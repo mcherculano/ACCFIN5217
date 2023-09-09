@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Maximum Likelihood Estimation &#8212; ECON 5129 Labs</title>
+    <title>Maximum Likelihood Estimation &#8212; My Jupyter Book</title>
   
   
   
@@ -141,8 +141,8 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/ASBS.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/ASBS.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/ASBS_small_.PNG" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/ASBS_small_.PNG" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
@@ -152,18 +152,23 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    ECON5129 Labs
+                    Course Overview
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="about_py.html">About Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="setting_up_your_python_environment.html">Setting up Your Python Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="learn_more.html">Learn More</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRELIMINARY</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started/getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/about_py.html">About Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/setting_up_your_python_environment.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/learn_more.html">Learn More</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/exercises.html">Exercises</a></li>
 </ul>
 </li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="regression.html">1.1 Introduction to Regression</a></li>
 
@@ -1105,8 +1110,8 @@ to confirm we obtain the same coefficients and log-likelihood value.</p>
 Dep. Variable:                      y   No. Observations:                    5
 Model:                        Poisson   Df Residuals:                        2
 Method:                           MLE   Df Model:                            2
-Date:                Wed, 06 Sep 2023   Pseudo R-squ.:                  0.2546
-Time:                        17:53:03   Log-Likelihood:                -3.3784
+Date:                Sat, 09 Sep 2023   Pseudo R-squ.:                  0.2546
+Time:                        14:34:11   Log-Likelihood:                -3.3784
 converged:                       True   LL-Null:                       -4.5325
 Covariance Type:            nonrobust   LLR p-value:                    0.3153
 ==============================================================================
@@ -1172,8 +1177,8 @@ model.</p>
 Dep. Variable:                numbil0   No. Observations:                  197
 Model:                        Poisson   Df Residuals:                      193
 Method:                           MLE   Df Model:                            3
-Date:                Wed, 06 Sep 2023   Pseudo R-squ.:                  0.8574
-Time:                        17:53:03   Log-Likelihood:                -438.54
+Date:                Sat, 09 Sep 2023   Pseudo R-squ.:                  0.8574
+Time:                        14:34:11   Log-Likelihood:                -438.54
 converged:                       True   LL-Null:                       -3074.7
 Covariance Type:                  HC0   LLR p-value:                     0.000
 ==============================================================================
@@ -1521,8 +1526,8 @@ Number of iterations: 4
 Dep. Variable:                      y   No. Observations:                    5
 Model:                         Probit   Df Residuals:                        2
 Method:                           MLE   Df Model:                            2
-Date:                Wed, 06 Sep 2023   Pseudo R-squ.:                  0.2961
-Time:                        17:53:03   Log-Likelihood:                -2.3687
+Date:                Sat, 09 Sep 2023   Pseudo R-squ.:                  0.2961
+Time:                        14:34:12   Log-Likelihood:                -2.3687
 converged:                       True   LL-Null:                       -3.3651
 Covariance Type:            nonrobust   LLR p-value:                    0.3692
 ==============================================================================
@@ -1622,7 +1627,7 @@ x2            -0.0971      0.590     -0.165      0.869      -1.254       1.060
   <div class="footer-item">
     
 <p class="component-author">
-By Miguel C. Herculano
+By The Jupyter Book community
 </p>
 
   </div>
@@ -1631,7 +1636,7 @@ By Miguel C. Herculano
     
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

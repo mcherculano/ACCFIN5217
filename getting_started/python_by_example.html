@@ -336,22 +336,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-application">Another Application</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise 4</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise 5</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -414,7 +398,7 @@ in the notebook if you run it on your own machine.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a336d852222db80512c180560bd19e59503a089952b80acd44b31c0cb5217a32.png" src="../_images/a336d852222db80512c180560bd19e59503a089952b80acd44b31c0cb5217a32.png" />
+<img alt="../_images/bcff7e3c74991f9c7bc458e65a6882f8b456ff909ad7bbf1de24adac8f30abed.png" src="../_images/bcff7e3c74991f9c7bc458e65a6882f8b456ff909ad7bbf1de24adac8f30abed.png" />
 </div>
 </div>
 <p>Let’s break this program down and see how it works.</p>
@@ -562,7 +546,7 @@ lines after the import statements are</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cf0f57ca0353899615c651c14b683663f3a58cffcc120a84e77b163c16689150.png" src="../_images/cf0f57ca0353899615c651c14b683663f3a58cffcc120a84e77b163c16689150.png" />
+<img alt="../_images/553b771da67f41d29d6c82138cf21cac79ca496a6970831b3ec5373ee672aca9.png" src="../_images/553b771da67f41d29d6c82138cf21cac79ca496a6970831b3ec5373ee672aca9.png" />
 </div>
 </div>
 <p>The first line generates 100 (quasi) independent standard normals and
@@ -599,7 +583,7 @@ semantics in a familiar setting.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2a1a812906e39932ee095a659610589d043bbc7b91f0ebea4c5728acef4ee659.png" src="../_images/2a1a812906e39932ee095a659610589d043bbc7b91f0ebea4c5728acef4ee659.png" />
+<img alt="../_images/53ee3d0d82234d88fff985904237bd49659bf65df1baf9c379d0e4ce0e822574.png" src="../_images/53ee3d0d82234d88fff985904237bd49659bf65df1baf9c379d0e4ce0e822574.png" />
 </div>
 </div>
 <p>In brief,</p>
@@ -846,7 +830,7 @@ a <code class="docutils literal notranslate"><span class="pre">while</span></cod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/87a3fa4bdb181004a69296f841c0ae6b1d119ab33a8d638b9aa481cd58eda44b.png" src="../_images/87a3fa4bdb181004a69296f841c0ae6b1d119ab33a8d638b9aa481cd58eda44b.png" />
+<img alt="../_images/e6735af038bb17d0ac0272fb9c016fb8aa4ab2b32c90548e1ebd851d5eb8b627.png" src="../_images/e6735af038bb17d0ac0272fb9c016fb8aa4ab2b32c90548e1ebd851d5eb8b627.png" />
 </div>
 </div>
 <p>Note that</p>
@@ -898,281 +882,6 @@ list and <code class="docutils literal notranslate"><span class="pre">append</sp
 space from the operating system.</p>
 <p>Notice that we added a legend to the plot — a feature you will be
 asked to use in the exercises.</p>
-</section>
-<section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
-<p>Now we turn to exercises. It is important that you complete them before
-continuing, since they present new concepts we will need.</p>
-<section id="exercise-1">
-<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
-<p>Your first task is to simulate and plot the correlated time series</p>
-<div class="math notranslate nohighlight">
-\[
-x_{t+1} = \alpha \, x_t + \epsilon_{t+1}
-\quad \text{where} \quad
-x_0 = 0
-\quad \text{and} \quad t = 0,\ldots,T
-\]</div>
-<p>The sequence of shocks <span class="math notranslate nohighlight">\(\{\epsilon_t\}\)</span> is assumed to be IID and
-standard normal.</p>
-<p>In your solution, restrict your import statements to</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Set <span class="math notranslate nohighlight">\(T=200\)</span> and <span class="math notranslate nohighlight">\(\alpha = 0.9\)</span>.</p>
-</section>
-<section id="exercise-2">
-<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
-<p>Starting with your solution to exercise 2, plot three simulated time
-series, one for each of the cases <span class="math notranslate nohighlight">\(\alpha=0\)</span>, <span class="math notranslate nohighlight">\(\alpha=0.8\)</span> and
-<span class="math notranslate nohighlight">\(\alpha=0.98\)</span>.</p>
-<p>Use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to step through the <span class="math notranslate nohighlight">\(\alpha\)</span> values.</p>
-<p>If you can, add a legend, to help distinguish between the three time
-series.</p>
-<p>Hints:</p>
-<ul class="simple">
-<li><p>If you call the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> function multiple times before calling
-<code class="docutils literal notranslate"><span class="pre">show()</span></code>, all of the lines you produce will end up on the same
-figure.</p></li>
-<li><p>For the legend, noted that the expression <code class="docutils literal notranslate"><span class="pre">'foo'</span> <span class="pre">+</span> <span class="pre">str(42)</span></code>
-evaluates to <code class="docutils literal notranslate"><span class="pre">'foo42'</span></code>.</p></li>
-</ul>
-</section>
-<section id="exercise-3">
-<h3>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h3>
-<p>Similar to the previous exercises, plot the time series</p>
-<div class="math notranslate nohighlight">
-\[
-x_{t+1} = \alpha \, |x_t| + \epsilon_{t+1}
-\quad \text{where} \quad
-x_0 = 0
-\quad \text{and} \quad t = 0,\ldots,T
-\]</div>
-<p>Use <span class="math notranslate nohighlight">\(T=200\)</span>, <span class="math notranslate nohighlight">\(\alpha = 0.9\)</span> and <span class="math notranslate nohighlight">\(\{\epsilon_t\}\)</span> as before.</p>
-<p>Search online for a function that can be used to compute the absolute
-value <span class="math notranslate nohighlight">\(|x_t|\)</span>.</p>
-</section>
-<section id="exercise-4">
-<h3>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h3>
-<p>One important aspect of essentially all programming languages is
-branching and conditions.</p>
-<p>In Python, conditions are usually implemented with if–else syntax.</p>
-<p>Here’s an example, that prints -1 for each negative number in an array
-and 1 for each nonnegative number</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
-1
--1
-1
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, write a new solution to Exercise 3 that does not use an existing
-function to compute the absolute value.</p>
-<p>Replace this existing function with an if–else condition.</p>
-</section>
-<section id="exercise-5">
-<span id="pbe-ex3"></span><h3>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h3>
-<p>Here’s a harder exercise, that takes some thought and planning.</p>
-<p>The task is to compute an approximation to <span class="math notranslate nohighlight">\(\pi\)</span> using <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a>.</p>
-<p>Use no imports besides</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Your hints are as follows:</p>
-<ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(U\)</span> is a bivariate uniform random variable on the unit square
-<span class="math notranslate nohighlight">\((0, 1)^2\)</span>, then the probability that <span class="math notranslate nohighlight">\(U\)</span> lies in a subset <span class="math notranslate nohighlight">\(B\)</span> of
-<span class="math notranslate nohighlight">\((0,1)^2\)</span> is equal to the area of <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(U_1,\ldots,U_n\)</span> are IID copies of <span class="math notranslate nohighlight">\(U\)</span>, then, as <span class="math notranslate nohighlight">\(n\)</span> gets large,
-the fraction that falls in <span class="math notranslate nohighlight">\(B\)</span>, converges to the probability of
-landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
-<li><p>For a circle, <span class="math notranslate nohighlight">\(area = \pi * radius^2\)</span>.</p></li>
-</ul>
-</section>
-</section>
-<section id="solutions">
-<h2>Solutions<a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h2>
-<section id="id1">
-<h3>Exercise 1<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<p>Here’s one solution.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f3a28f489d296ed4f11b2a9b96cea511b9b6096f4f7293a205f9d066616c9e4c.png" src="../_images/f3a28f489d296ed4f11b2a9b96cea511b9b6096f4f7293a205f9d066616c9e4c.png" />
-</div>
-</div>
-</section>
-<section id="id2">
-<h3>Exercise 2<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">]</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">α</span> <span class="ow">in</span> <span class="n">α_values</span><span class="p">:</span>
-    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">alpha = </span><span class="si">{</span><span class="n">α</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/cedfb2c490d93d293af5ccef0ff02d7ee66dbb3da4e41c25565fae3c94b433e0.png" src="../_images/cedfb2c490d93d293af5ccef0ff02d7ee66dbb3da4e41c25565fae3c94b433e0.png" />
-</div>
-</div>
-</section>
-<section id="id3">
-<h3>Exercise 3<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
-<p>Here’s one solution:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/aad8a03352d488af7abb24d76c14585298aa60307ba2aa75d69e50bb6d8aa806.png" src="../_images/aad8a03352d488af7abb24d76c14585298aa60307ba2aa75d69e50bb6d8aa806.png" />
-</div>
-</div>
-</section>
-<section id="id4">
-<h3>Exercise 4<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>Here’s one way:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">abs_x</span> <span class="o">=</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">abs_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
-    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">abs_x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/ab92ee42018ce0dcdac9f9461724b762bc4dfe4fa365eed57cf1cdf5ce036b54.png" src="../_images/ab92ee42018ce0dcdac9f9461724b762bc4dfe4fa365eed57cf1cdf5ce036b54.png" />
-</div>
-</div>
-<p>Here’s a shorter way to write the same thing:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
-    <span class="n">abs_x</span> <span class="o">=</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
-    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">abs_x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1920129a7b1733e3ce331870feb98ca7cdc6cfea114a43d1fb7fc191e29da9d4.png" src="../_images/1920129a7b1733e3ce331870feb98ca7cdc6cfea114a43d1fb7fc191e29da9d4.png" />
-</div>
-</div>
-</section>
-<section id="id5">
-<h3>Exercise 5<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p>Consider the circle of diameter 1 embedded in the unit square.</p>
-<p>Let <span class="math notranslate nohighlight">\(A\)</span> be its area and let <span class="math notranslate nohighlight">\(r=1/2\)</span> be its radius.</p>
-<p>If we know <span class="math notranslate nohighlight">\(\pi\)</span> then we can compute <span class="math notranslate nohighlight">\(A\)</span> via <span class="math notranslate nohighlight">\(A = \pi r^2\)</span>.</p>
-<p>But here the point is to compute <span class="math notranslate nohighlight">\(\pi\)</span>, which we can do by
-<span class="math notranslate nohighlight">\(\pi = A / r^2\)</span>.</p>
-<p>Summary: If we can estimate the area of a circle with diameter 1, then
-dividing by <span class="math notranslate nohighlight">\(r^2 = (1/2)^2 = 1/4\)</span> gives an estimate of <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
-<p>We estimate the area by sampling bivariate uniforms and looking at the
-fraction that falls into the circle.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
-
-<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">u</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
-        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="n">area_estimate</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="n">n</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">area_estimate</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># dividing by radius**2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.144
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 
@@ -1265,22 +974,6 @@ fraction that falls into the circle.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-application">Another Application</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Exercise 3</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise 4</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Exercise 5</a></li>
-</ul>
-</li>
 </ul>
   </nav></div>
 

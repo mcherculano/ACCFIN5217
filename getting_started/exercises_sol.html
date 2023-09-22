@@ -167,6 +167,19 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Lab1/lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/regression.html">1.1 Introduction to Regression</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/mle.html">1.2 Maximum Likelihood Estimation</a></li>
+
+
+</ul>
+</li>
+</ul>
 
     </div>
 </nav></div>
@@ -476,7 +489,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7933eb12ba03bc605d480ea16b331333cca4763283d1929d734984316a48e6e7.png" src="../_images/7933eb12ba03bc605d480ea16b331333cca4763283d1929d734984316a48e6e7.png" />
+<img alt="../_images/2e57c4843ae061355972160799df5b62cc9f57e855700b4daee76313108cab01.png" src="../_images/2e57c4843ae061355972160799df5b62cc9f57e855700b4daee76313108cab01.png" />
 </div>
 </div>
 </section>
@@ -500,7 +513,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bfd8d660daf860abf4ac8e10c157ed834356fd0636beb02310931963db939709.png" src="../_images/bfd8d660daf860abf4ac8e10c157ed834356fd0636beb02310931963db939709.png" />
+<img alt="../_images/6c3a23b2899ad469adad3a20daaeda4b4c5e452f75f0b18694cf4f9c7dc5ea1e.png" src="../_images/6c3a23b2899ad469adad3a20daaeda4b4c5e452f75f0b18694cf4f9c7dc5ea1e.png" />
 </div>
 </div>
 </section>
@@ -523,7 +536,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9608d461510792653224cfd5a9f8b45140348af88ff04b435b080b7a45b75fec.png" src="../_images/9608d461510792653224cfd5a9f8b45140348af88ff04b435b080b7a45b75fec.png" />
+<img alt="../_images/79cca2f62bfd941a21371826d20bfc8f15725d31edf5178391a086336aed834e.png" src="../_images/79cca2f62bfd941a21371826d20bfc8f15725d31edf5178391a086336aed834e.png" />
 </div>
 </div>
 </section>
@@ -532,7 +545,12 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 <p>Here’s one way:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set a seed</span>
+<span class="c1">#seed_value = 42</span>
+<span class="c1">#np.random.seed(seed_value)</span>
+
+
+<span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -550,7 +568,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6cd465637a0edccb269008ed1b9779dd25e289cdbbafe2cd2d9ec98e3a10efe2.png" src="../_images/6cd465637a0edccb269008ed1b9779dd25e289cdbbafe2cd2d9ec98e3a10efe2.png" />
+<img alt="../_images/a124fb19ea07c6f397f5cb605ade62cae04015792b04c4996d702238bbea6cd2.png" src="../_images/a124fb19ea07c6f397f5cb605ade62cae04015792b04c4996d702238bbea6cd2.png" />
 </div>
 </div>
 <p>Here’s a shorter way to write the same thing:</p>
@@ -571,7 +589,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1db8973e36aa6754e838e9971824966cdd6c6464b3abea4572ca95fba06212cb.png" src="../_images/1db8973e36aa6754e838e9971824966cdd6c6464b3abea4572ca95fba06212cb.png" />
+<img alt="../_images/7272468e408cda404ecea2cc1cb78fe2457adc7e2effe6bc69efbb8bd5fa0ac0.png" src="../_images/7272468e408cda404ecea2cc1cb78fe2457adc7e2effe6bc69efbb8bd5fa0ac0.png" />
 </div>
 </div>
 </section>
@@ -588,13 +606,14 @@ dividing by <span class="math notranslate nohighlight">\(r^2 = (1/2)^2 = 1/4\)</
 fraction that falls into the circle.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 
+<span class="c1"># Initialize the count of points inside the quarter circle</span>
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">u</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+    <span class="c1"># Check if the point is inside the quarter circle (x^2 + y^2 &lt;= 1)</span>
+    <span class="k">if</span> <span class="n">u</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="n">area_estimate</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="n">n</span>
@@ -604,7 +623,7 @@ fraction that falls into the circle.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.13912
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2
 </pre></div>
 </div>
 </div>
@@ -615,18 +634,31 @@ fraction that falls into the circle.</p>
 <p>Python is a powerful tool to download and manage large amounts of data. To have an idea of its potential, let’s build a simple notebook that replicates a recent <a class="reference external" href="https://fredblog.stlouisfed.org/2023/09/above-average-wage-growth-in-the-leisure-and-hospitality-industry/">FRED blog post</a>. Unlike previous exercises, here we need a third-party library so please start by opening anaconda prompt and run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pip</span></code>. You should then be able to run directly in your notebook:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>fredapi
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>conda<span class="w"> </span>install<span class="w"> </span>pip
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>fredapi
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fredapi in c:\users\miguel\anaconda3\lib\site-packages (0.5.1)
-Requirement already satisfied: pandas in c:\users\miguel\anaconda3\lib\site-packages (from fredapi) (2.0.3)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (2022.7)
-Requirement already satisfied: tzdata&gt;=2022.1 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (2023.3)
-Requirement already satisfied: numpy&gt;=1.21.0 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (1.24.3)
-Requirement already satisfied: six&gt;=1.5 in c:\users\miguel\anaconda3\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;fredapi) (1.16.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): repo.anaconda.com:443
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): repo.anaconda.com:443
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): repo.anaconda.com:443
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): repo.anaconda.com:443
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): repo.anaconda.com:443
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): repo.anaconda.com:443
+DEBUG:urllib3.connectionpool:https://repo.anaconda.com:443 &quot;GET /pkgs/r/noarch/current_repodata.json HTTP/1.1&quot; 304 0
+DEBUG:urllib3.connectionpool:https://repo.anaconda.com:443 &quot;GET /pkgs/msys2/win-64/current_repodata.json HTTP/1.1&quot; 304 0
+DEBUG:urllib3.connectionpool:https://repo.anaconda.com:443 &quot;GET /pkgs/main/noarch/current_repodata.json HTTP/1.1&quot; 304 0
+DEBUG:urllib3.connectionpool:https://repo.anaconda.com:443 &quot;GET /pkgs/main/win-64/current_repodata.json HTTP/1.1&quot; 304 0
+DEBUG:urllib3.connectionpool:https://repo.anaconda.com:443 &quot;GET /pkgs/r/win-64/current_repodata.json HTTP/1.1&quot; 304 0
+DEBUG:urllib3.connectionpool:https://repo.anaconda.com:443 &quot;GET /pkgs/msys2/noarch/current_repodata.json HTTP/1.1&quot; 304 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting package metadata (current_repodata.json): ...working... done
+Solving environment: ...working... done
 </pre></div>
 </div>
 </div>

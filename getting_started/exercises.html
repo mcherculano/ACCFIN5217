@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/exercises';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction to Regression &amp; MLE" href="../Lab1/lab1_overview.html" />
     <link rel="prev" title="Learn More" href="learn_more.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -165,6 +166,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="learn_more.html">Learn More</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Lab1/lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/regression.html">1.1 Introduction to Regression</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/mle.html">1.2 Maximum Likelihood Estimation</a></li>
+
+
 </ul>
 </li>
 </ul>
@@ -314,12 +328,19 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Solution:</a></li>
 </ul>
             </nav>
         </div>
@@ -356,7 +377,28 @@ standard normal.</p>
 </div>
 </div>
 </div>
-<p>Set <span class="math notranslate nohighlight">\(T=200\)</span> and <span class="math notranslate nohighlight">\(\alpha = 0.9\)</span>.</p>
+</section>
+<section id="solution">
+<h2>Solution:<a class="headerlink" href="#solution" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/735e5f1c0e97bba5d88e0a3b055b6d3098fea043b2b3399418880936f435f4d0.png" src="../_images/735e5f1c0e97bba5d88e0a3b055b6d3098fea043b2b3399418880936f435f4d0.png" />
+</div>
+</div>
 </section>
 <section id="exercise-2">
 <h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h2>
@@ -375,6 +417,30 @@ figure.</p></li>
 evaluates to <code class="docutils literal notranslate"><span class="pre">'foo42'</span></code>.</p></li>
 </ul>
 </section>
+<section id="id2">
+<h2>Solution:<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">α</span> <span class="ow">in</span> <span class="n">α_values</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">alpha = </span><span class="si">{</span><span class="n">α</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/748cf50225eb1eb14705c07bd2175949419d7b2ba2c192c23796c5af58974326.png" src="../_images/748cf50225eb1eb14705c07bd2175949419d7b2ba2c192c23796c5af58974326.png" />
+</div>
+</div>
+</section>
 <section id="exercise-3">
 <h2>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h2>
 <p>Similar to the previous exercises, plot the time series</p>
@@ -388,6 +454,28 @@ x_0 = 0
 <p>Use <span class="math notranslate nohighlight">\(T=200\)</span>, <span class="math notranslate nohighlight">\(\alpha = 0.9\)</span> and <span class="math notranslate nohighlight">\(\{\epsilon_t\}\)</span> as before.</p>
 <p>Search online for a function that can be used to compute the absolute
 value <span class="math notranslate nohighlight">\(|x_t|\)</span>.</p>
+</section>
+<section id="id3">
+<h2>Solution:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/657628f345d0d15b522db9f60a04f9cbe766125f6f56e42a19e4cf8c7e5c5d85.png" src="../_images/657628f345d0d15b522db9f60a04f9cbe766125f6f56e42a19e4cf8c7e5c5d85.png" />
+</div>
+</div>
 </section>
 <section id="exercise-4">
 <h2>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h2>
@@ -426,8 +514,39 @@ and 1 for each nonnegative number</p>
 function to compute the absolute value.</p>
 <p>Replace this existing function with an if–else condition.</p>
 </section>
+<section id="id4">
+<h2>Solution:<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set a seed</span>
+<span class="c1">#seed_value = 42</span>
+<span class="c1">#np.random.seed(seed_value)</span>
+
+
+<span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">abs_x</span> <span class="o">=</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">abs_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α</span> <span class="o">*</span> <span class="n">abs_x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cab7bb22b2c0f238b97b291c36cf55a20b41d018c740e409e1cac1d772c3f52f.png" src="../_images/cab7bb22b2c0f238b97b291c36cf55a20b41d018c740e409e1cac1d772c3f52f.png" />
+</div>
+</div>
+</section>
 <section id="exercise-5">
-<span id="pbe-ex3"></span><h2>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h2>
+<h2>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h2>
 <p>Here’s a harder exercise, that takes some thought and planning.</p>
 <p>The task is to compute an approximation to <span class="math notranslate nohighlight">\(\pi\)</span> using <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a>.</p>
 <p>Use no imports besides</p>
@@ -449,23 +568,179 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 <li><p>For a circle, <span class="math notranslate nohighlight">\(area = \pi * radius^2\)</span>.</p></li>
 </ul>
 </section>
+<section id="id5">
+<h2>Solution:<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># Initialize the count of points inside the quarter circle</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span>
+    <span class="c1"># Check if the point is inside the quarter circle (x^2 + y^2 &lt;= 1)</span>
+    <span class="k">if</span> <span class="n">u</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">area_estimate</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="n">n</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">area_estimate</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># dividing by radius**2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1464
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="exercise-6">
 <h2>Exercise 6<a class="headerlink" href="#exercise-6" title="Permalink to this heading">#</a></h2>
 <p>Python is a powerful tool to download and manage large amounts of data. To have an idea of its potential, let’s build a simple notebook that replicates a recent <a class="reference external" href="https://fredblog.stlouisfed.org/2023/09/above-average-wage-growth-in-the-leisure-and-hospitality-industry/">FRED blog post</a>. Unlike previous exercises, here we need a third-party library so please start by opening anaconda prompt and run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">pip</span></code>. You should then be able to run directly in your notebook:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>fredapi
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!conda install pip</span>
+<span class="c1">#!pip install fredapi</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2>Solution:<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">fredapi</span> <span class="kn">import</span> <span class="n">Fred</span>
+<span class="n">fred</span> <span class="o">=</span> <span class="n">Fred</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;insert your api key here&#39;</span><span class="p">)</span>
+<span class="n">seriesid</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FRBATLWGT12MMUMHGO&#39;</span><span class="p">,</span>	<span class="s1">&#39;FRBATLWGT12MMUMHWGILH&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">seriesid</span><span class="p">)):</span>
+    <span class="n">data_j</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series</span><span class="p">(</span><span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data_j</span>
+
+
+<span class="c1"># Create a plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot the first line (dashed and red)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;FRBATLWGT12MMUMHGO&#39;</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Hourly wage growth&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the second line (solid and black)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;FRBATLWGT12MMUMHWGILH&#39;</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Hourly wage growth (Leisure &amp; Hospitality)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels and a legend</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pp.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Wage growth Leisure vs. Overall&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fredapi in c:\users\miguel\anaconda3\lib\site-packages (0.5.1)
-Requirement already satisfied: pandas in c:\users\miguel\anaconda3\lib\site-packages (from fredapi) (2.0.3)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (2022.7)
-Requirement already satisfied: tzdata&gt;=2022.1 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (2023.3)
-Requirement already satisfied: numpy&gt;=1.21.0 in c:\users\miguel\anaconda3\lib\site-packages (from pandas-&gt;fredapi) (1.24.3)
-Requirement already satisfied: six&gt;=1.5 in c:\users\miguel\anaconda3\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;fredapi) (1.16.0)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">InvalidURL</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">seriesid</span><span class="p">)):</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">data_j</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series</span><span class="p">(</span><span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">data</span><span class="p">[</span><span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data_j</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1"># Create a plot</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\fredapi\fred.py:131,</span> in <span class="ni">Fred.get_series</span><span class="nt">(self, series_id, observation_start, observation_end, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="n">url</span> <span class="o">+=</span> <span class="s1">&#39;&amp;&#39;</span> <span class="o">+</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">131</span> <span class="n">root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fetch_data</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span> <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No data exists for series id: &#39;</span> <span class="o">+</span> <span class="n">series_id</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\fredapi\fred.py:64,</span> in <span class="ni">Fred.__fetch_data</span><span class="nt">(self, url)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="n">url</span> <span class="o">+=</span> <span class="s1">&#39;&amp;api_key=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_key</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">64</span>     <span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+
+<span class="nn">File ~\anaconda3\Lib\urllib\request.py:216,</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
+<span class="ne">--&gt; </span><span class="mi">216</span> <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\urllib\request.py:519,</span> in <span class="ni">OpenerDirector.open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">516</span>     <span class="n">req</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">518</span> <span class="n">sys</span><span class="o">.</span><span class="n">audit</span><span class="p">(</span><span class="s1">&#39;urllib.Request&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">full_url</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">())</span>
+<span class="ne">--&gt; </span><span class="mi">519</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">521</span> <span class="c1"># post-process response</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span> <span class="n">meth_name</span> <span class="o">=</span> <span class="n">protocol</span><span class="o">+</span><span class="s2">&quot;_response&quot;</span>
+
+<span class="nn">File ~\anaconda3\Lib\urllib\request.py:536,</span> in <span class="ni">OpenerDirector._open</span><span class="nt">(self, req, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">533</span>     <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span> <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
+<span class="ne">--&gt; </span><span class="mi">536</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span>                           <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span> <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span>     <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~\anaconda3\Lib\urllib\request.py:496,</span> in <span class="ni">OpenerDirector._call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">495</span>     <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">496</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">497</span>     <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">498</span>         <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">File ~\anaconda3\Lib\urllib\request.py:1391,</span> in <span class="ni">HTTPSHandler.https_open</span><span class="nt">(self, req)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1390</span> <span class="k">def</span> <span class="nf">https_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1391</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1392</span>         <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="p">,</span> <span class="n">check_hostname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\urllib\request.py:1348,</span> in <span class="ni">AbstractHTTPHandler.do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1346</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1347</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1348</span>         <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1349</span>                   <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1350</span>     <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+<span class="g g-Whitespace">   </span><span class="mi">1351</span>         <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\http\client.py:1286,</span> in <span class="ni">HTTPConnection.request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1283</span> <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{},</span> <span class="o">*</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1284</span>             <span class="n">encode_chunked</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1285</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1286</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\http\client.py:1297,</span> in <span class="ni">HTTPConnection._send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1294</span> <span class="k">if</span> <span class="s1">&#39;accept-encoding&#39;</span> <span class="ow">in</span> <span class="n">header_names</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1295</span>     <span class="n">skips</span><span class="p">[</span><span class="s1">&#39;skip_accept_encoding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="ne">-&gt; </span><span class="mi">1297</span> <span class="bp">self</span><span class="o">.</span><span class="n">putrequest</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">skips</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1299</span> <span class="c1"># chunked encoding will happen if HTTP/1.1 is used and either</span>
+<span class="g g-Whitespace">   </span><span class="mi">1300</span> <span class="c1"># the caller passes encode_chunked=True or the following</span>
+<span class="g g-Whitespace">   </span><span class="mi">1301</span> <span class="c1"># conditions hold:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1302</span> <span class="c1"># 1. content-length has not been explicitly set</span>
+<span class="g g-Whitespace">   </span><span class="mi">1303</span> <span class="c1"># 2. the body is a file or iterable, but not a str or bytes-like</span>
+<span class="g g-Whitespace">   </span><span class="mi">1304</span> <span class="c1"># 3. Transfer-Encoding has NOT been explicitly set by the caller</span>
+<span class="g g-Whitespace">   </span><span class="mi">1306</span> <span class="k">if</span> <span class="s1">&#39;content-length&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">header_names</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1307</span>     <span class="c1"># only chunk body if not explicitly set for backwards</span>
+<span class="g g-Whitespace">   </span><span class="mi">1308</span>     <span class="c1"># compatibility, assuming the client code is already handling the</span>
+<span class="g g-Whitespace">   </span><span class="mi">1309</span>     <span class="c1"># chunking</span>
+
+<span class="nn">File ~\anaconda3\Lib\http\client.py:1131,</span> in <span class="ni">HTTPConnection.putrequest</span><span class="nt">(self, method, url, skip_host, skip_accept_encoding)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1128</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="n">method</span>
+<span class="g g-Whitespace">   </span><span class="mi">1130</span> <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="ow">or</span> <span class="s1">&#39;/&#39;</span>
+<span class="ne">-&gt; </span><span class="mi">1131</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_path</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1133</span> <span class="n">request</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_vsn_str</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1135</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encode_request</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+
+<span class="nn">File ~\anaconda3\Lib\http\client.py:1231,</span> in <span class="ni">HTTPConnection._validate_path</span><span class="nt">(self, url)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1229</span> <span class="n">match</span> <span class="o">=</span> <span class="n">_contains_disallowed_url_pchar_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1230</span> <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1231</span>     <span class="k">raise</span> <span class="n">InvalidURL</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;URL can&#39;t contain control characters. </span><span class="si">{</span><span class="n">url</span><span class="si">!r}</span><span class="s2"> &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1232</span>                      <span class="sa">f</span><span class="s2">&quot;(found at least </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="ne">InvalidURL</span>: URL can&#39;t contain control characters. &#39;/fred/series/observations?series_id=FRBATLWGT12MMUMHGO&amp;api_key=insert your api key here&#39; (found at least &#39; &#39;)
 </pre></div>
 </div>
 </div>
@@ -473,7 +748,58 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\miguel\anaconda3\lib\site
 </section>
 <section id="exercise-7">
 <h2>Exercise 7<a class="headerlink" href="#exercise-7" title="Permalink to this heading">#</a></h2>
-<p>The correlation between bonds and stocks is an important parameter for asset allocation decisions. Since most long-term investor portfolios involve a mix between bonds and stocks, this parameter is of paramount importance. A recent issue under discussion by academics and practitioners relates to the change in sign of this parameter. Read about the discussion in <a class="reference external" href="https://www.aqr.com/Insights/Research/Journal-Article/A-Changing-Stock-Bond-Correlation">this paper</a> and replicate Exhibit 1 on page 2. Use the data from FRED for equity <code class="docutils literal notranslate"><span class="pre">SP500</span></code> and bonds <code class="docutils literal notranslate"><span class="pre">DTB3</span></code>.</p>
+<p>The correlation between bonds and stocks is an important parameter for asset allocation decisions. Since most long-term investor portfolios involve a mix between bonds and stocks, this parameter is of paramount importance. A recent issue under discussion by academics and practitioners relates to the change in sign of this parameter. Read about the discussion in <a class="reference external" href="https://www.aqr.com/Insights/Research/Journal-Article/A-Changing-Stock-Bond-Correlation">this paper</a> and replicate Exhibit 1 on page 2. Use the data from FRED for equity <code class="docutils literal notranslate"><span class="pre">SPASTT01USM657N</span></code> and bonds <code class="docutils literal notranslate"><span class="pre">DGS10</span></code>.</p>
+</section>
+<section id="id7">
+<h2>Solution:<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">fredapi</span> <span class="kn">import</span> <span class="n">Fred</span>
+<span class="n">fred</span> <span class="o">=</span> <span class="n">Fred</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;insert your api key here&#39;</span><span class="p">)</span>
+<span class="n">seriesid</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;WILL5000IND&#39;</span><span class="p">,</span>	<span class="s1">&#39;DGS10&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">seriesid</span><span class="p">)):</span>
+    <span class="n">data_j</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series</span><span class="p">(</span><span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="s1">&#39;01/01/1990&#39;</span><span class="p">,</span> <span class="s1">&#39;01/09/2023&#39;</span><span class="p">)</span>
+    <span class="n">data_j</span> <span class="o">=</span> <span class="n">data_j</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">fred</span><span class="o">.</span><span class="n">get_series_info</span><span class="p">(</span><span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;description of &gt;&gt; &#39;</span><span class="o">+</span> <span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; : &quot;</span> <span class="o">+</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">seriesid</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data_j</span>   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>description of &gt;&gt; WILL5000IND : Wilshire 5000 Total Market Index
+description of &gt;&gt; DGS10 : Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Quoted on an Investment Basis
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now inspect the data </span>
+<span class="n">rw_size</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">rolling_correlation</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;WILL5000IND_r&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">rw_size</span><span class="p">)</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DGS10&#39;</span><span class="p">])</span>
+<span class="n">rolling_correlation</span> <span class="o">=</span> <span class="n">rolling_correlation</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rolling_correlation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Rolling 10-Year Correlation&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels and a legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Correlation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rolling 10-Year Correlation Between Stock Returns and negative 10 yr Treasury yields&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/227af4a2e4fc50fc552367ad926ddefaf995c42ce7682fcbde7118b6926dd6e5.png" src="../_images/227af4a2e4fc50fc552367ad926ddefaf995c42ce7682fcbde7118b6926dd6e5.png" />
+</div>
+</div>
 </section>
 </section>
 
@@ -517,6 +843,15 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\miguel\anaconda3\lib\site
         <p class="prev-next-title">Learn More</p>
       </div>
     </a>
+    <a class="right-next"
+       href="../Lab1/lab1_overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. Introduction to Regression &amp; MLE</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -536,12 +871,19 @@ Requirement already satisfied: six&gt;=1.5 in c:\users\miguel\anaconda3\lib\site
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Solution:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Solution:</a></li>
 </ul>
   </nav></div>
 

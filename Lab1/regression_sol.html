@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.1 Introduction to Regression &#8212; ECON 5129</title>
+    <title>Introduction to Regression &#8212; ECON 5129</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab1/regression_sol';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Maximum Likelihood Estimation" href="mle_.html" />
+    <link rel="next" title="Maximum Likelihood Estimation" href="mle.html" />
     <link rel="prev" title="1. Introduction to Regression &amp; MLE" href="lab1_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -172,11 +172,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.1 Introduction to Regression</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Introduction to Regression</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="mle_.html">Maximum Likelihood Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mle.html">Maximum Likelihood Estimation</a></li>
+
+
 </ul>
 </li>
 </ul>
@@ -315,7 +317,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1.1 Introduction to Regression</h1>
+    <h1>Introduction to Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -325,7 +327,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.1 Introduction to Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 </ul>
 </li>
@@ -361,7 +363,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-regression">
-<h1>1.1 Introduction to Regression<a class="headerlink" href="#introduction-to-regression" title="Permalink to this heading">#</a></h1>
+<h1>Introduction to Regression<a class="headerlink" href="#introduction-to-regression" title="Permalink to this heading">#</a></h1>
 <p>The goal of regression analysis is to provide accurate mapping from one or
 more input variables (called features in machine learning or exogenous
 variables in econometrics) to a continuous output variable (called the label or
@@ -677,7 +679,7 @@ optimal linear regression line through the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e68fbb71061119afb70b83f40acd348683d7b8ac2361e77ae086871e881a98b6.png" src="../_images/e68fbb71061119afb70b83f40acd348683d7b8ac2361e77ae086871e881a98b6.png" />
+<img alt="../_images/159d8fce3c440f202772425120f325b38545b5d42d0df2520a44c9859c0f993b.png" src="../_images/159d8fce3c440f202772425120f325b38545b5d42d0df2520a44c9859c0f993b.png" />
 </div>
 </div>
 <p>Let’s use <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to replicate the figure ourselves.</p>
@@ -719,7 +721,7 @@ optimal linear regression line through the data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x2a0fb970210&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x20e60187550&gt;]
 </pre></div>
 </div>
 <img alt="../_images/5271acf904e88a8651fe99260e0607b78c27334b4cfb72deb1967ebfcd2f444b.png" src="../_images/5271acf904e88a8651fe99260e0607b78c27334b4cfb72deb1967ebfcd2f444b.png" />
@@ -884,7 +886,7 @@ one more time – this time including the prediction from both of our linear mod
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x2a0fe29b090&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x20e6061f6d0&gt;
 </pre></div>
 </div>
 <img alt="../_images/140acd254df296eb4d86529bb141be5b160cbce8679c8bb38331214d7141a7d3.png" src="../_images/140acd254df296eb4d86529bb141be5b160cbce8679c8bb38331214d7141a7d3.png" />
@@ -1090,7 +1092,7 @@ should be aware of as you continue to learn about these techniques.</p>
       </div>
     </a>
     <a class="right-next"
-       href="mle_.html"
+       href="mle.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -1116,7 +1118,7 @@ should be aware of as you continue to learn about these techniques.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.1 Introduction to Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Regression</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 </ul>
 </li>

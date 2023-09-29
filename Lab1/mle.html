@@ -66,7 +66,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab1/mle';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="1.1 Introduction to Regression" href="regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,15 +168,13 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="regression.html">1.1 Introduction to Regression</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="regression_sol.html">1.1 Introduction to Regression</a></li>
 
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2 Maximum Likelihood Estimation</a></li>
-
-
+<li class="toctree-l2"><a class="reference internal" href="mle_.html">Maximum Likelihood Estimation</a></li>
 </ul>
 </li>
 </ul>
@@ -338,8 +335,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-with-numerical-methods">MLE with Numerical Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation-with-statsmodels">Maximum Likelihood Estimation with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1079,8 +1079,8 @@ to confirm we obtain the same coefficients and log-likelihood value.</p>
 Dep. Variable:                      y   No. Observations:                    5
 Model:                        Poisson   Df Residuals:                        2
 Method:                           MLE   Df Model:                            2
-Date:                Fri, 22 Sep 2023   Pseudo R-squ.:                  0.2546
-Time:                        16:10:30   Log-Likelihood:                -3.3784
+Date:                Fri, 29 Sep 2023   Pseudo R-squ.:                  0.2546
+Time:                        16:26:40   Log-Likelihood:                -3.3784
 converged:                       True   LL-Null:                       -4.5325
 Covariance Type:            nonrobust   LLR p-value:                    0.3153
 ==============================================================================
@@ -1146,8 +1146,8 @@ model.</p>
 Dep. Variable:                numbil0   No. Observations:                  197
 Model:                        Poisson   Df Residuals:                      193
 Method:                           MLE   Df Model:                            3
-Date:                Fri, 22 Sep 2023   Pseudo R-squ.:                  0.8574
-Time:                        16:10:30   Log-Likelihood:                -438.54
+Date:                Fri, 29 Sep 2023   Pseudo R-squ.:                  0.8574
+Time:                        16:26:40   Log-Likelihood:                -438.54
 converged:                       True   LL-Null:                       -3074.7
 Covariance Type:                  HC0   LLR p-value:                     0.000
 ==============================================================================
@@ -1291,8 +1291,10 @@ distribution manually using the <code class="docutils literal notranslate"><span
 example notebook can be found
 <a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/generic_mle.html">here</a>.</p>
 </section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <section id="exercise-1">
-<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h2>
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
 <p>Suppose we wanted to estimate the probability of an event <span class="math notranslate nohighlight">\( y_i \)</span>
 occurring, given some observations.</p>
 <p>We could use a probit regression model, where the pdf of <span class="math notranslate nohighlight">\( y_i \)</span> is</p>
@@ -1315,7 +1317,7 @@ Hessian.</p>
 compute the cmf and pmf of the normal distribution.</p>
 </section>
 <section id="exercise-2">
-<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h2>
+<h3>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h3>
 <p>Use the following dataset and initial values of <span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span> to
 estimate the MLE with the Newton-Raphson algorithm developed earlier in
 the lab</p>
@@ -1360,6 +1362,7 @@ is very sensitive to initial values, and therefore you may fail to
 achieve convergence with different starting values.</p>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1392,15 +1395,6 @@ achieve convergence with different starting values.</p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="regression.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">1.1 Introduction to Regression</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
@@ -1431,8 +1425,11 @@ achieve convergence with different starting values.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-with-numerical-methods">MLE with Numerical Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation-with-statsmodels">Maximum Likelihood Estimation with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

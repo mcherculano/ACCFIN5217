@@ -1,0 +1,1014 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2.1 Overfitting and Regularization &#8212; ECON 5129</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab2/regression_2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ASBS_small_.PNG" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/ASBS_small_.PNG" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRELIMINARY</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/about_py.html">About Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/setting_up_your_python_environment.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/learn_more.html">Learn More</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Lab1/lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/regression_sol.html">1.1 Introduction to Regression</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/mle_.html">Maximum Likelihood Estimation</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Lab2/regression_2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2.1 Overfitting and Regularization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.1 Overfitting and Regularization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-of-regularization-parameter">Cross-validation of Regularization Parameter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout">Holdout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-in-econometrics">Lasso in Econometrics</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8">Exercise 8</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9">Exercise 9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10">Exercise 10</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11">Exercise 11</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="overfitting-and-regularization">
+<h1>2.1 Overfitting and Regularization<a class="headerlink" href="#overfitting-and-regularization" title="Permalink to this heading">#</a></h1>
+<p>You might be wondering, “Why would we ever want to throw variables out,
+can’t that only hurt our model?”</p>
+<p>The primary answer: it helps us avoid a common issue called <strong>overfitting</strong>.</p>
+<p>Overfitting occurs when a model that specializes its coefficients too much on the
+data it was trained on, and only to perform poorly when predicting on data
+outside the training set.</p>
+<p>The extreme example of overfitting is a model that can perfectly memorize the
+training data, but can do no better than just randomly guess when predicting
+on a new observation.</p>
+<p>The techniques applied to reduce overfitting are known as <strong>regularization</strong>.</p>
+<p>Regularization is an attempt to limit a model’s ability to specialize too narrowly
+on training data (e.g. limit overfitting) by penalizing extreme values of the
+model’s parameters.</p>
+<p>The additional term in the lasso regression loss function (<span class="math notranslate nohighlight">\( \alpha ||\beta||_1 \)</span>)
+is a form of regularization.</p>
+<p>Let’s demonstrate the overfitting and regularization phenomenon on our housing
+price data as follows:</p>
+<ol class="arabic simple">
+<li><p>Split the data set into training and testing subsets. We will use the first 50 observations for training and the rest for testing.</p></li>
+<li><p>Fit the linear regression model and report MSE on training and testing datasets.</p></li>
+<li><p>Fit the lasso model and report the same statistics.</p></li>
+</ol>
+</section>
+<section id="dataset">
+<h1>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h1>
+<p>Let’s load the dataset and take a quick look at our task.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#165aa7&#39;</span><span class="p">,</span> <span class="s1">&#39;#cb495c&#39;</span><span class="p">,</span> <span class="s1">&#39;#fec630&#39;</span><span class="p">,</span> <span class="s1">&#39;#bb60d5&#39;</span><span class="p">,</span> <span class="s1">&#39;#f47915&#39;</span><span class="p">,</span> <span class="s1">&#39;#06ab54&#39;</span><span class="p">,</span> <span class="s1">&#39;#002070&#39;</span><span class="p">,</span> <span class="s1">&#39;#b27d12&#39;</span><span class="p">,</span> <span class="s1">&#39;#007030&#39;</span><span class="p">]</span>
+
+<span class="c1"># We will import all these here to ensure that they are loaded, but</span>
+<span class="c1"># will usually re-import close to where they are used to make clear</span>
+<span class="c1"># where the functions come from</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">linear_model</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">neural_network</span><span class="p">,</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">model_selection</span>
+<span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://datascience.quantecon.org/assets/data/kc_house_data.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># convert everything to be a float for later on</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;log_price&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 21613 entries, 0 to 21612
+Data columns (total 21 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   id             21613 non-null  int64  
+ 1   date           21613 non-null  object 
+ 2   price          21613 non-null  float64
+ 3   bedrooms       21613 non-null  int64  
+ 4   bathrooms      21613 non-null  float64
+ 5   sqft_living    21613 non-null  int64  
+ 6   sqft_lot       21613 non-null  int64  
+ 7   floors         21613 non-null  float64
+ 8   waterfront     21613 non-null  int64  
+ 9   view           21613 non-null  int64  
+ 10  condition      21613 non-null  int64  
+ 11  grade          21613 non-null  int64  
+ 12  sqft_above     21613 non-null  int64  
+ 13  sqft_basement  21613 non-null  int64  
+ 14  yr_built       21613 non-null  int64  
+ 15  yr_renovated   21613 non-null  int64  
+ 16  zipcode        21613 non-null  int64  
+ 17  lat            21613 non-null  float64
+ 18  long           21613 non-null  float64
+ 19  sqft_living15  21613 non-null  int64  
+ 20  sqft_lot15     21613 non-null  int64  
+dtypes: float64(5), int64(15), object(1)
+memory usage: 3.5+ MB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    12.309982
+1    13.195614
+2    12.100712
+3    13.311329
+4    13.142166
+Name: price, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lasso-regression">
+<h1>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h1>
+<p>Lasso regression is very closely related to linear regression.</p>
+<p>The lasso model also generates predictions using <span class="math notranslate nohighlight">\( y = X \beta \)</span> but
+optimizes over a slightly different loss function.</p>
+<p>The optimization problem solved by lasso regression can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\beta} {|| X \beta - y||_2}^2 + \underbrace{\alpha {|| \beta ||_1}}_{\text{new part}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\( || a ||_1 = \sum_{i=1}^N | a_i| \)</span> is the <a class="reference external" href="http://mathworld.wolfram.com/L1-Norm.html">l1-norm</a> and <span class="math notranslate nohighlight">\( \alpha \)</span> is called the regularization parameter.</p>
+<p>The additional term penalizes large coefficients and in practice, effectively sets coefficients to zero
+for features that are not informative about the
+target.</p>
+<p>Let’s see an example of what this looks like using the full feature set in
+<code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lasso_model</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">()</span>
+<span class="n">lasso_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">lasso_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lasso_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
+<span class="n">lr_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
+<span class="n">coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">lasso</span><span class="o">=</span><span class="n">lasso_coefs</span><span class="p">,</span> <span class="n">linreg</span><span class="o">=</span><span class="n">lr_coefs</span><span class="p">))</span>
+<span class="n">coefs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">lasso_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">lasso_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lasso_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">lr_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">lasso</span><span class="o">=</span><span class="n">lasso_coefs</span><span class="p">,</span> <span class="n">linreg</span><span class="o">=</span><span class="n">lr_coefs</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">coefs</span>
+
+<span class="ne">NameError</span>: name &#39;lr_model&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that many coefficients from the lasso regression have been set to
+zero.</p>
+<p>The intuition here is that the corresponding features hadn’t provided
+enough predictive power to be worth considering alongside the other features.</p>
+<p>The default value for the <span class="math notranslate nohighlight">\( \alpha \)</span> parameter is 1.0.</p>
+<p>Larger <span class="math notranslate nohighlight">\( \alpha \)</span> values cause coefficients to shrink (and maybe
+additional ones to be thrown out).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute lasso for many alphas (the lasso path)</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">alphas</span><span class="p">,</span> <span class="n">coefs_lasso</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">lasso_path</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alphas</span><span class="o">=</span><span class="n">alphas</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="c1"># plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">color_cycle</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+<span class="n">log_alphas</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">coef_l</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coefs_lasso</span><span class="p">,</span> <span class="n">color_cycle</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">log_alphas</span><span class="p">,</span> <span class="n">coef_l</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;-Log(alpha)&#39;</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;lasso coefficients&#39;</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Lasso Path&#39;</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+   <span class="n">maxabs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coef_l</span><span class="p">))</span>
+   <span class="n">i</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coef_l</span><span class="p">))</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">coef_l</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mf">0.9</span><span class="o">*</span><span class="n">maxabs</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+   <span class="n">xnote</span> <span class="o">=</span> <span class="n">log_alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+   <span class="n">ynote</span> <span class="o">=</span> <span class="n">coef_l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">xnote</span><span class="p">,</span> <span class="n">ynote</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit_and_report_mses</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">mse_train</span><span class="o">=</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)),</span>
+        <span class="n">mse_test</span><span class="o">=</span><span class="n">metrics</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+    <span class="p">)</span>
+
+<span class="n">n_test</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">n_test</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">n_test</span><span class="p">:,</span> <span class="p">:]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">n_test</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">n_test</span><span class="p">:]</span>
+
+<span class="n">fit_and_report_mses</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_and_report_mses</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how the MSE on the training dataset was smaller for the linear model
+without the regularization, but the MSE on the test dataset was much
+higher.</p>
+<p>This strongly suggests that the linear regression model was
+overfitting.</p>
+<p>The regularization parameter has a large impact on overfitting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">fit_and_report_mses</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50000</span><span class="p">),</span>
+                           <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">])</span>
+<span class="n">mse</span><span class="p">[</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">mse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;mse_test&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">mse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;mse_train&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\log(\alpha)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;MSE&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">get_legend</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,(</span><span class="n">mse</span><span class="o">.</span><span class="n">log_alpha</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">mse</span><span class="o">.</span><span class="n">mse_test</span><span class="p">[</span><span class="mi">15</span><span class="p">]),</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">,(</span><span class="n">mse</span><span class="o">.</span><span class="n">log_alpha</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">mse</span><span class="o">.</span><span class="n">mse_train</span><span class="p">[</span><span class="mi">30</span><span class="p">]),</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="cross-validation-of-regularization-parameter">
+<h2>Cross-validation of Regularization Parameter<a class="headerlink" href="#cross-validation-of-regularization-parameter" title="Permalink to this heading">#</a></h2>
+<p>As you can see in the figure above, the regularization parameter has a
+large impact on MSE in the test data.</p>
+<p>Moreover, the relationship between the test data MSE and <span class="math notranslate nohighlight">\( \alpha \)</span> is
+complicated and non-monotonic.</p>
+<p>One popular method for choosing the regularization parameter is cross-validation.</p>
+<p>Roughly speaking, cross-validation splits the dataset into many training/testing
+subsets, then chooses the regularization parameter value that minimizes the
+average MSE.</p>
+<p>More precisely, k-fold cross-validation does the following:</p>
+<ol class="arabic simple">
+<li><p>Partition the dataset randomly into k subsets/”folds”.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\( MSE_j(\alpha)= \)</span> mean squared error in j-th subset
+when using the j-th subset as test data, and other k-1 as training
+data.</p></li>
+<li><p>Minimize average (across folds) MSE <span class="math notranslate nohighlight">\( \min_\alpha \frac{1}{k}
+\sum_{j=1}^k MSE_j(\alpha) \)</span>.</p></li>
+</ol>
+<p>The following code plots 5-fold, cross-validated MSE as a function of
+<span class="math notranslate nohighlight">\( \alpha \)</span>, using the same training data as above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="n">mse</span><span class="p">[</span><span class="s2">&quot;cv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50000</span><span class="p">),</span>
+                                  <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">))</span>
+          <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">]</span>
+<span class="n">mse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;cv&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;5 fold cross-validation&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">mse</span><span class="o">.</span><span class="n">log_alpha</span><span class="p">[</span><span class="mi">40</span><span class="p">],</span> <span class="n">mse</span><span class="o">.</span><span class="n">cv</span><span class="p">[</span><span class="mi">40</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">get_legend</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\log(\alpha)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;MSE&quot;</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>scikit learn also includes methods to automate the above and select
+<span class="math notranslate nohighlight">\( \alpha \)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LassoCV exploits special structure of lasso problem to minimize CV more efficiently</span>
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LassoCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">lasso</span><span class="o">.</span><span class="n">alpha_</span><span class="p">)</span> <span class="c1"># should roughly = minimizer on graph, not exactly equal due to random splitting</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="holdout">
+<h2>Holdout<a class="headerlink" href="#holdout" title="Permalink to this heading">#</a></h2>
+<p>Practitioners often use another technique to avoid overfitting, called
+<em>holdout</em>.</p>
+<p>We demonstrated an extreme example of applying holdout above when we used only
+the first 50 observations to train our models.</p>
+<p>In general, good practice is to split the entire dataset into a training subset
+and testing or validation subset.</p>
+<p>The splitting should be done randomly. It should leave enough data in the
+training dataset to produce a good model, but also enough in the validation
+subset to determine the degree of overfitting.</p>
+<p>There aren’t hard and fast rules for how much data to put in each subset, but a
+reasonable default uses 75% of the data for training and the
+rest for testing.</p>
+<p>As in the example above, the training data is often further split
+while selecting regularization parameters with cross-validation.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> function <code class="docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code> will do this for you:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note test_size=0.25 is the default value, but is shown here so you</span>
+<span class="c1"># can see how to change it</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5">
+<h2>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h2>
+<p>Experiment with how the size of the holdout dataset can impact a diagnosis
+of overfitting.</p>
+<p>Evaluate only the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> model on the full feature set and use
+the <code class="docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code> function with various values for
+<code class="docutils literal notranslate"><span class="pre">test_size</span></code>.</p>
+</section>
+<section id="lasso-in-econometrics">
+<h2>Lasso in Econometrics<a class="headerlink" href="#lasso-in-econometrics" title="Permalink to this heading">#</a></h2>
+<p>Lasso is becoming increasingly popular in economics, partially due to
+the work of Victor Chernozhukov and his coauthors.</p>
+<p>In econometrics, the goal is typically to estimate some coefficient of interest or causal
+effect, rather than obtaining the most precise prediction.</p>
+<p>Among other things, this different goal affects how the regularization parameter
+must be chosen.</p>
+<p>[<span class="xref myst">regBC11</span>] and [<span class="xref myst">regCHS16</span>] are somewhat approachable introductions
+to this area.</p>
+<p>The latter of these two references includes an R package.</p>
+<p>[<span class="xref myst">regCCD+18</span>] reflects close to the state-of-art in this rapidly
+advancing area.</p>
+</section>
+</section>
+<section id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
+<p>Two good text books covering the above regression methods are
+[<span class="xref myst">regFHT09</span>] and [<span class="xref myst">regEH16</span>]</p>
+<p><a id='id24'></a>
+[regAI18] Susan Athey and Guido Imbens. Machine learning and econometrics. 2018. URL: <a class="reference external" href="https://www.aeaweb.org/conference/cont-ed/2018-webcasts">https://www.aeaweb.org/conference/cont-ed/2018-webcasts</a>.</p>
+<p><a id='id25'></a>
+[regAI17] Susan Athey and Guido W. Imbens. The state of applied econometrics: causality and policy evaluation. <em>Journal of Economic Perspectives</em>, 31(2):3–32, May 2017. URL: <a class="reference external" href="http://www.aeaweb.org/articles?id=10.1257/jep.31.2.3">http://www.aeaweb.org/articles?id=10.1257/jep.31.2.3</a>, <a class="reference external" href="https://doi.org/10.1257/jep.31.2.3">doi:10.1257/jep.31.2.3</a>.</p>
+<p><a id='id23'></a>
+[regBC11] Alexandre Belloni and Victor Chernozhukov. <em>High Dimensional Sparse Econometric Models: An Introduction</em>, pages 121–156. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011. URL: <a class="reference external" href="https://doi.org/10.1007/978-3-642-19989-9_3">https://doi.org/10.1007/978-3-642-19989-9_3</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-642-19989-9_3">doi:10.1007/978-3-642-19989-9_3</a>.</p>
+<p><a id='id14'></a>
+[regCCD+18] Victor Chernozhukov, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. Double/debiased machine learning for treatment and structural parameters. <em>The Econometrics Journal</em>, 21(1):C1–C68, 2018. URL: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ectj.12097">https://onlinelibrary.wiley.com/doi/abs/10.1111/ectj.12097</a>, <a class="reference external" href="https://arxiv.org/abs/https://onlinelibrary.wiley.com/doi/pdf/10.1111/ectj.12097">arXiv:https://onlinelibrary.wiley.com/doi/pdf/10.1111/ectj.12097</a>, <a class="reference external" href="https://doi.org/10.1111/ectj.12097">doi:10.1111/ectj.12097</a>.</p>
+<p><a id='id21'></a>
+[regCHS16] Victor Chernozhukov, Chris Hansen, and Martin Spindler. hdm: high-dimensional metrics. <em>R Journal</em>, 8(2):185–199, 2016. URL: <a class="reference external" href="https://journal.r-project.org/archive/2016/RJ-2016-040/index.html">https://journal.r-project.org/archive/2016/RJ-2016-040/index.html</a>.</p>
+<p><a id='id27'></a>
+[regEH16] Bradley Efron and Trevor Hastie. <em>Computer age statistical inference</em>. Volume 5. Cambridge University Press, 2016. URL: <a class="reference external" href="https://web.stanford.edu/~hastie/CASI/">https://web.stanford.edu/~hastie/CASI/</a>.</p>
+<p><a id='id26'></a>
+[regFHT09] Jerome Friedman, Trevor Hastie, and Robert Tibshirani. <em>The elements of statistical learning</em>. Springer series in statistics, 2009. URL: <a class="reference external" href="https://web.stanford.edu/~hastie/ElemStatLearn/">https://web.stanford.edu/~hastie/ElemStatLearn/</a>.</p>
+<p><a id='id28'></a>
+[regHSW89] Kurt Hornik, Maxwell Stinchcombe, and Halbert White. Multilayer feedforward networks are universal approximators. <em>Neural Networks</em>, 2(5):359 – 366, 1989. URL: <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/0893608089900208">http://www.sciencedirect.com/science/article/pii/0893608089900208</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1016/0893-6080%2889%2990020-8">doi:https://doi.org/10.1016/0893-6080(89)90020-8</a>.</p>
+<p><a id='app-reg-ex'></a></p>
+</section>
+<section id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h1>
+<section id="exercise-1">
+<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">sqft_lr_model</span></code> that we fit to generate predictions for all data points
+in our sample.</p>
+<p>Note that you need to pass a DataFrame (not Series)
+containing the <code class="docutils literal notranslate"><span class="pre">sqft_living</span></code> column to the <code class="docutils literal notranslate"><span class="pre">predict</span></code>. (See how we passed that to <code class="docutils literal notranslate"><span class="pre">.fit</span></code>
+above for help)</p>
+<p>Make a scatter chart with the actual data and the predictions on the same
+figure. Does it look familiar?</p>
+<p>When making the scatter for model predictions, we recommend passing
+<code class="docutils literal notranslate"><span class="pre">c=&quot;red&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">alpha=0.25</span></code> so you can distinguish the data from
+predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate predictions</span>
+
+<span class="c1"># Plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Make scatter of data</span>
+
+<span class="c1"># Make scatter of predictions</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-2">
+<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">metrics.mean_squared_error</span></code> function to evaluate the loss
+function used by <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> when it fits the model for us.</p>
+<p>Read the docstring to learn which the arguments that function takes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-3">
+<h2>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h2>
+<p>Compare the mean squared error for the <code class="docutils literal notranslate"><span class="pre">lr_model</span></code> and the <code class="docutils literal notranslate"><span class="pre">sqft_lr_model</span></code>.</p>
+<p>Which model has a better fit? Defend your choice.</p>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-4">
+<h2>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h2>
+<p>Explore how you can improve the fit of the full model by adding additional
+features created from the existing ones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="id1">
+<h2>Exercise 5<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Experiment with how the size of the holdout dataset can impact a diagnosis
+of overfitting.</p>
+<p>Evaluate only the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> model on the full feature set and use
+the <code class="docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code> function with various values for
+<code class="docutils literal notranslate"><span class="pre">test_size</span></code>.</p>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-6">
+<h2>Exercise 6<a class="headerlink" href="#exercise-6" title="Permalink to this heading">#</a></h2>
+<p>Read the documentation for <code class="docutils literal notranslate"><span class="pre">sklearn.tree.DecisionTreeRegressor</span></code> and
+then experiment with adjusting some regularization parameters to see how they
+affect the fitted tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot trees when varying some regularization parameter(s)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-7">
+<h2>Exercise 7<a class="headerlink" href="#exercise-7" title="Permalink to this heading">#</a></h2>
+<p>Fit a regression tree to the housing price data and use graphviz
+to visualize the decision graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-8">
+<h2>Exercise 8<a class="headerlink" href="#exercise-8" title="Permalink to this heading">#</a></h2>
+<p>Fit a random forest to the housing price data.</p>
+<p>Compare the MSE on a testing set to that of lasso.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit random forest and compute MSE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Produce a bar chart of feature importances for predicting house
+prices.</p>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-9">
+<h2>Exercise 9<a class="headerlink" href="#exercise-9" title="Permalink to this heading">#</a></h2>
+<p>In the pseudocode below, fill in the blanks for the generic MLP.</p>
+<p>Note that this is inside a markdown cell because the code is not valid
+Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">wend</span><span class="p">]</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">bend</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">eval_mlp</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluate MLP-given weights (ws), bias (bs) and an activation (f)</span>
+
+<span class="sd">    Assumes that the same activation is applied to all hidden layers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">__</span><span class="p">)</span>  <span class="c1"># replace the __</span>
+
+    <span class="c1"># For this step remember python starts counting at 0!</span>
+    <span class="k">return</span> <span class="n">out</span><span class="nd">@__</span> <span class="o">+</span> <span class="n">__</span>  <span class="c1"># replace the __</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-10">
+<h2>Exercise 10<a class="headerlink" href="#exercise-10" title="Permalink to this heading">#</a></h2>
+<p>Scale all variables in <code class="docutils literal notranslate"><span class="pre">X</span></code> by subtracting their mean and dividing by the
+standard deviation.</p>
+<p>Verify that the transformed data has mean 0 and standard deviation 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(<span class="xref myst">back to text</span>)</p>
+</section>
+<section id="exercise-11">
+<h2>Exercise 11<a class="headerlink" href="#exercise-11" title="Permalink to this heading">#</a></h2>
+<p>Read the documentation for sklearn.neural_network.MLPRegressor and
+use the full housing data to experiment with how adjusting layer depth, width, and other
+regularization parameters affects prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lab2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.1 Overfitting and Regularization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-of-regularization-parameter">Cross-validation of Regularization Parameter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout">Holdout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-in-econometrics">Lasso in Econometrics</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8">Exercise 8</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9">Exercise 9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10">Exercise 10</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11">Exercise 11</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miguel C. Herculano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

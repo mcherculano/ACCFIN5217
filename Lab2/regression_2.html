@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.1 Overfitting and Regularization &#8212; ECON 5129</title>
+    <title>Penalized Regression &#8212; ECON 5129</title>
   
   
   
@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab2/regression_2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Penalized Regression" href="lab2_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,8 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../Lab1/lab1_overview.html">1. Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Lab1/lab1_overview.html">Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../Lab1/regression_sol.html">Introduction to Regression</a></li>
 
 
@@ -177,6 +178,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../Lab1/mle.html">Maximum Likelihood Estimation</a></li>
 
 
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="lab2_overview.html">Penalized Regression</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Penalized Regression</a></li>
 </ul>
 </li>
 </ul>
@@ -315,7 +320,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2.1 Overfitting and Regularization</h1>
+    <h1>Penalized Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -325,32 +330,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.1 Overfitting and Regularization</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-of-regularization-parameter">Cross-validation of Regularization Parameter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout">Holdout</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-in-econometrics">Lasso in Econometrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">Remarks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-regularization">Overfitting and Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise 5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8">Exercise 8</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9">Exercise 9</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10">Exercise 10</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11">Exercise 11</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-of-regularization-parameter">Cross-validation of Regularization Parameter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout">Holdout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -361,8 +353,32 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="overfitting-and-regularization">
-<h1>2.1 Overfitting and Regularization<a class="headerlink" href="#overfitting-and-regularization" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="penalized-regression">
+<h1>Penalized Regression<a class="headerlink" href="#penalized-regression" title="Permalink to this heading">#</a></h1>
+<p>When running a regression with many predictors the results have a tendency to overfit the data, reducing out-of-sample predictive properties.</p>
+<p>Penalized regression eases this problem by forcing the regression estimator to shrink the coefficients towards 0 in order to avoid the “penalty” term imposed on the coefficients. This process is closely related to the idea of Bayesian shrinkage, and indeed standard penalized regression results are equivalent to regression performed using <a class="reference external" href="https://amstat.tandfonline.com/doi/abs/10.1198/016214508000000337?casa_token=DE6O93Bz7uUAAAAA:Ff_MiPXvPH32NA2hnGtZtqb8grXEiEqF0fdO3B0p_a6wOaqRciCZ4ASwxn69gdOb93Lbt-HSyK1o4As">certain Bayesian priors</a>.</p>
+<p>Regular OLS selects coefficients <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> to minimize the sum of squared errors:</p>
+<div class="math notranslate nohighlight">
+\[
+\min\sum_i(y_i - X_i\hat{\beta})^2
+\]</div>
+<p>Penalized regressions similarly select coefficients to minimize a similar objective function by adding a penalty term <span class="math notranslate nohighlight">\(\lambda\lVert\beta\rVert_p\)</span> to that objective function, where <span class="math notranslate nohighlight">\(\lambda\)</span> is a tuning parameter that determines how harshly to penalize coefficients, and <span class="math notranslate nohighlight">\(\lVert\beta\rVert_p\)</span> is the <span class="math notranslate nohighlight">\(p\)</span>-norm of the coefficients, or <span class="math notranslate nohighlight">\(\sum_j\lvert\beta\rvert^p\)</span>. Thus, the objective function becomes,</p>
+<div class="math notranslate nohighlight">
+\[
+\min\left(\sum_i(y_i - X_i\hat{\beta})^2 + \lambda\left\lVert\beta\right\rVert_p \right).
+\]</div>
+<p>Typically <span class="math notranslate nohighlight">\(p\)</span> is set to 1 for LASSO regression (least absolute shrinkage and selection operator), which has the effect of tending to set coefficients to 0, i.e. model selection, or to 2 for Ridge Regression. Elastic net regression provides a weighted mix of LASSO and Ridge penalties, commonly referring to the weight as <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<section id="remarks">
+<h2>Remarks<a class="headerlink" href="#remarks" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To avoid being penalized for a constant term, or by differences in scale between variables, it is a very good idea to standardize each variable (subtract the mean and divide by the standard deviation) before running a penalized regression.</p></li>
+<li><p>Penalized regression can be run for logit and other kinds of regression, not just linear regression. Using penalties with general linear models like logit is common.</p></li>
+<li><p>Penalized regression coefficients are designed to improve out-of-sample prediction, but they are biased. If the goal is estimation of a parameter, rather than prediction, this should be kept in mind. A common procedure is to use LASSO to select variables, and then run regular regression models with the variables that LASSO has selected.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(\lambda\)</span> parameter is often chosen using cross-validation. Many penalized regression commands include an option to select <span class="math notranslate nohighlight">\(\lambda\)</span> by cross-validation automatically.</p></li>
+<li><p>LASSO models commonly include variables along with polynomial transformation of those variables and interactions, allowing LASSO to determine which transformations are worth keeping.</p></li>
+</ul>
+<section id="overfitting-and-regularization">
+<h3>Overfitting and Regularization<a class="headerlink" href="#overfitting-and-regularization" title="Permalink to this heading">#</a></h3>
 <p>You might be wondering, “Why would we ever want to throw variables out,
 can’t that only hurt our model?”</p>
 <p>The primary answer: it helps us avoid a common issue called <strong>overfitting</strong>.</p>
@@ -378,16 +394,9 @@ on training data (e.g. limit overfitting) by penalizing extreme values of the
 model’s parameters.</p>
 <p>The additional term in the lasso regression loss function (<span class="math notranslate nohighlight">\( \alpha ||\beta||_1 \)</span>)
 is a form of regularization.</p>
-<p>Let’s demonstrate the overfitting and regularization phenomenon on our housing
-price data as follows:</p>
-<ol class="arabic simple">
-<li><p>Split the data set into training and testing subsets. We will use the first 50 observations for training and the rest for testing.</p></li>
-<li><p>Fit the linear regression model and report MSE on training and testing datasets.</p></li>
-<li><p>Fit the lasso model and report the same statistics.</p></li>
-</ol>
 </section>
 <section id="dataset">
-<h1>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h1>
+<h3>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h3>
 <p>Let’s load the dataset and take a quick look at our task.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -407,63 +416,25 @@ price data as follows:</p>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://datascience.quantecon.org/assets/data/kc_house_data.csv&quot;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="c1">#df.info()</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="c1"># convert everything to be a float for later on</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1">#X.head()</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">])</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;log_price&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-<span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 21613 entries, 0 to 21612
-Data columns (total 21 columns):
- #   Column         Non-Null Count  Dtype  
----  ------         --------------  -----  
- 0   id             21613 non-null  int64  
- 1   date           21613 non-null  object 
- 2   price          21613 non-null  float64
- 3   bedrooms       21613 non-null  int64  
- 4   bathrooms      21613 non-null  float64
- 5   sqft_living    21613 non-null  int64  
- 6   sqft_lot       21613 non-null  int64  
- 7   floors         21613 non-null  float64
- 8   waterfront     21613 non-null  int64  
- 9   view           21613 non-null  int64  
- 10  condition      21613 non-null  int64  
- 11  grade          21613 non-null  int64  
- 12  sqft_above     21613 non-null  int64  
- 13  sqft_basement  21613 non-null  int64  
- 14  yr_built       21613 non-null  int64  
- 15  yr_renovated   21613 non-null  int64  
- 16  zipcode        21613 non-null  int64  
- 17  lat            21613 non-null  float64
- 18  long           21613 non-null  float64
- 19  sqft_living15  21613 non-null  int64  
- 20  sqft_lot15     21613 non-null  int64  
-dtypes: float64(5), int64(15), object(1)
-memory usage: 3.5+ MB
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    12.309982
-1    13.195614
-2    12.100712
-3    13.311329
-4    13.142166
-Name: price, dtype: float64
+<span class="c1">#y.head()</span>
+<span class="c1">#Note: Uncomment the previous lines to inspect the data. We&#39;ve done this in previous labs with this data so I&#39;m going to skip this step here. </span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+</section>
 <section id="lasso-regression">
-<h1>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h1>
+<h2>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Permalink to this heading">#</a></h2>
 <p>Lasso regression is very closely related to linear regression.</p>
 <p>The lasso model also generates predictions using <span class="math notranslate nohighlight">\( y = X \beta \)</span> but
 optimizes over a slightly different loss function.</p>
@@ -480,30 +451,136 @@ target.</p>
 <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lasso_model</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr_model</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lr_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">lasso_model</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">()</span>
 <span class="n">lasso_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="n">lasso_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lasso_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
 <span class="n">lr_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
 <span class="n">coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">lasso</span><span class="o">=</span><span class="n">lasso_coefs</span><span class="p">,</span> <span class="n">linreg</span><span class="o">=</span><span class="n">lr_coefs</span><span class="p">))</span>
-<span class="n">coefs</span>
+<span class="n">coefs</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">lasso_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">lasso_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lasso_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">lr_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">lasso</span><span class="o">=</span><span class="n">lasso_coefs</span><span class="p">,</span> <span class="n">linreg</span><span class="o">=</span><span class="n">lr_coefs</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">coefs</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">NameError</span>: name &#39;lr_model&#39; is not defined
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lasso</th>
+      <th>linreg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bedrooms</th>
+      <td>-0.0000</td>
+      <td>-0.0122</td>
+    </tr>
+    <tr>
+      <th>bathrooms</th>
+      <td>0.0000</td>
+      <td>0.0691</td>
+    </tr>
+    <tr>
+      <th>sqft_living</th>
+      <td>0.0003</td>
+      <td>0.0001</td>
+    </tr>
+    <tr>
+      <th>sqft_lot</th>
+      <td>0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>floors</th>
+      <td>0.0000</td>
+      <td>0.0752</td>
+    </tr>
+    <tr>
+      <th>waterfront</th>
+      <td>0.0000</td>
+      <td>0.3712</td>
+    </tr>
+    <tr>
+      <th>view</th>
+      <td>0.0000</td>
+      <td>0.0604</td>
+    </tr>
+    <tr>
+      <th>condition</th>
+      <td>0.0000</td>
+      <td>0.0626</td>
+    </tr>
+    <tr>
+      <th>grade</th>
+      <td>0.0000</td>
+      <td>0.1589</td>
+    </tr>
+    <tr>
+      <th>sqft_above</th>
+      <td>-0.0000</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>sqft_basement</th>
+      <td>0.0000</td>
+      <td>0.0001</td>
+    </tr>
+    <tr>
+      <th>yr_built</th>
+      <td>-0.0012</td>
+      <td>-0.0034</td>
+    </tr>
+    <tr>
+      <th>yr_renovated</th>
+      <td>0.0001</td>
+      <td>0.0000</td>
+    </tr>
+    <tr>
+      <th>zipcode</th>
+      <td>0.0007</td>
+      <td>-0.0006</td>
+    </tr>
+    <tr>
+      <th>lat</th>
+      <td>0.0000</td>
+      <td>1.4000</td>
+    </tr>
+    <tr>
+      <th>long</th>
+      <td>-0.0000</td>
+      <td>-0.1592</td>
+    </tr>
+    <tr>
+      <th>sqft_living15</th>
+      <td>0.0002</td>
+      <td>0.0001</td>
+    </tr>
+    <tr>
+      <th>sqft_lot15</th>
+      <td>-0.0000</td>
+      <td>-0.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Notice that many coefficients from the lasso regression have been set to
 zero.</p>
@@ -537,7 +614,17 @@ additional ones to be thrown out).</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/e68bf6b28fbd8f53bb177a70b59613bf144f27661af912b5c5c4b11a63127ffe.png" src="../_images/e68bf6b28fbd8f53bb177a70b59613bf144f27661af912b5c5c4b11a63127ffe.png" />
 </div>
+</div>
+<p>Let’s demonstrate the overfitting and regularization phenomenon on our housing
+price data as follows:</p>
+<ol class="arabic simple">
+<li><p>Split the data set into training and testing subsets. We will use the first 50 observations for training and the rest for testing.</p></li>
+<li><p>Fit the linear regression model and report MSE on training and testing datasets.</p></li>
+<li><p>Fit the lasso model and report the same statistics.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit_and_report_mses</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
@@ -557,10 +644,20 @@ additional ones to be thrown out).</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mse_train&#39;: 0.05545627171577257, &#39;mse_test&#39;: 0.6705205330633802}
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_and_report_mses</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(),</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mse_train&#39;: 0.1062919502412495, &#39;mse_test&#39;: 0.2910434823708496}
 </pre></div>
 </div>
 </div>
@@ -570,31 +667,9 @@ without the regularization, but the MSE on the test dataset was much
 higher.</p>
 <p>This strongly suggests that the linear regression model was
 overfitting.</p>
-<p>The regularization parameter has a large impact on overfitting.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">fit_and_report_mses</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50000</span><span class="p">),</span>
-                           <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">])</span>
-<span class="n">mse</span><span class="p">[</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">alphas</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">mse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;mse_test&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">mse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;mse_train&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$-\log(\alpha)$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;MSE&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">get_legend</span><span class="p">()</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,(</span><span class="n">mse</span><span class="o">.</span><span class="n">log_alpha</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">mse</span><span class="o">.</span><span class="n">mse_test</span><span class="p">[</span><span class="mi">15</span><span class="p">]),</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;train&quot;</span><span class="p">,(</span><span class="n">mse</span><span class="o">.</span><span class="n">log_alpha</span><span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="n">mse</span><span class="o">.</span><span class="n">mse_train</span><span class="p">[</span><span class="mi">30</span><span class="p">]),</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
 <section id="cross-validation-of-regularization-parameter">
-<h2>Cross-validation of Regularization Parameter<a class="headerlink" href="#cross-validation-of-regularization-parameter" title="Permalink to this heading">#</a></h2>
-<p>As you can see in the figure above, the regularization parameter has a
-large impact on MSE in the test data.</p>
-<p>Moreover, the relationship between the test data MSE and <span class="math notranslate nohighlight">\( \alpha \)</span> is
+<h3>Cross-validation of Regularization Parameter<a class="headerlink" href="#cross-validation-of-regularization-parameter" title="Permalink to this heading">#</a></h3>
+<p>The regularization parameter has a large impact on overfitting. Moreover, the relationship between the test data MSE and <span class="math notranslate nohighlight">\( \alpha \)</span> is
 complicated and non-monotonic.</p>
 <p>One popular method for choosing the regularization parameter is cross-validation.</p>
 <p>Roughly speaking, cross-validation splits the dataset into many training/testing
@@ -626,6 +701,21 @@ data.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">mse</span><span class="p">[</span><span class="s2">&quot;cv&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50000</span><span class="p">),</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>                                   <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>           <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">mse</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;cv&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;5 fold cross-validation&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">mse</span><span class="o">.</span><span class="n">log_alpha</span><span class="p">[</span><span class="mi">40</span><span class="p">],</span> <span class="n">mse</span><span class="o">.</span><span class="n">cv</span><span class="p">[</span><span class="mi">40</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="ne">NameError</span>: name &#39;mse&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <p>scikit learn also includes methods to automate the above and select
 <span class="math notranslate nohighlight">\( \alpha \)</span>.</p>
@@ -637,10 +727,15 @@ data.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.9732104006516822
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="holdout">
-<h2>Holdout<a class="headerlink" href="#holdout" title="Permalink to this heading">#</a></h2>
+<h3>Holdout<a class="headerlink" href="#holdout" title="Permalink to this heading">#</a></h3>
 <p>Practitioners often use another technique to avoid overfitting, called
 <em>holdout</em>.</p>
 <p>We demonstrated an extreme example of applying holdout above when we used only
@@ -667,222 +762,16 @@ while selecting regularization parameters with cross-validation.</p>
 </div>
 </section>
 <section id="exercise-5">
-<h2>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h2>
-<p>Experiment with how the size of the holdout dataset can impact a diagnosis
-of overfitting.</p>
-<p>Evaluate only the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> model on the full feature set and use
-the <code class="docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code> function with various values for
-<code class="docutils literal notranslate"><span class="pre">test_size</span></code>.</p>
-</section>
-<section id="lasso-in-econometrics">
-<h2>Lasso in Econometrics<a class="headerlink" href="#lasso-in-econometrics" title="Permalink to this heading">#</a></h2>
-<p>Lasso is becoming increasingly popular in economics, partially due to
-the work of Victor Chernozhukov and his coauthors.</p>
-<p>In econometrics, the goal is typically to estimate some coefficient of interest or causal
-effect, rather than obtaining the most precise prediction.</p>
-<p>Among other things, this different goal affects how the regularization parameter
-must be chosen.</p>
-<p>[<span class="xref myst">regBC11</span>] and [<span class="xref myst">regCHS16</span>] are somewhat approachable introductions
-to this area.</p>
-<p>The latter of these two references includes an R package.</p>
-<p>[<span class="xref myst">regCCD+18</span>] reflects close to the state-of-art in this rapidly
-advancing area.</p>
+<h3>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this heading">#</a></h3>
+<p>Run the same experiment using Ridge Regression as your prefered regularization choice. How does it compare to LASSO and OLS ?</p>
 </section>
 </section>
 <section id="references">
-<h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
-<p>Two good text books covering the above regression methods are
-[<span class="xref myst">regFHT09</span>] and [<span class="xref myst">regEH16</span>]</p>
-<p><a id='id24'></a>
-[regAI18] Susan Athey and Guido Imbens. Machine learning and econometrics. 2018. URL: <a class="reference external" href="https://www.aeaweb.org/conference/cont-ed/2018-webcasts">https://www.aeaweb.org/conference/cont-ed/2018-webcasts</a>.</p>
-<p><a id='id25'></a>
-[regAI17] Susan Athey and Guido W. Imbens. The state of applied econometrics: causality and policy evaluation. <em>Journal of Economic Perspectives</em>, 31(2):3–32, May 2017. URL: <a class="reference external" href="http://www.aeaweb.org/articles?id=10.1257/jep.31.2.3">http://www.aeaweb.org/articles?id=10.1257/jep.31.2.3</a>, <a class="reference external" href="https://doi.org/10.1257/jep.31.2.3">doi:10.1257/jep.31.2.3</a>.</p>
-<p><a id='id23'></a>
-[regBC11] Alexandre Belloni and Victor Chernozhukov. <em>High Dimensional Sparse Econometric Models: An Introduction</em>, pages 121–156. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011. URL: <a class="reference external" href="https://doi.org/10.1007/978-3-642-19989-9_3">https://doi.org/10.1007/978-3-642-19989-9_3</a>, <a class="reference external" href="https://doi.org/10.1007/978-3-642-19989-9_3">doi:10.1007/978-3-642-19989-9_3</a>.</p>
-<p><a id='id14'></a>
-[regCCD+18] Victor Chernozhukov, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins. Double/debiased machine learning for treatment and structural parameters. <em>The Econometrics Journal</em>, 21(1):C1–C68, 2018. URL: <a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ectj.12097">https://onlinelibrary.wiley.com/doi/abs/10.1111/ectj.12097</a>, <a class="reference external" href="https://arxiv.org/abs/https://onlinelibrary.wiley.com/doi/pdf/10.1111/ectj.12097">arXiv:https://onlinelibrary.wiley.com/doi/pdf/10.1111/ectj.12097</a>, <a class="reference external" href="https://doi.org/10.1111/ectj.12097">doi:10.1111/ectj.12097</a>.</p>
-<p><a id='id21'></a>
-[regCHS16] Victor Chernozhukov, Chris Hansen, and Martin Spindler. hdm: high-dimensional metrics. <em>R Journal</em>, 8(2):185–199, 2016. URL: <a class="reference external" href="https://journal.r-project.org/archive/2016/RJ-2016-040/index.html">https://journal.r-project.org/archive/2016/RJ-2016-040/index.html</a>.</p>
-<p><a id='id27'></a>
-[regEH16] Bradley Efron and Trevor Hastie. <em>Computer age statistical inference</em>. Volume 5. Cambridge University Press, 2016. URL: <a class="reference external" href="https://web.stanford.edu/~hastie/CASI/">https://web.stanford.edu/~hastie/CASI/</a>.</p>
-<p><a id='id26'></a>
-[regFHT09] Jerome Friedman, Trevor Hastie, and Robert Tibshirani. <em>The elements of statistical learning</em>. Springer series in statistics, 2009. URL: <a class="reference external" href="https://web.stanford.edu/~hastie/ElemStatLearn/">https://web.stanford.edu/~hastie/ElemStatLearn/</a>.</p>
-<p><a id='id28'></a>
-[regHSW89] Kurt Hornik, Maxwell Stinchcombe, and Halbert White. Multilayer feedforward networks are universal approximators. <em>Neural Networks</em>, 2(5):359 – 366, 1989. URL: <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/0893608089900208">http://www.sciencedirect.com/science/article/pii/0893608089900208</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1016/0893-6080%2889%2990020-8">doi:https://doi.org/10.1016/0893-6080(89)90020-8</a>.</p>
-<p><a id='app-reg-ex'></a></p>
-</section>
-<section id="exercises">
-<h1>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h1>
-<section id="exercise-1">
-<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h2>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">sqft_lr_model</span></code> that we fit to generate predictions for all data points
-in our sample.</p>
-<p>Note that you need to pass a DataFrame (not Series)
-containing the <code class="docutils literal notranslate"><span class="pre">sqft_living</span></code> column to the <code class="docutils literal notranslate"><span class="pre">predict</span></code>. (See how we passed that to <code class="docutils literal notranslate"><span class="pre">.fit</span></code>
-above for help)</p>
-<p>Make a scatter chart with the actual data and the predictions on the same
-figure. Does it look familiar?</p>
-<p>When making the scatter for model predictions, we recommend passing
-<code class="docutils literal notranslate"><span class="pre">c=&quot;red&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">alpha=0.25</span></code> so you can distinguish the data from
-predictions.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate predictions</span>
-
-<span class="c1"># Plot</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-
-<span class="c1"># Make scatter of data</span>
-
-<span class="c1"># Make scatter of predictions</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-2">
-<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h2>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">metrics.mean_squared_error</span></code> function to evaluate the loss
-function used by <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> when it fits the model for us.</p>
-<p>Read the docstring to learn which the arguments that function takes.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
-
-<span class="c1"># your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-3">
-<h2>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this heading">#</a></h2>
-<p>Compare the mean squared error for the <code class="docutils literal notranslate"><span class="pre">lr_model</span></code> and the <code class="docutils literal notranslate"><span class="pre">sqft_lr_model</span></code>.</p>
-<p>Which model has a better fit? Defend your choice.</p>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-4">
-<h2>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this heading">#</a></h2>
-<p>Explore how you can improve the fit of the full model by adding additional
-features created from the existing ones.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="id1">
-<h2>Exercise 5<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>Experiment with how the size of the holdout dataset can impact a diagnosis
-of overfitting.</p>
-<p>Evaluate only the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> model on the full feature set and use
-the <code class="docutils literal notranslate"><span class="pre">model_selection.train_test_split</span></code> function with various values for
-<code class="docutils literal notranslate"><span class="pre">test_size</span></code>.</p>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-6">
-<h2>Exercise 6<a class="headerlink" href="#exercise-6" title="Permalink to this heading">#</a></h2>
-<p>Read the documentation for <code class="docutils literal notranslate"><span class="pre">sklearn.tree.DecisionTreeRegressor</span></code> and
-then experiment with adjusting some regularization parameters to see how they
-affect the fitted tree.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot trees when varying some regularization parameter(s)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-7">
-<h2>Exercise 7<a class="headerlink" href="#exercise-7" title="Permalink to this heading">#</a></h2>
-<p>Fit a regression tree to the housing price data and use graphviz
-to visualize the decision graph.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-8">
-<h2>Exercise 8<a class="headerlink" href="#exercise-8" title="Permalink to this heading">#</a></h2>
-<p>Fit a random forest to the housing price data.</p>
-<p>Compare the MSE on a testing set to that of lasso.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit random forest and compute MSE</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Produce a bar chart of feature importances for predicting house
-prices.</p>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-9">
-<h2>Exercise 9<a class="headerlink" href="#exercise-9" title="Permalink to this heading">#</a></h2>
-<p>In the pseudocode below, fill in the blanks for the generic MLP.</p>
-<p>Note that this is inside a markdown cell because the code is not valid
-Python.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">wend</span><span class="p">]</span>
-<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">bend</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">eval_mlp</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Evaluate MLP-given weights (ws), bias (bs) and an activation (f)</span>
-
-<span class="sd">    Assumes that the same activation is applied to all hidden layers</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ws</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="n">X</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">__</span><span class="p">)</span>  <span class="c1"># replace the __</span>
-
-    <span class="c1"># For this step remember python starts counting at 0!</span>
-    <span class="k">return</span> <span class="n">out</span><span class="nd">@__</span> <span class="o">+</span> <span class="n">__</span>  <span class="c1"># replace the __</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-10">
-<h2>Exercise 10<a class="headerlink" href="#exercise-10" title="Permalink to this heading">#</a></h2>
-<p>Scale all variables in <code class="docutils literal notranslate"><span class="pre">X</span></code> by subtracting their mean and dividing by the
-standard deviation.</p>
-<p>Verify that the transformed data has mean 0 and standard deviation 1.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>(<span class="xref myst">back to text</span>)</p>
-</section>
-<section id="exercise-11">
-<h2>Exercise 11<a class="headerlink" href="#exercise-11" title="Permalink to this heading">#</a></h2>
-<p>Read the documentation for sklearn.neural_network.MLPRegressor and
-use the full housing data to experiment with how adjusting layer depth, width, and other
-regularization parameters affects prediction.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
-</pre></div>
-</div>
-</div>
-</div>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Chapter 5 of Jerome Friedman, Trevor Hastie, and Robert Tibshirani. <em>The elements of statistical learning</em>. Springer series in statistics, 2009. URL: <a class="reference external" href="https://web.stanford.edu/~hastie/ElemStatLearn/">https://web.stanford.edu/~hastie/ElemStatLearn/</a></p></li>
+<li><p>The Library of Statistical Techniques (LOST)! URL: <a class="reference external" href="https://lost-stats.github.io/">https://lost-stats.github.io/</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -917,6 +806,15 @@ regularization parameters affects prediction.</p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="lab2_overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Penalized Regression</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
@@ -935,32 +833,19 @@ regularization parameters affects prediction.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.1 Overfitting and Regularization</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-of-regularization-parameter">Cross-validation of Regularization Parameter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout">Holdout</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-in-econometrics">Lasso in Econometrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks">Remarks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-and-regularization">Overfitting and Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise 5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6">Exercise 6</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7">Exercise 7</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8">Exercise 8</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9">Exercise 9</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10">Exercise 10</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11">Exercise 11</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-of-regularization-parameter">Cross-validation of Regularization Parameter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#holdout">Holdout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

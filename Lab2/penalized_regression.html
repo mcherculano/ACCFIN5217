@@ -1,0 +1,743 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Penalized Regression &#8212; ECON 5129</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab2/penalized_regression';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ASBS_small_.PNG" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/ASBS_small_.PNG" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRELIMINARY</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/about_py.html">About Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/setting_up_your_python_environment.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/learn_more.html">Learn More</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Lab1/lab1_overview.html">Introduction to Regression &amp; MLE</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/regression_sol.html">Introduction to Regression</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Lab1/mle.html">Maximum Likelihood Estimation</a></li>
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="lab2_overview.html">Penalized Regression</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="regression_2.html">Penalized Regression</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Lab2/penalized_regression.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Penalized Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Penalized Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-in-mind">Keep in Mind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#also-consider">Also Consider</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementations">Implementations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#r">R</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata">Stata</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="penalized-regression">
+<h1>Penalized Regression<a class="headerlink" href="#penalized-regression" title="Permalink to this heading">#</a></h1>
+<p>When running a regression, especially one with many predictors, the results have a tendency to overfit the data, reducing out-of-sample predictive properties.</p>
+<p>Penalized regression eases this problem by forcing the regression estimator to shrink its coefficients towards 0 in order to avoid the “penalty” term imposed on the coefficients. This process is closely related to the idea of Bayesian shrinkage, and indeed standard penalized regression results are equivalent to regression performed using <a class="reference external" href="https://amstat.tandfonline.com/doi/abs/10.1198/016214508000000337?casa_token=DE6O93Bz7uUAAAAA:Ff_MiPXvPH32NA2hnGtZtqb8grXEiEqF0fdO3B0p_a6wOaqRciCZ4ASwxn69gdOb93Lbt-HSyK1o4As">certain Bayesian priors</a>.</p>
+<p>Regular OLS selects coefficients $<span class="math notranslate nohighlight">\(\hat{\beta}\)</span>$ to minimize the sum of squared errors:</p>
+<div class="math notranslate nohighlight">
+\[
+\min\sum_i(y_i - X_i\hat{\beta})^2
+\]</div>
+<p>Non-OLS regressions similarly select coefficients to minimize a similar objective function. Penalized regression adds a penalty term $<span class="math notranslate nohighlight">\(\lambda\lVert\beta\rVert_p\)</span><span class="math notranslate nohighlight">\( to that objective function, where \)</span><span class="math notranslate nohighlight">\(\lambda\)</span><span class="math notranslate nohighlight">\( is a tuning parameter that determines how harshly to penalize coefficients, and \)</span><span class="math notranslate nohighlight">\(\lVert\beta\rVert_p\)</span><span class="math notranslate nohighlight">\( is the \)</span><span class="math notranslate nohighlight">\(p\)</span><span class="math notranslate nohighlight">\(-norm of the coefficients, or \)</span><span class="math notranslate nohighlight">\(\sum_j\lvert\beta\rvert^p\)</span>$.</p>
+<div class="math notranslate nohighlight">
+\[
+\min\left(\sum_i(y_i - X_i\hat{\beta})^2 + \lambda\left\lVert\beta\right\rVert_p \right)
+\]</div>
+<p>Typically $<span class="math notranslate nohighlight">\(p\)</span><span class="math notranslate nohighlight">\( is set to 1 for LASSO regression (least absolute shrinkage and selection operator), which has the effect of tending to set coefficients to 0, i.e. model selection, or to 2 for Ridge Regression. Elastic net regression provides a weighted mix of LASSO and Ridge penalties, commonly referring to the weight as \)</span><span class="math notranslate nohighlight">\(\alpha\)</span>$.</p>
+<section id="keep-in-mind">
+<h2>Keep in Mind<a class="headerlink" href="#keep-in-mind" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To avoid being penalized for a constant term, or by differences in scale between variables, it is a very good idea to standardize each variable (subtract the mean and divide by the standard deviation) before running a penalized regression.</p></li>
+<li><p>Penalized regression can be run for logit and other kinds of regression, not just linear regression. Using penalties with general linear models like logit is common.</p></li>
+<li><p>Penalized regression coefficients are designed to improve out-of-sample prediction, but they are biased. If the goal is estimation of a parameter, rather than prediction, this should be kept in mind. A common procedure is to use LASSO to select variables, and then run regular regression models with the variables that LASSO has selected.</p></li>
+<li><p>The $<span class="math notranslate nohighlight">\(\lambda\)</span><span class="math notranslate nohighlight">\( parameter is often chosen using cross-validation. Many penalized regression commands include an option to select \)</span><span class="math notranslate nohighlight">\(\lambda\)</span>$ by cross-validation automatically.</p></li>
+<li><p>LASSO models commonly include variables along with polynomial transformation of those variables and interactions, allowing LASSO to determine which transformations are worth keeping.</p></li>
+</ul>
+</section>
+<section id="also-consider">
+<h2>Also Consider<a class="headerlink" href="#also-consider" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If it is not important to estimate coefficients but the goal is simply to predict an outcome, then there are many other [machine learning]() methods that do so, and in some cases can handle higher dimensionality or work with smaller samples.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="implementations">
+<h1>Implementations<a class="headerlink" href="#implementations" title="Permalink to this heading">#</a></h1>
+<section id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h2>
+<p>This is an example of running penalised regressions in Python. The main takeaways are that the ubiquitous machine learning package <a class="reference external" href="https://scikit-learn.org/stable/index.html"><strong>sklearn</strong></a> can perform lasso, ridge, and elastic net regressions. In the example below, we’ll see all three in action. The level of penalisation will be set automatically by cross-validation, although a user may also supply the number directly.</p>
+<p>This example will use the seaborn package (for data), the patsy package (to create matrices from formulae), the matplotlib package (for plotting), the pandas package (for data manipulation), and the <a class="reference external" href="https://scikit-learn.org/stable/index.html"><strong>sklearn</strong></a> package (for machine learning). To run the example below, you may need to first install these packages. First, we need to import these packages for use.</p>
+<div class="highlight-python?example=penreg notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
+from patsy import dmatrices, dmatrix
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LassoCV, ElasticNetCV, RidgeCV
+import matplotlib.pyplot as plt
+import pandas as pd
+</pre></div>
+</div>
+<p>Now let’s load the data and transform it into a vector of endogeneous variables, and a matrix of exogenous variables. Using patsy, we’ll ask for all interaction variables among sepal width, petal length, and petal width (and exclude having an intercept).</p>
+<div class="highlight-python?example=penreg notranslate"><div class="highlight"><pre><span></span>iris = sns.load_dataset(&quot;iris&quot;)
+formula = (&quot;sepal_length ~ (sepal_width + petal_length + petal_width)**2 - 1&quot;)
+y, X = dmatrices(formula, iris)
+</pre></div>
+</div>
+<p>Some machine learning algorithms are more performant with data that are scaled before being used. One should be careful when scaling data if using test and training sets; here, we’re not worried about a test set though, so we just use the standard scaler (which transforms data to have 0 mean and unit standard deviation) on all of the $<span class="math notranslate nohighlight">\(X\)</span><span class="math notranslate nohighlight">\( and \)</span><span class="math notranslate nohighlight">\(y\)</span>$ data.</p>
+<div class="highlight-python?example=penreg notranslate"><div class="highlight"><pre><span></span>scale_X = StandardScaler().fit(X).transform(X)
+scale_y = StandardScaler().fit(y).transform(y)
+scale_y = scale_y.ravel()  # ravel collapses a (150, 1) vector to (150,)
+</pre></div>
+</div>
+<p>Now we run lasso with cross-validation.</p>
+<div class="highlight-python?example=penreg notranslate"><div class="highlight"><pre><span></span>reg_lasso = LassoCV(cv=10).fit(scale_X, scale_y)
+</pre></div>
+</div>
+<p>Let’s display the results so we can see for which value of $<span class="math notranslate nohighlight">\(\alpha\)</span><span class="math notranslate nohighlight">\( the lowest mean squared error occurred. Note that sklearn uses the convention that \)</span><span class="math notranslate nohighlight">\(\alpha\)</span><span class="math notranslate nohighlight">\( (rather than \)</span><span class="math notranslate nohighlight">\(\lambda\)</span>$) is the shrinkage parameter.</p>
+<div class="highlight-python?example=penreg notranslate"><div class="highlight"><pre><span></span>EPSILON = 1e-4  # This is to avoid division by zero while taking the base 10 logarithm
+plt.figure()
+plt.semilogx(reg_lasso.alphas_ + EPSILON, reg_lasso.mse_path_, &#39;:&#39;)
+plt.plot(reg_lasso.alphas_ + EPSILON, reg_lasso.mse_path_.mean(axis=-1), &#39;k&#39;,
+         label=&#39;Average across the folds&#39;, linewidth=2)
+plt.axvline(reg_lasso.alpha_ + EPSILON, linestyle=&#39;--&#39;, color=&#39;k&#39;,
+            label=r&#39;$\alpha$: CV estimate&#39;)
+plt.legend()
+plt.xlabel(r&#39;$\alpha$&#39;)
+plt.ylabel(&#39;Mean square error&#39;)
+plt.title(&#39;Mean square error on each fold: coordinate descent &#39;)
+plt.axis(&#39;tight&#39;)
+plt.show()
+</pre></div>
+</div>
+<p><img alt="Finding_alpha_from_CV" src="Lab2/Images/penalised_reg_example_py.png" /></p>
+<p>Let’s look at the coefficients that are selected with this optimal value of $<span class="math notranslate nohighlight">\(\alpha\)</span>$ (which you can access via <code class="docutils literal notranslate"><span class="pre">reg_lasso.alpha_</span></code>):</p>
+<div class="highlight-python?example=penreg notranslate"><div class="highlight"><pre><span></span>for coef, name in zip(reg_lasso.coef_, dmatrix(formula.split(&#39;~&#39;)[1], iris).design_info.term_names):
+    print(f&#39;Coeff {name} = {coef:.2f}&#39;)
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Coeff sepal_width = 0.36
+Coeff petal_length = 1.38
+Coeff petal_width = -0.39
+Coeff sepal_width:petal_length = -0.00
+Coeff sepal_width:petal_width = -0.32
+Coeff petal_length:petal_width = 0.33
+</pre></div>
+</div>
+<p>Now let’s see what coefficients we get with ridge regression and elastic net (a mixture between ridge and lasso; here we use the default setting of a half-mixture between the two).</p>
+<div class="highlight-python?example=penreg notranslate"><div class="highlight"><pre><span></span>reg_elastic = ElasticNetCV(cv=10).fit(scale_X, scale_y)
+reg_ridge = RidgeCV(cv=10).fit(scale_X, scale_y)
+# For convenient comparison, let&#39;s pop these into a dataframe
+df = pd.DataFrame({&#39;Lasso&#39;: reg_lasso.coef_,
+                   &#39;Elastic Net (0.5)&#39;: reg_elastic.coef_,
+                   &#39;Ridge&#39;: reg_ridge.coef_},
+                  index=dmatrix(formula.split(&#39;~&#39;)[1], iris).design_info.term_names).T
+df[r&#39;$\alpha$&#39;] = [reg_lasso.alpha_, reg_elastic.alpha_, reg_ridge.alpha_]
+df = df.T
+df
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Lasso</th>
+      <th>Elastic Net (0.5)</th>
+      <th>Ridge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>sepal_width</th>
+      <td>0.362891</td>
+      <td>0.357877</td>
+      <td>0.288003</td>
+    </tr>
+    <tr>
+      <th>petal_length</th>
+      <td>1.383851</td>
+      <td>1.321840</td>
+      <td>0.931508</td>
+    </tr>
+    <tr>
+      <th>petal_width</th>
+      <td>-0.386780</td>
+      <td>-0.320669</td>
+      <td>-0.148416</td>
+    </tr>
+    <tr>
+      <th>sepal_width:petal_length</th>
+      <td>-0.000000</td>
+      <td>0.039810</td>
+      <td>0.363751</td>
+    </tr>
+    <tr>
+      <th>sepal_width:petal_width</th>
+      <td>-0.322053</td>
+      <td>-0.362515</td>
+      <td>-0.497244</td>
+    </tr>
+    <tr>
+      <th>petal_length:petal_width</th>
+      <td>0.327846</td>
+      <td>0.321951</td>
+      <td>0.326384</td>
+    </tr>
+    <tr>
+      <th>α</th>
+      <td>0.000901</td>
+      <td>0.001802</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</section>
+<section id="r">
+<h2>R<a class="headerlink" href="#r" title="Permalink to this heading">#</a></h2>
+<p>We will use the <strong>glmnet</strong> package.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install glmnet and tidyverse if necessary</span>
+<span class="c1"># install.packages(&#39;glmnet&#39;, &#39;tidyverse&#39;)</span>
+
+<span class="c1"># Load glmnet</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">glmnet</span><span class="p">)</span>
+
+<span class="c1"># Load iris data</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
+
+<span class="c1"># Create a matrix with all variables other than our dependent vairable, Sepal.Length</span>
+<span class="c1"># and interactions. </span>
+<span class="c1"># -1 to omit the intercept</span>
+<span class="n">M</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">model.matrix</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Sepal.Length</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="p">(</span><span class="n">.</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iris</span><span class="p">))</span>
+<span class="c1"># Add squared terms of numeric variables</span>
+<span class="n">numeric.var.names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">iris</span><span class="p">)[</span><span class="m">2</span><span class="o">:</span><span class="m">4</span><span class="p">]</span>
+<span class="n">M</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">iris</span><span class="p">[,</span><span class="n">numeric.var.names</span><span class="p">]</span><span class="o">^</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">M</span><span class="p">)[</span><span class="m">16</span><span class="o">:</span><span class="m">18</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">numeric.var.names</span><span class="p">,</span><span class="s">&#39;squared&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a matrix for our dependent variable too</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">iris</span><span class="o">$</span><span class="n">Sepal.Length</span><span class="p">)</span>
+
+<span class="c1"># Standardize all variables</span>
+<span class="n">M</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+
+<span class="c1"># Use glmnet to estimate penalized regression</span>
+<span class="c1"># We pick family = &quot;gaussian&quot; for linear regression;</span>
+<span class="c1"># other families work for other kinds of data, like binomial for binary data</span>
+<span class="c1"># In each case, we use cv.glmnet to pick our lambda value using cross-validation</span>
+<span class="c1"># using nfolds folds for cross-validation</span>
+<span class="c1"># Note that alpha = 1 picks LASSO</span>
+<span class="n">cv.lasso</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cv.glmnet</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gaussian&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nfolds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="c1"># We might want to see how the choice of lambda relates to out-of-sample error with a plot</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">cv.lasso</span><span class="p">)</span>
+<span class="c1"># After doing CV, we commonly pick the lambda.min for lambda, </span>
+<span class="c1"># which is the lambda that minimizes out-of-sample error</span>
+<span class="c1"># or lambda.1se, which is one standard error above lambda.min,</span>
+<span class="c1"># which penalizes more harshly. The choice depends on context.</span>
+<span class="n">lasso.model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gaussian&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cv.lasso</span><span class="o">$</span><span class="n">lambda.min</span><span class="p">)</span>
+<span class="c1"># coefficients are shown in the beta element. . means LASSO dropped it</span>
+<span class="n">lasso.model</span><span class="o">$</span><span class="n">beta</span>
+
+<span class="c1"># Running Ridge, or mixing the two with elastic net, simply means picking</span>
+<span class="c1"># alpha = 0 (Ridge), or 0 &lt; alpha &lt; 1 (Elastic Net)</span>
+<span class="n">cv.ridge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cv.glmnet</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gaussian&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nfolds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="n">ridge.model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gaussian&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cv.ridge</span><span class="o">$</span><span class="n">lambda.min</span><span class="p">)</span>
+
+<span class="n">cv.elasticnet</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cv.glmnet</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gaussian&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nfolds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">5</span><span class="p">)</span>
+<span class="n">elasticnet.model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">glmnet</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;gaussian&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cv.elasticnet</span><span class="o">$</span><span class="n">lambda.min</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="stata">
+<h2>Stata<a class="headerlink" href="#stata" title="Permalink to this heading">#</a></h2>
+<p>Penalized regression is one of the few machine learning algorithms that Stata does natively. This requires Stata 16. If you do not have Stata 16, you can alternately perform some forms of penalized regression by installing the <strong>lars</strong> package using <strong>ssc install lars</strong>.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">* Use NLSY-W data</span>
+<span class="k">sysuse</span> nlsw88<span class="m">.</span>dta,<span class="k"> clear</span>
+
+<span class="c1">* Construct all squared and interaction terms by loop so we don&#39;t have to specify them all</span>
+<span class="c1">* by hand in the regression function</span>
+<span class="k">local</span> numeric_vars = <span class="s">&quot;age grade hours ttl_exp tenure&quot;</span>
+<span class="k">local</span> factor_vars = <span class="s">&quot;race married never_married collgrad south smsa c_city industry occupation union&quot;</span>
+
+<span class="c1">* Add all squares</span>
+<span class="k">foreach</span> x<span class="k"> in</span> <span class="nv">`numeric_vars&#39;</span> {
+<span class="k">	g</span> sq_<span class="nv">`x&#39;</span> = <span class="nv">`x&#39;</span><span class="o">^</span><span class="m">2</span>
+}
+
+<span class="c1">* Turn all factors into dummies so we can standardize them</span>
+<span class="k">local</span> faccount = <span class="m">1</span>
+<span class="k">local</span> dummy_vars = <span class="s">&quot;&quot;</span>
+<span class="k">foreach</span> x<span class="k"> in</span> <span class="nv">`factor_vars&#39;</span> {
+<span class="k">	xi</span> i.<span class="nv">`x&#39;</span>, pre(f<span class="nv">`count&#39;</span>_)
+<span class="k">	local count</span> = <span class="nv">`count&#39;</span> <span class="o">+</span> <span class="m">1</span>
+}
+
+<span class="c1">* Add all numeric-numeric interactions; these are easy</span>
+<span class="c1">* factor interactions would need a more thorough loop</span>
+<span class="k">forvalues</span> i = <span class="m">1</span>(<span class="m">1</span>)<span class="m">5</span> {
+<span class="k">	local</span> next_i = <span class="nv">`i&#39;</span><span class="o">+</span><span class="m">1</span>
+<span class="k">	forvalues</span> j = <span class="nv">`next_i&#39;</span>(<span class="m">1</span>)<span class="m">5</span> {
+<span class="k">		local</span> namei = <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`numeric_vars&#39;</span><span class="s">&quot;</span>,<span class="nv">`i&#39;</span>)
+<span class="k">		local</span> namej = <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`numeric_vars&#39;</span><span class="s">&quot;</span>,<span class="nv">`j&#39;</span>)
+<span class="k">		g</span> interact_<span class="nv">`i&#39;</span>_<span class="nv">`j&#39;</span> = <span class="nv">`namei&#39;</span><span class="o">*</span><span class="nv">`namej&#39;</span>
+	}
+}
+
+<span class="c1">* Standardize everything</span>
+<span class="k">foreach var</span> of<span class="k"> varlist</span> <span class="nv">`numeric_vars&#39;</span> f<span class="o">*</span>_<span class="o">*</span> interact_<span class="o">*</span> {
+<span class="k">	qui summ</span> <span class="nv">`var&#39;</span>
+<span class="k">	qui replace</span> <span class="nv">`var&#39;</span> = (<span class="nv">`var&#39;</span> <span class="o">-</span> <span class="nf">r</span>(mean))<span class="o">/</span><span class="nf">r</span>(sd)
+}
+
+<span class="c1">* Use the lasso command to run LASSO</span>
+<span class="c1">* using sel(cv) to select lambda using cross-validation</span>
+<span class="c1">* we specify a linear model here, but logit/probit/poisson would work</span>
+lasso linear wage <span class="nv">`numeric_vars&#39;</span> f<span class="o">*</span>_<span class="o">*</span> interact_<span class="o">*</span>, sel(cv)
+<span class="c1">* get list of included coefficients</span>
+lassocoef
+
+<span class="c1">* We can use elasticnet to run Elastic Net</span>
+<span class="c1">* By default, alpha will be selected by cross-validation as well</span>
+elasticnet linear wage <span class="nv">`numeric_vars&#39;</span> f<span class="o">*</span>_<span class="o">*</span> interact_<span class="o">*</span>, sel(cv)
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lab2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Penalized Regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-in-mind">Keep in Mind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#also-consider">Also Consider</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implementations">Implementations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#r">R</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata">Stata</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miguel C. Herculano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

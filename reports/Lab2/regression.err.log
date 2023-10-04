@@ -21,24 +21,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import graphviz
-tree_graph = tree.export_graphviz(fitted_tree, out_file=None,
-                                  feature_names=["X1", "X2"],
-                                  filled=True, rounded=True,
-                                  special_characters=True)
-display(graphviz.Source(tree_graph))
+y = f(X@w1 + b1)@w2 + b2
 ------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[26], line 1[0m
-[1;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mgraphviz[39;00m
-[0;32m      2[0m tree_graph [38;5;241m=[39m tree[38;5;241m.[39mexport_graphviz(fitted_tree, out_file[38;5;241m=[39m[38;5;28;01mNone[39;00m,
-[0;32m      3[0m                                   feature_names[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mX1[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mX2[39m[38;5;124m"[39m],
-[0;32m      4[0m                                   filled[38;5;241m=[39m[38;5;28;01mTrue[39;00m, rounded[38;5;241m=[39m[38;5;28;01mTrue[39;00m,
-[0;32m      5[0m                                   special_characters[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
-[0;32m      6[0m display(graphviz[38;5;241m.[39mSource(tree_graph))
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[30], line 1[0m
+[1;32m----> 1[0m y [38;5;241m=[39m f(X[38;5;129m@w1[39m [38;5;241m+[39m b1)[38;5;129m@w2[39m [38;5;241m+[39m b2
 
-[1;31mModuleNotFoundError[0m: No module named 'graphviz'
-ModuleNotFoundError: No module named 'graphviz'
+[1;31mNameError[0m: name 'f' is not defined
+NameError: name 'f' is not defined
 

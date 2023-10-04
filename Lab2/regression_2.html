@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab2/regression_2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Maximum Likelihood Estimation" href="../Lab1/mle.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Lab1/regression_sol.html">Introduction to Regression</a></li>
 
 
@@ -176,6 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Lab1/mle.html">Maximum Likelihood Estimation</a></li>
 
 
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Penalized Regression</a></li>
 </ul>
 
     </div>
@@ -348,7 +350,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="penalized-regression">
 <h1>Penalized Regression<a class="headerlink" href="#penalized-regression" title="Permalink to this heading">#</a></h1>
 <p>When running a regression with many predictors the results have a tendency to overfit the data, reducing out-of-sample predictive properties.</p>
-<p>Penalized regression eases this problem by forcing the regression estimator to shrink the coefficients towards 0 in order to avoid the “penalty” term imposed on the coefficients. This process is closely related to the idea of Bayesian shrinkage, and indeed standard penalized regression results are equivalent to regression performed using <a class="reference external" href="https://amstat.tandfonline.com/doi/abs/10.1198/016214508000000337?casa_token=DE6O93Bz7uUAAAAA:Ff_MiPXvPH32NA2hnGtZtqb8grXEiEqF0fdO3B0p_a6wOaqRciCZ4ASwxn69gdOb93Lbt-HSyK1o4As">certain Bayesian priors</a>.</p>
+<p>Penalized regression eases this problem by forcing the regression estimator to shrink the coefficients towards 0 in order to avoid the “penalty” term imposed on the coefficients. This process is closely related to the idea of Bayesian shrinkage, and indeed standard penalized regression results are equivalent to regression performed using <a class="reference external" href="https://amstat.tandfonline.com/doi/abs/10.1198/016214508000000337?casa_token=DE6O93Bz7uUAAAAA:Ff_MiPXvPH32NA2hnGtZtqb8grXEiEqF0fdO3B0p_a6wOaqRciCZ4ASwxn69gdOb93Lbt-HSyK1o4As">certain Bayesian priors</a> (more about this in the next lab).</p>
 <p>Regular OLS selects coefficients <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> to minimize the sum of squared errors:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -433,7 +435,7 @@ optimizes over a slightly different loss function.</p>
 <p>The optimization problem solved by lasso regression can be written as</p>
 <div class="math notranslate nohighlight">
 \[
-\min_{\beta} {|| X \beta - y||_2}^2 + \underbrace{\alpha {|| \beta ||_1}}_{\text{new part}}
+\min_{\beta} {|| X \beta - y||_2}^2 + \underbrace{\alpha {|| \beta ||_1}}_{\text{penalty}}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\( || a ||_1 = \sum_{i=1}^N | a_i| \)</span> is the <a class="reference external" href="http://mathworld.wolfram.com/L1-Norm.html">l1-norm</a> and <span class="math notranslate nohighlight">\( \alpha \)</span> is called the regularization parameter.</p>
 <p>The additional term penalizes large coefficients and in practice, effectively sets coefficients to zero
@@ -755,7 +757,7 @@ while selecting regularization parameters with cross-validation.</p>
 </section>
 <section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
-<p>Run the same experiment using Ridge Regression as your prefered regularization choice. How does it compare to LASSO and OLS ?</p>
+<p>Run the same experiment using Ridge and Elastic Net Regression as your prefered regularization choice. How does it compare to LASSO and OLS ?</p>
 </section>
 </section>
 <section id="references">
@@ -798,6 +800,15 @@ while selecting regularization parameters with cross-validation.</p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../Lab1/mle.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Maximum Likelihood Estimation</p>
+      </div>
+    </a>
 </div></div>
   
 </div>

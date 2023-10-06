@@ -1,0 +1,1672 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Maximum Likelihood Estimation &#8212; ECON 5129</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab2/mle_sol';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Penalized Regression" href="../Lab3/regression_2.html" />
+    <link rel="prev" title="Introduction to Regression" href="../Lab1/regression_sol.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ASBS_small_.PNG" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/ASBS_small_.PNG" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRELIMINARY</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/about_py.html">About Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/setting_up_your_python_environment.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/learn_more.html">Learn More</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Lab1/regression_sol.html">Introduction to Regression</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Maximum Likelihood Estimation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Lab3/regression_2.html">Penalized Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lab4/BLR.html">Bayesian Linear Regression</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Lab2/mle_sol.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Maximum Likelihood Estimation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Maximum Likelihood Estimation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-and-assumptions">Set Up and Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-of-ideas">Flow of Ideas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-billionaires">Counting Billionaires</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-distributions">Conditional Distributions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Maximum Likelihood Estimation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-with-numerical-methods">MLE with Numerical Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation-with-statsmodels">Maximum Likelihood Estimation with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="maximum-likelihood-estimation">
+<h1>Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>We have previously estimated the relationship between
+dependent and explanatory variables using linear regression.</p>
+<p>But what if a linear relationship is not an appropriate assumption for our model?</p>
+<p>One widely used alternative is maximum likelihood estimation, which
+involves specifying a class of distributions, indexed by unknown parameters, and then using the data to pin down these parameter values.</p>
+<p>The benefit relative to linear regression is that it allows more flexibility in the probabilistic relationships between variables.</p>
+<p>Here we illustrate maximum likelihood by replicating Daniel Treisman’s (2016) paper, <a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/aer.p20161068">Russia’s Billionaires</a>, which connects the number of billionaires in a country to its economic characteristics.</p>
+<p>The paper concludes that Russia has a higher number of billionaires than
+economic factors such as market size and tax rate predict.</p>
+<p>We’ll require the following imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1">#set default figure size</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">exp</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.api</span> <span class="kn">import</span> <span class="n">Poisson</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.iolib.summary2</span> <span class="kn">import</span> <span class="n">summary_col</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="set-up-and-assumptions">
+<h2>Set Up and Assumptions<a class="headerlink" href="#set-up-and-assumptions" title="Permalink to this heading">#</a></h2>
+<p>Let’s consider the steps we need to go through in maximum likelihood estimation and how they pertain to this study.</p>
+<section id="flow-of-ideas">
+<h3>Flow of Ideas<a class="headerlink" href="#flow-of-ideas" title="Permalink to this heading">#</a></h3>
+<p>The first step with maximum likelihood estimation is to choose the probability distribution believed to be generating the data.</p>
+<p>More precisely, we need to make an assumption as to which <em>parametric class</em> of distributions is generating the data.</p>
+<ul class="simple">
+<li><p>e.g., the class of all normal distributions, or the class of all gamma distributions.</p></li>
+</ul>
+<p>Each such class is a family of distributions indexed by a finite number of parameters.</p>
+<ul class="simple">
+<li><p>e.g., the class of normal distributions is a family of distributions
+indexed by its mean <span class="math notranslate nohighlight">\( \mu \in (-\infty, \infty) \)</span> and standard deviation <span class="math notranslate nohighlight">\( \sigma \in (0, \infty) \)</span>.</p></li>
+</ul>
+<p>We’ll let the data pick out a particular element of the class by pinning down the parameters.</p>
+<p>The parameter estimates so produced will be called <strong>maximum likelihood estimates</strong>.</p>
+</section>
+<section id="counting-billionaires">
+<h3>Counting Billionaires<a class="headerlink" href="#counting-billionaires" title="Permalink to this heading">#</a></h3>
+<p>Treisman is interested in estimating the number of billionaires in different countries.</p>
+<p>The number of billionaires is integer-valued.</p>
+<p>Hence we consider distributions that take values only in the nonnegative integers.</p>
+<p>(This is one reason least squares regression is not the best tool for the present problem, since the dependent variable in linear regression is not restricted
+to integer values)</p>
+<p>One integer distribution is the <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a>, the probability density function (pdf) of which is</p>
+<div class="math notranslate nohighlight">
+\[
+f(y) = \frac{\mu^{y}}{y!} e^{-\mu},
+\qquad y = 0, 1, 2, \ldots, \infty
+\]</div>
+<p>We can plot the Poisson distribution over <span class="math notranslate nohighlight">\( y \)</span> for different values of <span class="math notranslate nohighlight">\( \mu \)</span> as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poisson_pdf</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">μ</span><span class="p">:</span> <span class="n">μ</span><span class="o">**</span><span class="n">y</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">μ</span><span class="p">)</span>
+<span class="n">y_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">μ</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]:</span>
+    <span class="n">distribution</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">y_i</span> <span class="ow">in</span> <span class="n">y_values</span><span class="p">:</span>
+        <span class="n">distribution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">poisson_pdf</span><span class="p">(</span><span class="n">y_i</span><span class="p">,</span> <span class="n">μ</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span>
+            <span class="n">distribution</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$\mu$=</span><span class="si">{</span><span class="n">μ</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$f(y \mid \mu)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b662384d4d500cef50b51ff24b18213b4ced3777b6149bb51707d9dbc1815236.png" src="../_images/b662384d4d500cef50b51ff24b18213b4ced3777b6149bb51707d9dbc1815236.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Load in data and view</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;https://github.com/QuantEcon/lecture-python/blob/master/source/_static/lecture_specific/mle/fp.dta?raw=true&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1">#df.describe()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>ccode</th>
+      <th>year</th>
+      <th>cyear</th>
+      <th>numbil</th>
+      <th>...</th>
+      <th>topint08</th>
+      <th>rintr</th>
+      <th>noyrs</th>
+      <th>roflaw</th>
+      <th>nrrents</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>United States</td>
+      <td>2.0</td>
+      <td>1990.0</td>
+      <td>21990.0</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>39.799999</td>
+      <td>4.988405</td>
+      <td>20.0</td>
+      <td>1.61</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>United States</td>
+      <td>2.0</td>
+      <td>1991.0</td>
+      <td>21991.0</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>39.799999</td>
+      <td>4.988405</td>
+      <td>20.0</td>
+      <td>1.61</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>United States</td>
+      <td>2.0</td>
+      <td>1992.0</td>
+      <td>21992.0</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>39.799999</td>
+      <td>4.988405</td>
+      <td>20.0</td>
+      <td>1.61</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>United States</td>
+      <td>2.0</td>
+      <td>1993.0</td>
+      <td>21993.0</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>39.799999</td>
+      <td>4.988405</td>
+      <td>20.0</td>
+      <td>1.61</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>United States</td>
+      <td>2.0</td>
+      <td>1994.0</td>
+      <td>21994.0</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>39.799999</td>
+      <td>4.988405</td>
+      <td>20.0</td>
+      <td>1.61</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 36 columns</p>
+</div></div></div>
+</div>
+<p>Using a histogram, we can view the distribution of the number of
+billionaires per country, <code class="docutils literal notranslate"><span class="pre">numbil0</span></code>, in 2008 (the United States is
+dropped for plotting purposes)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbil0_2008</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2008</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;United States&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;numbil0&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">numbil0_2008</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of billionaires in 2008&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3ddbc0315a54011378ec5cd7be20093b3e1d043cdd880de61dd4b5839190adf1.png" src="../_images/3ddbc0315a54011378ec5cd7be20093b3e1d043cdd880de61dd4b5839190adf1.png" />
+</div>
+</div>
+<p>From the histogram, it appears that the Poisson assumption is not unreasonable (albeit with a very low <span class="math notranslate nohighlight">\( \mu \)</span> and some outliers).</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conditional-distributions">
+<h1>Conditional Distributions<a class="headerlink" href="#conditional-distributions" title="Permalink to this heading">#</a></h1>
+<p>In Treisman’s paper, the dependent variable — the number of billionaires <span class="math notranslate nohighlight">\( y_i \)</span> in country <span class="math notranslate nohighlight">\( i \)</span> — is modeled as a function of GDP per capita, population size, and years membership in GATT and WTO.</p>
+<p>Hence, the distribution of <span class="math notranslate nohighlight">\( y_i \)</span> needs to be conditioned on the vector of explanatory variables <span class="math notranslate nohighlight">\( \mathbf{x}_i \)</span>.</p>
+<p>The standard formulation — the so-called <em>poisson regression</em> model — is as follows:</p>
+<p><a id='equation-poissonreg'></a>
+$<span class="math notranslate nohighlight">\(
+f(y_i \mid \mathbf{x}_i) = \frac{\mu_i^{y_i}}{y_i!} e^{-\mu_i}; \qquad y_i = 0, 1, 2, \ldots , \infty . \tag{1}
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+\text{where}\ \mu_i
+     = \exp(\mathbf{x}_i' \boldsymbol{\beta})
+     = \exp(\beta_0 + \beta_1 x_{i1} + \ldots + \beta_k x_{ik})
+\]</div>
+<p>To illustrate the idea that the distribution of <span class="math notranslate nohighlight">\( y_i \)</span> depends on
+<span class="math notranslate nohighlight">\( \mathbf{x}_i \)</span> let’s run a simple simulation.</p>
+<p>We use our <code class="docutils literal notranslate"><span class="pre">poisson_pdf</span></code> function from above and arbitrary values for
+<span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span> and <span class="math notranslate nohighlight">\( \mathbf{x}_i \)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_values</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Define a parameter vector with estimates</span>
+<span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.26</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.22</span><span class="p">])</span>
+
+<span class="c1"># Create some observations X</span>
+<span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">])]</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+    <span class="n">μ</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">β</span><span class="p">)</span>
+    <span class="n">distribution</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">y_i</span> <span class="ow">in</span> <span class="n">y_values</span><span class="p">:</span>
+        <span class="n">distribution</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">poisson_pdf</span><span class="p">(</span><span class="n">y_i</span><span class="p">,</span> <span class="n">μ</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_values</span><span class="p">,</span>
+            <span class="n">distribution</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$\mu_i$=</span><span class="si">{</span><span class="n">μ</span><span class="si">:</span><span class="s1">.1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$y \mid x_i$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$f(y \mid x_i; \beta )$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/730d2d9bdb25987e6160c9575720a4041a29b92c33f0a0ad8f5aae1838e144e8.png" src="../_images/730d2d9bdb25987e6160c9575720a4041a29b92c33f0a0ad8f5aae1838e144e8.png" />
+</div>
+</div>
+<p>We can see that the distribution of <span class="math notranslate nohighlight">\( y_i \)</span> is conditional on
+<span class="math notranslate nohighlight">\( \mathbf{x}_i \)</span> (<span class="math notranslate nohighlight">\( \mu_i \)</span> is no longer constant).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Maximum Likelihood Estimation<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>In our model for number of billionaires, the conditional distribution
+contains 4 (<span class="math notranslate nohighlight">\( k = 4 \)</span>) parameters that we need to estimate.</p>
+<p>We will label our entire parameter vector as <span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{\beta} = \begin{bmatrix}
+                            \beta_0 \\
+                            \beta_1 \\
+                            \beta_2 \\
+                            \beta_3
+                      \end{bmatrix}
+\end{split}\]</div>
+<p>To estimate the model using MLE, we want to maximize the likelihood that
+our estimate <span class="math notranslate nohighlight">\( \hat{\boldsymbol{\beta}} \)</span> is the true parameter <span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span>.</p>
+<p>Intuitively, we want to find the <span class="math notranslate nohighlight">\( \hat{\boldsymbol{\beta}} \)</span> that best fits our data.</p>
+<p>First, we need to construct the likelihood function <span class="math notranslate nohighlight">\( \mathcal{L}(\boldsymbol{\beta}) \)</span>, which is similar to a joint probability density function.</p>
+<p>Assume we have some data <span class="math notranslate nohighlight">\( y_i = \{y_1, y_2\} \)</span> and
+<span class="math notranslate nohighlight">\( y_i \sim f(y_i) \)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\( y_1 \)</span> and <span class="math notranslate nohighlight">\( y_2 \)</span> are independent, the joint pdf of these
+data is <span class="math notranslate nohighlight">\( f(y_1, y_2) = f(y_1) \cdot f(y_2) \)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\( y_i \)</span> follows a Poisson distribution with <span class="math notranslate nohighlight">\( \lambda = 7 \)</span>,
+we can visualize the joint pdf like so</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_joint_poisson</span><span class="p">(</span><span class="n">μ</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">y_n</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">yi_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Create coordinate points of X and Y</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">yi_values</span><span class="p">,</span> <span class="n">yi_values</span><span class="p">)</span>
+
+    <span class="c1"># Multiply distributions together</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">poisson_pdf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">μ</span><span class="p">)</span> <span class="o">*</span> <span class="n">poisson_pdf</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">μ</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;$y_1$&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;$y_2$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;$f(y_1, y_2)$&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot_joint_poisson</span><span class="p">(</span><span class="n">μ</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">y_n</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d4afcfc614e9fb2ba2ca568430805f2d2b400cfc3342b74a6dc3afc9414c3777.png" src="../_images/d4afcfc614e9fb2ba2ca568430805f2d2b400cfc3342b74a6dc3afc9414c3777.png" />
+</div>
+</div>
+<p>Similarly, the joint pdf of our data (which is distributed as a
+conditional Poisson distribution) can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+f(y_1, y_2, \ldots, y_n \mid \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n; \boldsymbol{\beta})
+    = \prod_{i=1}^{n} \frac{\mu_i^{y_i}}{y_i!} e^{-\mu_i}
+\]</div>
+<p><span class="math notranslate nohighlight">\( y_i \)</span> is conditional on both the values of <span class="math notranslate nohighlight">\( \mathbf{x}_i \)</span> and the
+parameters <span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span>.</p>
+<p>The likelihood function is the same as the joint pmf, but treats the
+parameter <span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span> as a random variable and takes the observations
+<span class="math notranslate nohighlight">\( (y_i, \mathbf{x}_i) \)</span> as given</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\mathcal{L}(\beta \mid y_1, y_2, \ldots, y_n \ ; \ \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n) = &amp;
+\prod_{i=1}^{n} \frac{\mu_i^{y_i}}{y_i!} e^{-\mu_i} \\ = &amp;
+f(y_1, y_2, \ldots, y_n \mid  \ \mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_n ; \beta)
+\end{split}
+\end{split}\]</div>
+<p>Now that we have our likelihood function, we want to find the <span class="math notranslate nohighlight">\( \hat{\boldsymbol{\beta}} \)</span> that yields the maximum likelihood value</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\boldsymbol{\beta}}{\max} \mathcal{L}(\boldsymbol{\beta})
+\]</div>
+<p>In doing so it is generally easier to maximize the log-likelihood (consider
+differentiating <span class="math notranslate nohighlight">\( f(x) = x \exp(x) \)</span>  vs.  <span class="math notranslate nohighlight">\( f(x) = \log(x) + x \)</span>).</p>
+<p>Given that taking a logarithm is a monotone increasing transformation, a maximizer of the likelihood function will also be a maximizer of the log-likelihood function.</p>
+<p>In our case the log-likelihood is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\log{ \mathcal{L}} (\boldsymbol{\beta}) = \ &amp;
+    \log \Big(
+        f(y_1 ; \boldsymbol{\beta})
+        \cdot
+        f(y_2 ; \boldsymbol{\beta})
+        \cdot \ldots \cdot
+        f(y_n ; \boldsymbol{\beta})
+        \Big) \\
+        = &amp;
+        \sum_{i=1}^{n} \log{f(y_i ; \boldsymbol{\beta})} \\
+        = &amp;
+        \sum_{i=1}^{n}
+        \log \Big( {\frac{\mu_i^{y_i}}{y_i!} e^{-\mu_i}} \Big) \\
+        = &amp;
+        \sum_{i=1}^{n} y_i \log{\mu_i} -
+        \sum_{i=1}^{n} \mu_i -
+        \sum_{i=1}^{n} \log y!
+\end{split}
+\end{split}\]</div>
+<p>The MLE of the Poisson to the Poisson  for <span class="math notranslate nohighlight">\( \hat{\beta} \)</span> can be obtained by solving</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\beta}{\max} \Big(
+\sum_{i=1}^{n} y_i \log{\mu_i} -
+\sum_{i=1}^{n} \mu_i -
+\sum_{i=1}^{n} \log y! \Big)
+\]</div>
+<p>However, no analytical solution exists to the above problem – to find the MLE
+we need to use numerical methods.</p>
+<section id="mle-with-numerical-methods">
+<h2>MLE with Numerical Methods<a class="headerlink" href="#mle-with-numerical-methods" title="Permalink to this heading">#</a></h2>
+<p>Many distributions do not have nice, analytical solutions and therefore require
+numerical methods to solve for parameter estimates.</p>
+<p>One such numerical method is the Newton-Raphson algorithm.</p>
+<p>Our goal is to find the maximum likelihood estimate <span class="math notranslate nohighlight">\( \hat{\boldsymbol{\beta}} \)</span>.</p>
+<p>At <span class="math notranslate nohighlight">\( \hat{\boldsymbol{\beta}} \)</span>, the first derivative of the log-likelihood
+function will be equal to 0.</p>
+<p>Let’s illustrate this by supposing</p>
+<div class="math notranslate nohighlight">
+\[
+\log \mathcal{L(\beta)} = - (\beta - 10) ^2 - 10
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">logL</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">β</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span>
+<span class="n">dlogL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">β</span> <span class="o">+</span> <span class="mi">20</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">logL</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">dlogL</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$log \mathcal{L(\beta)}$&#39;</span><span class="p">,</span>
+               <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+               <span class="n">labelpad</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
+               <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac{dlog \mathcal{L(\beta)}}{d \beta}$ &#39;</span><span class="p">,</span>
+               <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+               <span class="n">labelpad</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
+               <span class="n">fontsize</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\beta$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(),</span> <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1e7620d2dd1ef384c15301425dd45e90fe9e8d3159e43a98956cb38f68cd2cb2.png" src="../_images/1e7620d2dd1ef384c15301425dd45e90fe9e8d3159e43a98956cb38f68cd2cb2.png" />
+</div>
+</div>
+<p>The plot shows that the maximum likelihood value (the top plot) occurs
+when <span class="math notranslate nohighlight">\( \frac{d \log \mathcal{L(\boldsymbol{\beta})}}{d \boldsymbol{\beta}} = 0 \)</span> (the bottom
+plot).</p>
+<p>Therefore, the likelihood is maximized when <span class="math notranslate nohighlight">\( \beta = 10 \)</span>.</p>
+<p>We can also ensure that this value is a <em>maximum</em> (as opposed to a
+minimum) by checking that the second derivative (slope of the bottom
+plot) is negative.</p>
+<p>The Newton-Raphson algorithm finds a point where the first derivative is
+0.</p>
+<p>To use the algorithm, we take an initial guess at the maximum value,
+<span class="math notranslate nohighlight">\( \beta_0 \)</span> (the OLS parameter estimates might be a reasonable
+guess), then</p>
+<ol class="arabic simple">
+<li><p>Use the updating rule to iterate the algorithm<br />
+$<span class="math notranslate nohighlight">\(
+\boldsymbol{\beta}_{(k+1)} = \boldsymbol{\beta}_{(k)} - H^{-1}(\boldsymbol{\beta}_{(k)})G(\boldsymbol{\beta}_{(k)})
+\)</span>$</p></li>
+</ol>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{aligned}
+     G(\boldsymbol{\beta}_{(k)}) = \frac{d \log \mathcal{L(\boldsymbol{\beta}_{(k)})}}{d \boldsymbol{\beta}_{(k)}} \\
+     H(\boldsymbol{\beta}_{(k)}) = \frac{d^2 \log \mathcal{L(\boldsymbol{\beta}_{(k)})}}{d \boldsymbol{\beta}_{(k)}d \boldsymbol{\beta}'_{(k)}}
+     \end{aligned}
+  \end{split}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Check whether <span class="math notranslate nohighlight">\( \boldsymbol{\beta}_{(k+1)} - \boldsymbol{\beta}_{(k)} &lt; tol \)</span></p></li>
+</ol>
+<ul class="simple">
+<li><p>If true, then stop iterating and set
+<span class="math notranslate nohighlight">\( \hat{\boldsymbol{\beta}} = \boldsymbol{\beta}_{(k+1)} \)</span></p></li>
+<li><p>If false, then update <span class="math notranslate nohighlight">\( \boldsymbol{\beta}_{(k+1)} \)</span></p></li>
+</ul>
+<p>As can be seen from the updating equation,
+<span class="math notranslate nohighlight">\( \boldsymbol{\beta}_{(k+1)} = \boldsymbol{\beta}_{(k)} \)</span> only when
+<span class="math notranslate nohighlight">\( G(\boldsymbol{\beta}_{(k)}) = 0 \)</span> ie. where the first derivative is equal to 0.</p>
+<p>(In practice, we stop iterating when the difference is below a small
+tolerance threshold)</p>
+<p>Let’s have a go at implementing the Newton-Raphson algorithm.</p>
+<p>First, we’ll create a class called <code class="docutils literal notranslate"><span class="pre">PoissonRegression</span></code> so we can
+easily recompute the values of the log likelihood, gradient and Hessian
+for every iteration</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PoissonRegression</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">β</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+        <span class="c1"># Reshape y as a n_by_1 column vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Reshape β as a k_by_1 column vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">=</span> <span class="n">β</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">μ</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">logL</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
+        <span class="n">μ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span> <span class="o">-</span> <span class="n">μ</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">G</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
+        <span class="n">μ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">μ</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span>
+        <span class="n">μ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">()</span>
+        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">μ</span> <span class="o">*</span> <span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our function <code class="docutils literal notranslate"><span class="pre">newton_raphson</span></code> will take a <code class="docutils literal notranslate"><span class="pre">PoissonRegression</span></code> object
+that has an initial guess of the parameter vector <span class="math notranslate nohighlight">\( \boldsymbol{\beta}_0 \)</span>.</p>
+<p>The algorithm will update the parameter vector according to the updating
+rule, and recalculate the gradient and Hessian matrices at the new
+parameter estimates.</p>
+<p>Iteration will end when either:</p>
+<ul class="simple">
+<li><p>The difference between the parameter and the updated parameter is below a tolerance level.</p></li>
+<li><p>The maximum number of iterations has been achieved (meaning convergence is not achieved).</p></li>
+</ul>
+<p>So we can get an idea of what’s going on while the algorithm is running,
+an option <code class="docutils literal notranslate"><span class="pre">display=True</span></code> is added to print out values at each
+iteration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton_raphson</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Initial error value</span>
+
+    <span class="c1"># Print header of output</span>
+    <span class="k">if</span> <span class="n">display</span><span class="p">:</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Iteration_k&quot;</span><span class="si">:</span><span class="s1">&lt;13</span><span class="si">}{</span><span class="s2">&quot;Log-likelihood&quot;</span><span class="si">:</span><span class="s1">&lt;16</span><span class="si">}{</span><span class="s2">&quot;θ&quot;</span><span class="si">:</span><span class="s1">&lt;60</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
+
+    <span class="c1"># While loop runs while any value in error is greater</span>
+    <span class="c1"># than the tolerance until max iterations are reached</span>
+    <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">error</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">:</span>
+        <span class="n">H</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">H</span><span class="p">(),</span> <span class="n">model</span><span class="o">.</span><span class="n">G</span><span class="p">()</span>
+        <span class="n">β_new</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">β</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">@</span> <span class="n">G</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">β_new</span> <span class="o">-</span> <span class="n">model</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">β</span> <span class="o">=</span> <span class="n">β_new</span>
+
+        <span class="c1"># Print iterations</span>
+        <span class="k">if</span> <span class="n">display</span><span class="p">:</span>
+            <span class="n">β_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">β</span><span class="o">.</span><span class="n">flatten</span><span class="p">())]</span>
+            <span class="n">update</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">&lt;13</span><span class="si">}{</span><span class="n">model</span><span class="o">.</span><span class="n">logL</span><span class="p">()</span><span class="si">:</span><span class="s1">&lt;16.8</span><span class="si">}{</span><span class="n">β_list</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of iterations: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;β_hat = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">β</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Return a flat array for β (instead of a k_by_1 column vector)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">β</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try out our algorithm with a small dataset of 5 observations and 3
+variables in <span class="math notranslate nohighlight">\( \mathbf{X} \)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Take a guess at initial βs</span>
+<span class="n">init_β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+
+<span class="c1"># Create an object with Poisson model values</span>
+<span class="n">poi</span> <span class="o">=</span> <span class="n">PoissonRegression</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="n">init_β</span><span class="p">)</span>
+
+<span class="c1"># Use newton_raphson to find the MLE</span>
+<span class="n">β_hat</span> <span class="o">=</span> <span class="n">newton_raphson</span><span class="p">(</span><span class="n">poi</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration_k  Log-likelihood  θ                                                           
+-----------------------------------------------------------------------------------------
+0            -4.3447622      [&#39;-1.49&#39;, &#39;0.265&#39;, &#39;0.244&#39;]
+1            -3.5742413      [&#39;-3.38&#39;, &#39;0.528&#39;, &#39;0.474&#39;]
+2            -3.3999526      [&#39;-5.06&#39;, &#39;0.782&#39;, &#39;0.702&#39;]
+3            -3.3788646      [&#39;-5.92&#39;, &#39;0.909&#39;, &#39;0.82&#39;]
+4            -3.3783559      [&#39;-6.07&#39;, &#39;0.933&#39;, &#39;0.843&#39;]
+5            -3.3783555      [&#39;-6.08&#39;, &#39;0.933&#39;, &#39;0.843&#39;]
+6            -3.3783555      [&#39;-6.08&#39;, &#39;0.933&#39;, &#39;0.843&#39;]
+Number of iterations: 7
+β_hat = [-6.07848573  0.9334028   0.84329677]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As this was a simple model with few observations, the algorithm achieved
+convergence in only 7 iterations.</p>
+<p>You can see that with each iteration, the log-likelihood value increased.</p>
+<p>Remember, our objective was to maximize the log-likelihood function,
+which the algorithm has worked to achieve.</p>
+<p>Also, note that the increase in <span class="math notranslate nohighlight">\( \log \mathcal{L}(\boldsymbol{\beta}_{(k)}) \)</span>
+becomes smaller with each iteration.</p>
+<p>This is because the gradient is approaching 0 as we reach the maximum,
+and therefore the numerator in our updating equation is becoming smaller.</p>
+<p>The gradient vector should be close to 0 at <span class="math notranslate nohighlight">\( \hat{\boldsymbol{\beta}} \)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poi</span><span class="o">.</span><span class="n">G</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2.54574140e-13],
+       [-6.44040377e-13],
+       [-4.99100761e-13]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The iterative process can be visualized in the following diagram, where
+the maximum is found at <span class="math notranslate nohighlight">\( \beta = 10 \)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logL</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">find_tangent</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">logL</span><span class="p">(</span><span class="n">β</span><span class="p">)</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">logL</span><span class="p">(</span><span class="n">β</span><span class="o">+</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">β</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">β</span><span class="o">+</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]),</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">c</span>
+
+<span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">logL</span><span class="p">(</span><span class="n">β</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">β</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]:</span>
+    <span class="n">β_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">β</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">β</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">find_tangent</span><span class="p">(</span><span class="n">β</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">β_line</span> <span class="o">+</span> <span class="n">c</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">β_line</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">β</span><span class="o">+</span><span class="mf">2.05</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s1">&#39;$G(</span><span class="si">{</span><span class="n">β</span><span class="si">}</span><span class="s1">) = </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="n">logL</span><span class="p">(</span><span class="n">β</span><span class="p">),</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">logL</span><span class="p">(</span><span class="n">β</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\beta$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$log \mathcal{L(\beta)}$&#39;</span><span class="p">,</span>
+               <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+               <span class="n">labelpad</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+               <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ac3a5c85462fadf9ebb7b0504f0ab662b09668b9468b10dff88c9f990950da8a.png" src="../_images/ac3a5c85462fadf9ebb7b0504f0ab662b09668b9468b10dff88c9f990950da8a.png" />
+</div>
+</div>
+<p>Note that our implementation of the Newton-Raphson algorithm is rather
+basic — for more robust implementations see,
+for example, <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/optimize.html">scipy.optimize</a>.</p>
+</section>
+<section id="maximum-likelihood-estimation-with-statsmodels">
+<h2>Maximum Likelihood Estimation with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code><a class="headerlink" href="#maximum-likelihood-estimation-with-statsmodels" title="Permalink to this heading">#</a></h2>
+<p>Now that we know what’s going on under the hood, we can apply MLE to an interesting application.</p>
+<p>We’ll use the Poisson regression model in <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> to obtain
+a richer output with standard errors, test values, and more.</p>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> uses the same algorithm as above to find the maximum
+likelihood estimates.</p>
+<p>Before we begin, let’s re-estimate our simple model with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>
+to confirm we obtain the same coefficients and log-likelihood value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">stats_poisson</span> <span class="o">=</span> <span class="n">Poisson</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats_poisson</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.675671
+         Iterations 7
+                          Poisson Regression Results                          
+==============================================================================
+Dep. Variable:                      y   No. Observations:                    5
+Model:                        Poisson   Df Residuals:                        2
+Method:                           MLE   Df Model:                            2
+Date:                Fri, 06 Oct 2023   Pseudo R-squ.:                  0.2546
+Time:                        13:42:33   Log-Likelihood:                -3.3784
+converged:                       True   LL-Null:                       -4.5325
+Covariance Type:            nonrobust   LLR p-value:                    0.3153
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -6.0785      5.279     -1.151      0.250     -16.425       4.268
+x1             0.9334      0.829      1.126      0.260      -0.691       2.558
+x2             0.8433      0.798      1.057      0.291      -0.720       2.407
+==============================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s replicate results from Daniel Treisman’s paper, <a class="reference external" href="https://www.aeaweb.org/articles?id=10.1257/aer.p20161068">Russia’s
+Billionaires</a>,
+mentioned earlier in the lecture.</p>
+<p>Treisman starts by estimating equation <span class="xref myst">(1)</span>, where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( y_i \)</span> is <span class="math notranslate nohighlight">\( {number\ of\ billionaires}_i \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( x_{i1} \)</span> is <span class="math notranslate nohighlight">\( \log{GDP\ per\ capita}_i \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( x_{i2} \)</span> is <span class="math notranslate nohighlight">\( \log{population}_i \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( x_{i3} \)</span> is <span class="math notranslate nohighlight">\( {years\ in\ GATT}_i \)</span> – years membership in GATT and WTO (to proxy access to international markets)</p></li>
+</ul>
+<p>The paper only considers the year 2008 for estimation.</p>
+<p>We will set up our variables for estimation like so (you should have the
+data assigned to <code class="docutils literal notranslate"><span class="pre">df</span></code> from earlier in the lecture)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keep only year 2008</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2008</span><span class="p">]</span>
+
+<span class="c1"># Add a constant</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Variable sets</span>
+<span class="n">reg1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="s1">&#39;lngdppc&#39;</span><span class="p">,</span> <span class="s1">&#39;lnpop&#39;</span><span class="p">,</span> <span class="s1">&#39;gattwto08&#39;</span><span class="p">]</span>
+<span class="n">reg2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="s1">&#39;lngdppc&#39;</span><span class="p">,</span> <span class="s1">&#39;lnpop&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;gattwto08&#39;</span><span class="p">,</span> <span class="s1">&#39;lnmcap08&#39;</span><span class="p">,</span> <span class="s1">&#39;rintr&#39;</span><span class="p">,</span> <span class="s1">&#39;topint08&#39;</span><span class="p">]</span>
+<span class="n">reg3</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="s1">&#39;lngdppc&#39;</span><span class="p">,</span> <span class="s1">&#39;lnpop&#39;</span><span class="p">,</span> <span class="s1">&#39;gattwto08&#39;</span><span class="p">,</span> <span class="s1">&#39;lnmcap08&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rintr&#39;</span><span class="p">,</span> <span class="s1">&#39;topint08&#39;</span><span class="p">,</span> <span class="s1">&#39;nrrents&#39;</span><span class="p">,</span> <span class="s1">&#39;roflaw&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can use the <code class="docutils literal notranslate"><span class="pre">Poisson</span></code> function from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> to fit the
+model.</p>
+<p>We’ll use robust standard errors as in the author’s paper</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify model</span>
+<span class="n">poisson_reg</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;numbil0&#39;</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="n">reg1</span><span class="p">],</span>
+                         <span class="n">missing</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;HC0&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poisson_reg</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 2.226090
+         Iterations 9
+                          Poisson Regression Results                          
+==============================================================================
+Dep. Variable:                numbil0   No. Observations:                  197
+Model:                        Poisson   Df Residuals:                      193
+Method:                           MLE   Df Model:                            3
+Date:                Fri, 06 Oct 2023   Pseudo R-squ.:                  0.8574
+Time:                        13:42:33   Log-Likelihood:                -438.54
+converged:                       True   LL-Null:                       -3074.7
+Covariance Type:                  HC0   LLR p-value:                     0.000
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const        -29.0495      2.578    -11.268      0.000     -34.103     -23.997
+lngdppc        1.0839      0.138      7.834      0.000       0.813       1.355
+lnpop          1.1714      0.097     12.024      0.000       0.980       1.362
+gattwto08      0.0060      0.007      0.868      0.386      -0.008       0.019
+==============================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>Success! The algorithm was able to achieve convergence in 9 iterations.</p>
+<p>Our output indicates that GDP per capita, population, and years of
+membership in the General Agreement on Tariffs and Trade (GATT) are
+positively related to the number of billionaires a country has, as
+expected.</p>
+<p>Let’s also estimate the author’s more full-featured models and display
+them in a single table</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regs</span> <span class="o">=</span> <span class="p">[</span><span class="n">reg1</span><span class="p">,</span> <span class="n">reg2</span><span class="p">,</span> <span class="n">reg3</span><span class="p">]</span>
+<span class="n">reg_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Model 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Model 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Model 3&#39;</span><span class="p">]</span>
+<span class="n">info_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Pseudo R-squared&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">prsquared</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+             <span class="s1">&#39;No. observations&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">nobs</span><span class="p">)</span><span class="si">:</span><span class="s2">d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+<span class="n">regressor_order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;lngdppc&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;lnpop&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;gattwto08&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;lnmcap08&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;rintr&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;topint08&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;nrrents&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;roflaw&#39;</span><span class="p">]</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">reg</span> <span class="ow">in</span> <span class="n">regs</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;numbil0&#39;</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="n">reg</span><span class="p">],</span>
+                        <span class="n">missing</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;HC0&#39;</span><span class="p">,</span>
+                                            <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">results_table</span> <span class="o">=</span> <span class="n">summary_col</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">,</span>
+                            <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%0.3f</span><span class="s1">&#39;</span><span class="p">,</span>
+                            <span class="n">stars</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">model_names</span><span class="o">=</span><span class="n">reg_names</span><span class="p">,</span>
+                            <span class="n">info_dict</span><span class="o">=</span><span class="n">info_dict</span><span class="p">,</span>
+                            <span class="n">regressor_order</span><span class="o">=</span><span class="n">regressor_order</span><span class="p">)</span>
+<span class="n">results_table</span><span class="o">.</span><span class="n">add_title</span><span class="p">(</span><span class="s1">&#39;Table 1 - Explaining the Number of Billionaires </span><span class="se">\</span>
+<span class="s1">                        in 2008&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table 1 - Explaining the Number of Billionaires                         in 2008
+=================================================
+                  Model 1    Model 2    Model 3  
+-------------------------------------------------
+const            -29.050*** -19.444*** -20.858***
+                 (2.578)    (4.820)    (4.255)   
+lngdppc          1.084***   0.717***   0.737***  
+                 (0.138)    (0.244)    (0.233)   
+lnpop            1.171***   0.806***   0.929***  
+                 (0.097)    (0.213)    (0.195)   
+gattwto08        0.006      0.007      0.004     
+                 (0.007)    (0.006)    (0.006)   
+lnmcap08                    0.399**    0.286*    
+                            (0.172)    (0.167)   
+rintr                       -0.010     -0.009    
+                            (0.010)    (0.010)   
+topint08                    -0.051***  -0.058*** 
+                            (0.011)    (0.012)   
+nrrents                                -0.005    
+                                       (0.010)   
+roflaw                                 0.203     
+                                       (0.372)   
+Pseudo R-squared 0.86       0.90       0.90      
+No. observations 197        131        131       
+=================================================
+Standard errors in parentheses.
+* p&lt;.1, ** p&lt;.05, ***p&lt;.01
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output suggests that the frequency of billionaires is positively
+correlated with GDP per capita, population size, stock market
+capitalization, and negatively correlated with top marginal income tax
+rate.</p>
+<p>To analyze our results by country, we can plot the difference between
+the predicted an actual values, then sort from highest to lowest and
+plot the first 15</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="s1">&#39;lngdppc&#39;</span><span class="p">,</span> <span class="s1">&#39;lnpop&#39;</span><span class="p">,</span> <span class="s1">&#39;gattwto08&#39;</span><span class="p">,</span> <span class="s1">&#39;lnmcap08&#39;</span><span class="p">,</span> <span class="s1">&#39;rintr&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;topint08&#39;</span><span class="p">,</span> <span class="s1">&#39;nrrents&#39;</span><span class="p">,</span> <span class="s1">&#39;roflaw&#39;</span><span class="p">,</span> <span class="s1">&#39;numbil0&#39;</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">data</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Use last model (model 3)</span>
+<span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>
+
+<span class="c1"># Calculate difference</span>
+<span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;difference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;numbil0&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">results_df</span><span class="p">[</span><span class="s1">&#39;prediction&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sort in descending order</span>
+<span class="n">results_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;difference&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot the first 15 data points</span>
+<span class="n">results_df</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;difference&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+                    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of billionaires above predicted level&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Country&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b35e82d806413c6c79137ce3fa93d1952f692840de88436b9a15fa0bd377dc09.png" src="../_images/b35e82d806413c6c79137ce3fa93d1952f692840de88436b9a15fa0bd377dc09.png" />
+</div>
+</div>
+<p>As we can see, Russia has by far the highest number of billionaires in
+excess of what is predicted by the model (around 50 more than expected).</p>
+<p>Treisman uses this empirical result to discuss possible reasons for
+Russia’s excess of billionaires, including the origination of wealth in
+Russia, the political climate, and the history of privatization in the
+years after the USSR.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>In this lab, we used Maximum Likelihood Estimation to estimate the
+parameters of a Poisson model.</p>
+<p><code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> contains other built-in likelihood models such as
+<a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.discrete.discrete_model.Probit.html">Probit</a>
+and
+<a class="reference external" href="https://www.statsmodels.org/dev/generated/statsmodels.discrete.discrete_model.Logit.html">Logit</a>.</p>
+<p>For further flexibility, <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> provides a way to specify the
+distribution manually using the <code class="docutils literal notranslate"><span class="pre">GenericLikelihoodModel</span></code> class - an
+example notebook can be found
+<a class="reference external" href="https://www.statsmodels.org/dev/examples/notebooks/generated/generic_mle.html">here</a>.</p>
+</section>
+<section id="exercise-1">
+<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h2>
+<p>Suppose we wanted to estimate the probability of an event <span class="math notranslate nohighlight">\( y_i \)</span>
+occurring, given some observations.</p>
+<p>We could use a probit regression model, where the pdf of <span class="math notranslate nohighlight">\( y_i \)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+f(y_i; \boldsymbol{\beta}) = \mu_i^{y_i} (1-\mu_i)^{1-y_i}, \quad y_i = 0,1 \\
+\text{where} \quad \mu_i = \Phi(\mathbf{x}_i' \boldsymbol{\beta})
+\end{aligned}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\( \Phi \)</span> represents the <em>cumulative normal distribution</em> and
+constrains the predicted <span class="math notranslate nohighlight">\( y_i \)</span> to be between 0 and 1 (as required
+for a probability).</p>
+<p><span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span> is a vector of coefficients.</p>
+<p>Following the example in the lecture, write a class to represent the
+Probit model.</p>
+<p>To begin, find the log-likelihood function and derive the gradient and
+Hessian.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">scipy</span></code> module <code class="docutils literal notranslate"><span class="pre">stats.norm</span></code> contains the functions needed to
+compute the cmf and pmf of the normal distribution.</p>
+</section>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h2>
+<p>The log-likelihood can be written as</p>
+<div class="math notranslate nohighlight">
+\[
+\log \mathcal{L} = \sum_{i=1}^n
+\big[
+y_i \log \Phi(\mathbf{x}_i' \boldsymbol{\beta}) +
+(1 - y_i) \log (1 - \Phi(\mathbf{x}_i' \boldsymbol{\beta})) \big]
+\]</div>
+<p>Using the <strong>fundamental theorem of calculus</strong>, the derivative of a
+cumulative probability distribution is its marginal distribution</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{ \partial} {\partial s} \Phi(s) = \phi(s)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\( \phi \)</span> is the marginal normal distribution.</p>
+<p>The gradient vector of the Probit model is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac {\partial \log \mathcal{L}} {\partial \boldsymbol{\beta}} =
+\sum_{i=1}^n \Big[
+y_i \frac{\phi(\mathbf{x}'_i \boldsymbol{\beta})}{\Phi(\mathbf{x}'_i \boldsymbol{\beta)}} -
+(1 - y_i) \frac{\phi(\mathbf{x}'_i \boldsymbol{\beta)}}{1 - \Phi(\mathbf{x}'_i \boldsymbol{\beta)}}
+\Big] \mathbf{x}_i
+\]</div>
+<p>The Hessian of the Probit model is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac {\partial^2 \log \mathcal{L}} {\partial \boldsymbol{\beta} \partial \boldsymbol{\beta}'} =
+-\sum_{i=1}^n \phi (\mathbf{x}_i' \boldsymbol{\beta})
+\Big[
+y_i \frac{ \phi (\mathbf{x}_i' \boldsymbol{\beta}) + \mathbf{x}_i' \boldsymbol{\beta} \Phi (\mathbf{x}_i' \boldsymbol{\beta}) } { [\Phi (\mathbf{x}_i' \boldsymbol{\beta})]^2 } +
+(1 - y_i) \frac{ \phi (\mathbf{x}_i' \boldsymbol{\beta}) - \mathbf{x}_i' \boldsymbol{\beta} (1 - \Phi (\mathbf{x}_i' \boldsymbol{\beta})) } { [1 - \Phi (\mathbf{x}_i' \boldsymbol{\beta})]^2 }
+\Big]
+\mathbf{x}_i \mathbf{x}_i'
+\]</div>
+<p>Using these results, we can write a class for the Probit model as
+follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ProbitRegression</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">β</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">β</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">def</span> <span class="nf">μ</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ϕ</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">logL</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">μ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">μ</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">G</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">μ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">()</span>
+        <span class="n">ϕ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ϕ</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">ϕ</span> <span class="o">/</span> <span class="n">μ</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">ϕ</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">μ</span><span class="p">)),</span>
+                     <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span>
+        <span class="n">β</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span>
+        <span class="n">μ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ</span><span class="p">()</span>
+        <span class="n">ϕ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ϕ</span><span class="p">()</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">ϕ</span> <span class="o">+</span> <span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">β</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ</span><span class="p">)</span> <span class="o">/</span> <span class="n">μ</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">ϕ</span> <span class="o">-</span> <span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">β</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">μ</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">μ</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">ϕ</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">@</span> <span class="n">X</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2">
+<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h2>
+<p>Use the following dataset and initial values of <span class="math notranslate nohighlight">\( \boldsymbol{\beta} \)</span> to
+estimate the MLE with the Newton-Raphson algorithm developed earlier in
+the lecture</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X} =
+\begin{bmatrix}
+1 &amp; 2 &amp; 4 \\
+1 &amp; 1 &amp; 1 \\
+1 &amp; 4 &amp; 3 \\
+1 &amp; 5 &amp; 6 \\
+1 &amp; 3 &amp; 5
+\end{bmatrix}
+\quad
+y =
+\begin{bmatrix}
+1 \\
+0 \\
+1 \\
+1 \\
+0
+\end{bmatrix}
+\quad
+\boldsymbol{\beta}_{(0)} =
+\begin{bmatrix}
+0.1 \\
+0.1 \\
+0.1
+\end{bmatrix}
+\end{split}\]</div>
+<p>Verify your results with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> - you can import the Probit
+function with the following import statement</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.discrete.discrete_model</span> <span class="kn">import</span> <span class="n">Probit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the simple Newton-Raphson algorithm developed in this lecture
+is very sensitive to initial values, and therefore you may fail to
+achieve convergence with different starting values.</p>
+</section>
+<section id="id2">
+<h2>Solutions<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Here is one solution</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Take a guess at initial βs</span>
+<span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+
+<span class="c1"># Create instance of Probit regression class</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">ProbitRegression</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">β</span><span class="p">)</span>
+
+<span class="c1"># Run Newton-Raphson algorithm</span>
+<span class="n">newton_raphson</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration_k  Log-likelihood  θ                                                           
+-----------------------------------------------------------------------------------------
+0            -2.3796884      [&#39;-1.34&#39;, &#39;0.775&#39;, &#39;-0.157&#39;]
+1            -2.3687526      [&#39;-1.53&#39;, &#39;0.775&#39;, &#39;-0.0981&#39;]
+2            -2.3687294      [&#39;-1.55&#39;, &#39;0.778&#39;, &#39;-0.0971&#39;]
+3            -2.3687294      [&#39;-1.55&#39;, &#39;0.778&#39;, &#39;-0.0971&#39;]
+Number of iterations: 4
+β_hat = [-1.54625858  0.77778952 -0.09709757]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.54625858,  0.77778952, -0.09709757])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use statsmodels to verify results</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Probit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.473746
+         Iterations 6
+                          Probit Regression Results                           
+==============================================================================
+Dep. Variable:                      y   No. Observations:                    5
+Model:                         Probit   Df Residuals:                        2
+Method:                           MLE   Df Model:                            2
+Date:                Fri, 06 Oct 2023   Pseudo R-squ.:                  0.2961
+Time:                        13:42:33   Log-Likelihood:                -2.3687
+converged:                       True   LL-Null:                       -3.3651
+Covariance Type:            nonrobust   LLR p-value:                    0.3692
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -1.5463      1.866     -0.829      0.407      -5.204       2.111
+x1             0.7778      0.788      0.986      0.324      -0.768       2.323
+x2            -0.0971      0.590     -0.165      0.869      -1.254       1.060
+==============================================================================
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<p>Some good resources for further study:</p>
+<p><a id='id27'></a>
+<a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Christopher M. Bishop. <em>Pattern Recognition and Machine Learning</em>. Springer, 2006.</a></p>
+<p><a id='id26'></a>
+<a class="reference external" href="https://quantecon.org/"> <em>Quant Econ</em>. Open Source Code for Economic Modelling</a>.</p>
+<p><a id='app-reg-ex'></a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lab2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Lab1/regression_sol.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Lab3/regression_2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Penalized Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Maximum Likelihood Estimation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-and-assumptions">Set Up and Assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flow-of-ideas">Flow of Ideas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-billionaires">Counting Billionaires</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-distributions">Conditional Distributions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Maximum Likelihood Estimation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mle-with-numerical-methods">MLE with Numerical Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation-with-statsmodels">Maximum Likelihood Estimation with <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miguel C. Herculano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

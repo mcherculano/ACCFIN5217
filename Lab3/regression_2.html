@@ -413,7 +413,7 @@ is a form of regularization.</p>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://datascience.quantecon.org/assets/data/kc_house_data.csv&quot;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="c1">#df.info()</span>
+
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -425,7 +425,6 @@ is a form of regularization.</p>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;log_price&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
 <span class="c1"># standardize data</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-
 <span class="c1">#y.head()</span>
 <span class="c1">#Note: Uncomment the previous lines to inspect the data. We&#39;ve done this in previous labs with this data so I&#39;m going to skip this step here. </span>
 </pre></div>

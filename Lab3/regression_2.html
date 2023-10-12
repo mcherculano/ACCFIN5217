@@ -403,6 +403,7 @@ is a form of regularization.</p>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#165aa7&#39;</span><span class="p">,</span> <span class="s1">&#39;#cb495c&#39;</span><span class="p">,</span> <span class="s1">&#39;#fec630&#39;</span><span class="p">,</span> <span class="s1">&#39;#bb60d5&#39;</span><span class="p">,</span> <span class="s1">&#39;#f47915&#39;</span><span class="p">,</span> <span class="s1">&#39;#06ab54&#39;</span><span class="p">,</span> <span class="s1">&#39;#002070&#39;</span><span class="p">,</span> <span class="s1">&#39;#b27d12&#39;</span><span class="p">,</span> <span class="s1">&#39;#007030&#39;</span><span class="p">]</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 
 <span class="c1"># We will import all these here to ensure that they are loaded, but</span>
 <span class="c1"># will usually re-import close to where they are used to make clear</span>
@@ -414,19 +415,21 @@ is a form of regularization.</p>
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://datascience.quantecon.org/assets/data/kc_house_data.csv&quot;</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-
 <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">vnames</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
 
 <span class="c1"># convert everything to be a float for later on</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 <span class="c1">#X.head()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">vnames</span>
+
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">])</span>
 <span class="n">df</span><span class="p">[</span><span class="s2">&quot;log_price&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-<span class="c1"># standardize data</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-<span class="c1">#y.head()</span>
-<span class="c1">#Note: Uncomment the previous lines to inspect the data. We&#39;ve done this in previous labs with this data so I&#39;m going to skip this step here. </span>
+
+<span class="c1">#Note: Uncomment the previous lines to inspect the data. We&#39;ve done this in previous labs with this data so I&#39;m going to skip this step here.</span>
 </pre></div>
 </div>
 </div>
@@ -460,127 +463,9 @@ target.</p>
 <span class="n">lasso_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lasso_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
 <span class="n">lr_coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
 <span class="n">coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">lasso</span><span class="o">=</span><span class="n">lasso_coefs</span><span class="p">,</span> <span class="n">linreg</span><span class="o">=</span><span class="n">lr_coefs</span><span class="p">))</span>
-<span class="n">coefs</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>lasso</th>
-      <th>linreg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>bedrooms</th>
-      <td>-0.0000</td>
-      <td>-0.0122</td>
-    </tr>
-    <tr>
-      <th>bathrooms</th>
-      <td>0.0000</td>
-      <td>0.0691</td>
-    </tr>
-    <tr>
-      <th>sqft_living</th>
-      <td>0.0003</td>
-      <td>0.0001</td>
-    </tr>
-    <tr>
-      <th>sqft_lot</th>
-      <td>0.0000</td>
-      <td>0.0000</td>
-    </tr>
-    <tr>
-      <th>floors</th>
-      <td>0.0000</td>
-      <td>0.0752</td>
-    </tr>
-    <tr>
-      <th>waterfront</th>
-      <td>0.0000</td>
-      <td>0.3712</td>
-    </tr>
-    <tr>
-      <th>view</th>
-      <td>0.0000</td>
-      <td>0.0604</td>
-    </tr>
-    <tr>
-      <th>condition</th>
-      <td>0.0000</td>
-      <td>0.0626</td>
-    </tr>
-    <tr>
-      <th>grade</th>
-      <td>0.0000</td>
-      <td>0.1589</td>
-    </tr>
-    <tr>
-      <th>sqft_above</th>
-      <td>-0.0000</td>
-      <td>0.0000</td>
-    </tr>
-    <tr>
-      <th>sqft_basement</th>
-      <td>0.0000</td>
-      <td>0.0001</td>
-    </tr>
-    <tr>
-      <th>yr_built</th>
-      <td>-0.0012</td>
-      <td>-0.0034</td>
-    </tr>
-    <tr>
-      <th>yr_renovated</th>
-      <td>0.0001</td>
-      <td>0.0000</td>
-    </tr>
-    <tr>
-      <th>zipcode</th>
-      <td>0.0007</td>
-      <td>-0.0006</td>
-    </tr>
-    <tr>
-      <th>lat</th>
-      <td>0.0000</td>
-      <td>1.4000</td>
-    </tr>
-    <tr>
-      <th>long</th>
-      <td>-0.0000</td>
-      <td>-0.1592</td>
-    </tr>
-    <tr>
-      <th>sqft_living15</th>
-      <td>0.0002</td>
-      <td>0.0001</td>
-    </tr>
-    <tr>
-      <th>sqft_lot15</th>
-      <td>-0.0000</td>
-      <td>-0.0000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Notice that many coefficients from the lasso regression have been set to
 zero.</p>
@@ -615,7 +500,7 @@ additional ones to be thrown out).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e68bf6b28fbd8f53bb177a70b59613bf144f27661af912b5c5c4b11a63127ffe.png" src="../_images/e68bf6b28fbd8f53bb177a70b59613bf144f27661af912b5c5c4b11a63127ffe.png" />
+<img alt="../_images/a58b98a1959b99a646a5180dc76247ffe618c7249141385afa6f7bd134256048.png" src="../_images/a58b98a1959b99a646a5180dc76247ffe618c7249141385afa6f7bd134256048.png" />
 </div>
 </div>
 <p>Let’s demonstrate the overfitting and regularization phenomenon on our housing
@@ -645,7 +530,7 @@ price data as follows:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mse_train&#39;: 0.05545627171577257, &#39;mse_test&#39;: 0.6705205330633802}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mse_train&#39;: 0.055456271715772824, &#39;mse_test&#39;: 0.6705205330638009}
 </pre></div>
 </div>
 </div>
@@ -657,7 +542,7 @@ price data as follows:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mse_train&#39;: 0.1062919502412495, &#39;mse_test&#39;: 0.2910434823708496}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;mse_train&#39;: 0.28276356426271987, &#39;mse_test&#39;: 0.2774907707201781}
 </pre></div>
 </div>
 </div>
@@ -713,10 +598,10 @@ data.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(-1.7108570499219011, 0.21996657281072296, &#39;5 fold cross-validation&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(-1.7108570499219011, 0.2972948777056123, &#39;5 fold cross-validation&#39;)
 </pre></div>
 </div>
-<img alt="../_images/2f2afe576d0d4ca97ebd6ed30cc7e5706791faa692a01ebf15fa456bfe1fed56.png" src="../_images/2f2afe576d0d4ca97ebd6ed30cc7e5706791faa692a01ebf15fa456bfe1fed56.png" />
+<img alt="../_images/565f99dfa0976600c8b73178f30c748f8fc15613f7f22cb2a4bc3f779a2026d3.png" src="../_images/565f99dfa0976600c8b73178f30c748f8fc15613f7f22cb2a4bc3f779a2026d3.png" />
 </div>
 </div>
 <p>scikit learn also includes methods to automate the above and select
@@ -730,7 +615,7 @@ data.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.9732104006516822
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2352822350340373
 </pre></div>
 </div>
 </div>

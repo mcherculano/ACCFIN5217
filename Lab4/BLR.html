@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab4/BLR';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Classification" href="../Lab5/classification.html" />
     <link rel="prev" title="Penalized Regression" href="../Lab3/regression_2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -179,6 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="../Lab3/regression_2.html">Penalized Regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Bayesian Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lab5/classification.html">Introduction to Classification</a></li>
 </ul>
 
     </div>
@@ -407,52 +409,53 @@ p(w|y,X) = N(w|\mu, \Sigma).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _california_housing_dataset:
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_cali_hp</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">data_cali_hp</span><span class="o">.</span><span class="n">DESCR</span><span class="p">)</span> <span class="c1">#&lt;- uncomment to read a brief data description</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data_cali_hp</span> <span class="o">=</span> <span class="n">data_cali_hp</span><span class="o">.</span><span class="n">frame</span>
 
-California Housing dataset
---------------------------
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\datasets\_california_housing.py:153,</span> in <span class="ni">fetch_california_housing</span><span class="nt">(data_home, download_if_missing, return_X_y, as_frame)</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span>     <span class="n">remove</span><span class="p">(</span><span class="n">archive_path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">153</span>     <span class="n">cal_housing</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">156</span>     <span class="s2">&quot;MedInc&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span>     <span class="s2">&quot;HouseAge&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">163</span>     <span class="s2">&quot;Longitude&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">164</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="n">target</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">cal_housing</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cal_housing</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
 
-**Data Set Characteristics:**
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\numpy_pickle.py:587,</span> in <span class="ni">load</span><span class="nt">(filename, mmap_mode)</span>
+<span class="g g-Whitespace">    </span><span class="mi">581</span>             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fobj</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">582</span>                 <span class="c1"># if the returned file object is a string, this means we</span>
+<span class="g g-Whitespace">    </span><span class="mi">583</span>                 <span class="c1"># try to load a pickle file generated with an version of</span>
+<span class="g g-Whitespace">    </span><span class="mi">584</span>                 <span class="c1"># Joblib so we load it with joblib compatibility function.</span>
+<span class="g g-Whitespace">    </span><span class="mi">585</span>                 <span class="k">return</span> <span class="n">load_compatibility</span><span class="p">(</span><span class="n">fobj</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">587</span>             <span class="n">obj</span> <span class="o">=</span> <span class="n">_unpickle</span><span class="p">(</span><span class="n">fobj</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mmap_mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span> <span class="k">return</span> <span class="n">obj</span>
 
-    :Number of Instances: 20640
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\numpy_pickle.py:506,</span> in <span class="ni">_unpickle</span><span class="nt">(fobj, filename, mmap_mode)</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span> <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">506</span>     <span class="n">obj</span> <span class="o">=</span> <span class="n">unpickler</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">507</span>     <span class="k">if</span> <span class="n">unpickler</span><span class="o">.</span><span class="n">compat_mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">508</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The file &#39;</span><span class="si">%s</span><span class="s2">&#39; has been generated with a &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">509</span>                       <span class="s2">&quot;joblib version less than 0.10. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">510</span>                       <span class="s2">&quot;Please regenerate this pickle file.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">511</span>                       <span class="o">%</span> <span class="n">filename</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">512</span>                       <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-    :Number of Attributes: 8 numeric, predictive attributes and the target
+<span class="nn">File ~\anaconda3\Lib\pickle.py:1213,</span> in <span class="ni">_Unpickler.load</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1211</span>             <span class="k">raise</span> <span class="ne">EOFError</span>
+<span class="g g-Whitespace">   </span><span class="mi">1212</span>         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bytes_types</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1213</span>         <span class="n">dispatch</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]](</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1214</span> <span class="k">except</span> <span class="n">_Stop</span> <span class="k">as</span> <span class="n">stopinst</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span>     <span class="k">return</span> <span class="n">stopinst</span><span class="o">.</span><span class="n">value</span>
 
-    :Attribute Information:
-        - MedInc        median income in block group
-        - HouseAge      median house age in block group
-        - AveRooms      average number of rooms per household
-        - AveBedrms     average number of bedrooms per household
-        - Population    block group population
-        - AveOccup      average number of household members
-        - Latitude      block group latitude
-        - Longitude     block group longitude
-
-    :Missing Attribute Values: None
-
-This dataset was obtained from the StatLib repository.
-https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html
-
-The target variable is the median house value for California districts,
-expressed in hundreds of thousands of dollars ($100,000).
-
-This dataset was derived from the 1990 U.S. census, using one row per census
-block group. A block group is the smallest geographical unit for which the U.S.
-Census Bureau publishes sample data (a block group typically has a population
-of 600 to 3,000 people).
-
-A household is a group of people residing within a home. Since the average
-number of rooms and bedrooms in this dataset are provided per household, these
-columns may take surprisingly large values for block groups with few households
-and many empty houses, such as vacation resorts.
-
-It can be downloaded/loaded using the
-:func:`sklearn.datasets.fetch_california_housing` function.
-
-.. topic:: References
-
-    - Pace, R. Kelley and Ronald Barry, Sparse Spatial Autoregressions,
-      Statistics and Probability Letters, 33 (1997) 291-297
+<span class="ne">KeyError</span>: 194
 </pre></div>
 </div>
 </div>
@@ -615,16 +618,6 @@ It can be downloaded/loaded using the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\AppData\Local\Temp\ipykernel_22516\3254044107.py:12: UserWarning: Geometry is in a geographic CRS. Results from &#39;area&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
-
-  cali = cali.assign(area=cali.geometry.area)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\AppData\Local\Temp\ipykernel_22516\3254044107.py:12: UserWarning: Geometry is in a geographic CRS. Results from &#39;area&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
-
-  cali = cali.assign(area=cali.geometry.area)
-</pre></div>
-</div>
 <img alt="../_images/416ca70be9593670d39627cd2a8efc614e79186dfbdfd0b1e1e45f49bd9bc7db.png" src="../_images/416ca70be9593670d39627cd2a8efc614e79186dfbdfd0b1e1e45f49bd9bc7db.png" />
 <img alt="../_images/9aedb2b29b22eac8196d0c97241af5114120a9d5ad9b92be21ea25b251747806.png" src="../_images/9aedb2b29b22eac8196d0c97241af5114120a9d5ad9b92be21ea25b251747806.png" />
 </div>
@@ -673,6 +666,8 @@ It can be downloaded/loaded using the
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">BayesianRidge</span><span class="p">,</span> <span class="n">LinearRegression</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">data_cali_hp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1">#X = (X - X.mean()) / X.std()</span>
+
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">data_cali_hp</span><span class="p">[</span><span class="s1">&#39;MedHouseVal&#39;</span><span class="p">])</span> <span class="c1"># &lt;- typically we keep the log to run the regression. Here I take the exp{} so that coeffs are meaningful.</span>
 <span class="n">LRM</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 <span class="n">BLR</span> <span class="o">=</span> <span class="n">BayesianRidge</span><span class="p">()</span>
@@ -713,30 +708,12 @@ It can be downloaded/loaded using the
 <p>Calculate the predicted value of a house for a household with average features, using the model above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_cali_hp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BLR</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">data_cali_hp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 3.87067100e+00,  2.86394864e+01,  5.42899974e+00,  1.09667515e+00,
-        1.42547674e+03,  3.07065516e+00,  3.56318614e+01, -1.19569704e+02,
-        2.06855817e+00])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">BLR</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">data_cali_hp</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\base.py:464: UserWarning: X does not have valid feature names, but BayesianRidge was fitted with feature names
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.30271218e+08])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([18.68512913])
 </pre></div>
 </div>
 </div>
@@ -753,7 +730,6 @@ It can be downloaded/loaded using the
 
 <span class="c1"># Model Evaluation Pipeline w/ Cross Validation</span>
 <span class="k">def</span> <span class="nf">modelEval</span><span class="p">(</span><span class="n">datah</span><span class="p">,</span><span class="n">feature</span><span class="o">=</span><span class="s1">&#39;MedHouseVal&#39;</span><span class="p">,</span><span class="n">model_id</span> <span class="o">=</span> <span class="s1">&#39;dummy&#39;</span><span class="p">):</span>
-    
     
     <span class="c1"># Input: Feature &amp; Target DataFrame</span>
     <span class="c1"># Split feature/target variable</span>
@@ -1048,6 +1024,15 @@ p(w|\lambda) = N(w|0,A^{-1}),
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Penalized Regression</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Lab5/classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

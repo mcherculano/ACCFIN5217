@@ -1,0 +1,1181 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Classification &#8212; ECON 5129</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab5/classification';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Bayesian Linear Regression" href="../Lab4/BLR.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ASBS_small_.PNG" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/ASBS_small_.PNG" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Course Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRELIMINARY</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started/getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/about_py.html">About Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/setting_up_your_python_environment.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/learn_more.html">Learn More</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/exercises.html">Exercises</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Lab1/regression_sol.html">Introduction to Regression</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Lab2/mle_sol.html">Maximum Likelihood Estimation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Lab3/regression_2.html">Penalized Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lab4/BLR.html">Bayesian Linear Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Classification</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Lab5/classification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Classification</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-k-nn">K-Nearest Neighbors (K-NN)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-card-fraud-detection">Credit Card Fraud Detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-visualization">Data Preprocessing and Visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-model-building-and-prediction">KNN Model Building and Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-classifier">Bayes Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-assumption">Naive Bayes Assumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-bayes-classifier-works">How the Bayes Classifier Works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-naive-bayes-classifiers">Types of Naive Bayes Classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-the-bayes-classifier">Advantages of the Bayes Classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-the-bayes-classifier">Limitations of the Bayes Classifier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operating-characteristic-roc-curve">Receiver Operating Characteristic (ROC) curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-classification">
+<h1>Introduction to Classification<a class="headerlink" href="#introduction-to-classification" title="Permalink to this heading">#</a></h1>
+<p>In previous labs we mostly worked with regression models. We now discuss an analogous class of models for solving classification problems. Again, I will try and follow the notation in your lectures. If you enjoyed <a class="reference external" href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Chris Bishop’s</a> digression on regression, you may want to read through Chapter 4, which discusses classification.</p>
+<p>The goal in classification is to take an input vector <span class="math notranslate nohighlight">\(X\)</span> and to assign it to one of <span class="math notranslate nohighlight">\(K\)</span> discrete classes <span class="math notranslate nohighlight">\(\mathbf{Y}_k\)</span> where k = 1, … , K. Generaly, these classes are assumed to be disjoint, so that each input is assigned to one (and only one) class. The input space is thereby divided into decision regions whose boundaries are called decision boundaries or decision surfaces.</p>
+<p>Decision surfaces are modelled as functions of the input vector <span class="math notranslate nohighlight">\(X\)</span> and hence are defined by <span class="math notranslate nohighlight">\(D-1\)</span>-dimensional hyperplanes within the D-dimensional input space. Data sets whose classes can be separated exactly by linear decision surfaces are said to be linearly separable.</p>
+<p>As seen in class, classification uses a function (i.e. a classifiers) <span class="math notranslate nohighlight">\(y=f(Xw)\)</span>  to map inputs <span class="math notranslate nohighlight">\(X\)</span> to class <span class="math notranslate nohighlight">\(y\)</span>. In the machine learning literature, <span class="math notranslate nohighlight">\(f(.)\)</span> is also know as an activation function, whereas its inverse is called a link function. Note that, in contrast to some of the models used for regression that we have discussed, this class of models is no longer linear in the parameters due to the presence of the non-linear function <span class="math notranslate nohighlight">\(f(.)\)</span>.</p>
+<p>The intuitive starting point is therefore to define the classifier. Let’s give some practical examples of classification problems with different families of classifiers.</p>
+<p>In today’s lab, we will see several examples of classifiers using a Credit Card Fraud Detection dataset provided by Kaggle.</p>
+<section id="k-nearest-neighbors-k-nn">
+<h2>K-Nearest Neighbors (K-NN)<a class="headerlink" href="#k-nearest-neighbors-k-nn" title="Permalink to this heading">#</a></h2>
+<p><strong>Basic Idea</strong>:
+K-Nearest Neighbors (K-NN) is a simple and intuitive machine learning algorithm used for both classification and regression tasks (though here we focus solely on classification problems). It works based on the idea that similar data points tend to be close to each other in a feature space.</p>
+<p><strong>K-NN step-by-step</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Pick a Value for K</strong>: Choose the number of nearest neighbors (K) that you want to consider when making predictions.</p></li>
+<li><p><strong>Calculate Distances</strong>: Measure the distance between the new data point and all the data points in your dataset (eg. Euclidean distance or other measure).</p></li>
+<li><p><strong>Find K Nearest Neighbors</strong>: Identify the K data points from your dataset that are closest to the new data point based on the calculated distances.</p></li>
+<li><p><strong>Majority Vote</strong>: Look at the class labels of the K nearest neighbors and choose the class that appears most frequently (majority vote). The new data point is classified as that class.</p></li>
+</ol>
+<p><strong>Example</strong>:
+Let’s say you have a dataset of houses with features like square footage and number of bedrooms, and you want to predict whether a new house is “small” or “large” based on those features. If K=3, K-NN would find the 3 nearest houses to the new one and classify it based on the majority class among those 3 houses. If 2 of the 3 nearest houses are “small,” the new house would also be classified as “small.”</p>
+<p><strong>Remarks</strong>:</p>
+<ul class="simple">
+<li><p>The choice of K can affect the algorithm’s performance. A smaller K (e.g. 1) can lead to noisy predictions, while a larger K can lead to overly smooth predictions.</p></li>
+<li><p>K-NN can be sensitive to the scale of your data, so it’s often a good practice to normalize or standardize your features.</p></li>
+<li><p>It’s a lazy learner, meaning it doesn’t build a model during training, but rather stores the entire dataset in memory. This can make it slow and memory-intensive for large datasets (this will become obvious in today’s lab, even though we are working with a small dataset).</p></li>
+</ul>
+<p>K-NN is a straightforward algorithm and a good starting point for many classification and regression tasks, especially when the relationships between data points are simple and easily observable.</p>
+<p>Let’s have a go at it:</p>
+<section id="credit-card-fraud-detection">
+<h3>Credit Card Fraud Detection<a class="headerlink" href="#credit-card-fraud-detection" title="Permalink to this heading">#</a></h3>
+<p>It is important that credit card companies are able to recognize fraudulent credit card transactions so that customers are not charged for items that they did not purchase. The dataset contains transactions made by credit cards by European cardholders.</p>
+<p>It presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. The original dataset is highly unbalanced, the positive class (frauds) account for 0.172% of all transactions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import generic libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">cross_validate</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-preprocessing-and-visualization">
+<h3>Data Preprocessing and Visualization<a class="headerlink" href="#data-preprocessing-and-visualization" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the dataset (assuming you&#39;ve already downloaded it from Kaggle)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;creditcard.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Time</th>
+      <th>V1</th>
+      <th>V2</th>
+      <th>V3</th>
+      <th>V4</th>
+      <th>V5</th>
+      <th>V6</th>
+      <th>V7</th>
+      <th>V8</th>
+      <th>V9</th>
+      <th>...</th>
+      <th>V21</th>
+      <th>V22</th>
+      <th>V23</th>
+      <th>V24</th>
+      <th>V25</th>
+      <th>V26</th>
+      <th>V27</th>
+      <th>V28</th>
+      <th>Amount</th>
+      <th>Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>-1.359807</td>
+      <td>-0.072781</td>
+      <td>2.536347</td>
+      <td>1.378155</td>
+      <td>-0.338321</td>
+      <td>0.462388</td>
+      <td>0.239599</td>
+      <td>0.098698</td>
+      <td>0.363787</td>
+      <td>...</td>
+      <td>-0.018307</td>
+      <td>0.277838</td>
+      <td>-0.110474</td>
+      <td>0.066928</td>
+      <td>0.128539</td>
+      <td>-0.189115</td>
+      <td>0.133558</td>
+      <td>-0.021053</td>
+      <td>149.62</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>1.191857</td>
+      <td>0.266151</td>
+      <td>0.166480</td>
+      <td>0.448154</td>
+      <td>0.060018</td>
+      <td>-0.082361</td>
+      <td>-0.078803</td>
+      <td>0.085102</td>
+      <td>-0.255425</td>
+      <td>...</td>
+      <td>-0.225775</td>
+      <td>-0.638672</td>
+      <td>0.101288</td>
+      <td>-0.339846</td>
+      <td>0.167170</td>
+      <td>0.125895</td>
+      <td>-0.008983</td>
+      <td>0.014724</td>
+      <td>2.69</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>-1.358354</td>
+      <td>-1.340163</td>
+      <td>1.773209</td>
+      <td>0.379780</td>
+      <td>-0.503198</td>
+      <td>1.800499</td>
+      <td>0.791461</td>
+      <td>0.247676</td>
+      <td>-1.514654</td>
+      <td>...</td>
+      <td>0.247998</td>
+      <td>0.771679</td>
+      <td>0.909412</td>
+      <td>-0.689281</td>
+      <td>-0.327642</td>
+      <td>-0.139097</td>
+      <td>-0.055353</td>
+      <td>-0.059752</td>
+      <td>378.66</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>-0.966272</td>
+      <td>-0.185226</td>
+      <td>1.792993</td>
+      <td>-0.863291</td>
+      <td>-0.010309</td>
+      <td>1.247203</td>
+      <td>0.237609</td>
+      <td>0.377436</td>
+      <td>-1.387024</td>
+      <td>...</td>
+      <td>-0.108300</td>
+      <td>0.005274</td>
+      <td>-0.190321</td>
+      <td>-1.175575</td>
+      <td>0.647376</td>
+      <td>-0.221929</td>
+      <td>0.062723</td>
+      <td>0.061458</td>
+      <td>123.50</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.0</td>
+      <td>-1.158233</td>
+      <td>0.877737</td>
+      <td>1.548718</td>
+      <td>0.403034</td>
+      <td>-0.407193</td>
+      <td>0.095921</td>
+      <td>0.592941</td>
+      <td>-0.270533</td>
+      <td>0.817739</td>
+      <td>...</td>
+      <td>-0.009431</td>
+      <td>0.798278</td>
+      <td>-0.137458</td>
+      <td>0.141267</td>
+      <td>-0.206010</td>
+      <td>0.502292</td>
+      <td>0.219422</td>
+      <td>0.215153</td>
+      <td>69.99</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2.0</td>
+      <td>-0.425966</td>
+      <td>0.960523</td>
+      <td>1.141109</td>
+      <td>-0.168252</td>
+      <td>0.420987</td>
+      <td>-0.029728</td>
+      <td>0.476201</td>
+      <td>0.260314</td>
+      <td>-0.568671</td>
+      <td>...</td>
+      <td>-0.208254</td>
+      <td>-0.559825</td>
+      <td>-0.026398</td>
+      <td>-0.371427</td>
+      <td>-0.232794</td>
+      <td>0.105915</td>
+      <td>0.253844</td>
+      <td>0.081080</td>
+      <td>3.67</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>4.0</td>
+      <td>1.229658</td>
+      <td>0.141004</td>
+      <td>0.045371</td>
+      <td>1.202613</td>
+      <td>0.191881</td>
+      <td>0.272708</td>
+      <td>-0.005159</td>
+      <td>0.081213</td>
+      <td>0.464960</td>
+      <td>...</td>
+      <td>-0.167716</td>
+      <td>-0.270710</td>
+      <td>-0.154104</td>
+      <td>-0.780055</td>
+      <td>0.750137</td>
+      <td>-0.257237</td>
+      <td>0.034507</td>
+      <td>0.005168</td>
+      <td>4.99</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7.0</td>
+      <td>-0.644269</td>
+      <td>1.417964</td>
+      <td>1.074380</td>
+      <td>-0.492199</td>
+      <td>0.948934</td>
+      <td>0.428118</td>
+      <td>1.120631</td>
+      <td>-3.807864</td>
+      <td>0.615375</td>
+      <td>...</td>
+      <td>1.943465</td>
+      <td>-1.015455</td>
+      <td>0.057504</td>
+      <td>-0.649709</td>
+      <td>-0.415267</td>
+      <td>-0.051634</td>
+      <td>-1.206921</td>
+      <td>-1.085339</td>
+      <td>40.80</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>7.0</td>
+      <td>-0.894286</td>
+      <td>0.286157</td>
+      <td>-0.113192</td>
+      <td>-0.271526</td>
+      <td>2.669599</td>
+      <td>3.721818</td>
+      <td>0.370145</td>
+      <td>0.851084</td>
+      <td>-0.392048</td>
+      <td>...</td>
+      <td>-0.073425</td>
+      <td>-0.268092</td>
+      <td>-0.204233</td>
+      <td>1.011592</td>
+      <td>0.373205</td>
+      <td>-0.384157</td>
+      <td>0.011747</td>
+      <td>0.142404</td>
+      <td>93.20</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9.0</td>
+      <td>-0.338262</td>
+      <td>1.119593</td>
+      <td>1.044367</td>
+      <td>-0.222187</td>
+      <td>0.499361</td>
+      <td>-0.246761</td>
+      <td>0.651583</td>
+      <td>0.069539</td>
+      <td>-0.736727</td>
+      <td>...</td>
+      <td>-0.246914</td>
+      <td>-0.633753</td>
+      <td>-0.120794</td>
+      <td>-0.385050</td>
+      <td>-0.069733</td>
+      <td>0.094199</td>
+      <td>0.246219</td>
+      <td>0.083076</td>
+      <td>3.68</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 31 columns</p>
+</div></div></div>
+</div>
+<p>Unfortunately, due to confidentiality issues, the details about the original features and more background information about the data are not provided.  The only features which have not been transformed are ‘Time’ and ‘Amount’. ‘Time’ contains the seconds elapsed between each transaction and the first transaction in the dataset. The feature ‘Amount’ is the transaction Amount, this feature can be used for example-dependant cost-sensitive learning. Feature ‘Class’ is the response variable and it takes value 1 in case of fraud and 0 otherwise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the correlation matrix</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Create a mask for the upper triangle</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">))</span>
+
+<span class="c1"># Set up the matplotlib figure</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Define a custom colormap</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">diverging_palette</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create a correlation heatmap without annotations</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Customize the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Correlation Matrix of the Raw Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bb414bfb1bbae3948632cc3ce199d1199e99fd6f85ebf7078ba8dc953dc6915c.png" src="../_images/bb414bfb1bbae3948632cc3ce199d1199e99fd6f85ebf7078ba8dc953dc6915c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#! pip install skimpy # &lt; -- uncomment to install from PyPI </span>
+<span class="kn">from</span> <span class="nn">skimpy</span> <span class="kn">import</span> <span class="n">skim</span>
+<span class="n">skim</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">╭──────────────────────────────────────────────── skimpy summary ─────────────────────────────────────────────────╮
+│ <span style="font-style: italic">         Data Summary         </span> <span style="font-style: italic">      Data Types       </span>                                                          │
+│ ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓ ┏━━━━━━━━━━━━━┳━━━━━━━┓                                                          │
+│ ┃<span style="color: #008080; text-decoration-color: #008080; font-weight: bold"> dataframe         </span>┃<span style="color: #008080; text-decoration-color: #008080; font-weight: bold"> Values </span>┃ ┃<span style="color: #008080; text-decoration-color: #008080; font-weight: bold"> Column Type </span>┃<span style="color: #008080; text-decoration-color: #008080; font-weight: bold"> Count </span>┃                                                          │
+│ ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩ ┡━━━━━━━━━━━━━╇━━━━━━━┩                                                          │
+│ │ Number of rows    │ 284807 │ │ float64     │ 30    │                                                          │
+│ │ Number of columns │ 31     │ │ int32       │ 1     │                                                          │
+│ └───────────────────┴────────┘ └─────────────┴───────┘                                                          │
+│ <span style="font-style: italic">                                                    number                                                    </span>  │
+│ ┏━━━━━━━━━━━━━━━┳━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━┳━━━━━━━━┓  │
+│ ┃<span style="font-weight: bold"> column_name   </span>┃<span style="font-weight: bold"> NA  </span>┃<span style="font-weight: bold"> NA %  </span>┃<span style="font-weight: bold"> mean       </span>┃<span style="font-weight: bold"> sd     </span>┃<span style="font-weight: bold"> p0    </span>┃<span style="font-weight: bold"> p25     </span>┃<span style="font-weight: bold"> p50      </span>┃<span style="font-weight: bold"> p75     </span>┃<span style="font-weight: bold"> p100   </span>┃<span style="font-weight: bold"> hist   </span>┃  │
+│ ┡━━━━━━━━━━━━━━━╇━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━╇━━━━━━━━┩  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">Time         </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">     95000</span> │ <span style="color: #008080; text-decoration-color: #008080"> 47000</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  54000</span> │ <span style="color: #008080; text-decoration-color: #008080">   85000</span> │ <span style="color: #008080; text-decoration-color: #008080"> 140000</span> │ <span style="color: #008080; text-decoration-color: #008080">170000</span> │ <span style="color: #008000; text-decoration-color: #008000">▂▇▇▂▇▇</span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V1           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.2e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">     2</span> │ <span style="color: #008080; text-decoration-color: #008080">  -56</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.92</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.018</span> │ <span style="color: #008080; text-decoration-color: #008080">    1.3</span> │ <span style="color: #008080; text-decoration-color: #008080">   2.5</span> │ <span style="color: #008000; text-decoration-color: #008000">     ▇</span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V2           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   3.4e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.7</span> │ <span style="color: #008080; text-decoration-color: #008080">  -73</span> │ <span style="color: #008080; text-decoration-color: #008080">   -0.6</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.065</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.8</span> │ <span style="color: #008080; text-decoration-color: #008080">    22</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V3           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -1.4e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.5</span> │ <span style="color: #008080; text-decoration-color: #008080">  -48</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.89</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.18</span> │ <span style="color: #008080; text-decoration-color: #008080">      1</span> │ <span style="color: #008080; text-decoration-color: #008080">   9.4</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▅▇</span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V4           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   2.1e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.4</span> │ <span style="color: #008080; text-decoration-color: #008080"> -5.7</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.85</span> │ <span style="color: #008080; text-decoration-color: #008080">   -0.02</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.74</span> │ <span style="color: #008080; text-decoration-color: #008080">    17</span> │ <span style="color: #008000; text-decoration-color: #008000"> ▁▇▁  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V5           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   9.6e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.4</span> │ <span style="color: #008080; text-decoration-color: #008080"> -110</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.69</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.054</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.61</span> │ <span style="color: #008080; text-decoration-color: #008080">    35</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V6           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.5e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.3</span> │ <span style="color: #008080; text-decoration-color: #008080">  -26</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.77</span> │ <span style="color: #008080; text-decoration-color: #008080">   -0.27</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.4</span> │ <span style="color: #008080; text-decoration-color: #008080">    73</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V7           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -5.6e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.2</span> │ <span style="color: #008080; text-decoration-color: #008080">  -44</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.55</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.04</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.57</span> │ <span style="color: #008080; text-decoration-color: #008080">   120</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V8           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.2e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.2</span> │ <span style="color: #008080; text-decoration-color: #008080">  -73</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.21</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.022</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.33</span> │ <span style="color: #008080; text-decoration-color: #008080">    20</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V9           </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -2.4e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.1</span> │ <span style="color: #008080; text-decoration-color: #008080">  -13</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.64</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.051</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.6</span> │ <span style="color: #008080; text-decoration-color: #008080">    16</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇▁ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V10          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   2.2e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.1</span> │ <span style="color: #008080; text-decoration-color: #008080">  -25</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.54</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.093</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.45</span> │ <span style="color: #008080; text-decoration-color: #008080">    24</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▃▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V11          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.7e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">     1</span> │ <span style="color: #008080; text-decoration-color: #008080"> -4.8</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.76</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.033</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.74</span> │ <span style="color: #008080; text-decoration-color: #008080">    12</span> │ <span style="color: #008000; text-decoration-color: #008000">  ▇▂  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V12          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -1.2e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">     1</span> │ <span style="color: #008080; text-decoration-color: #008080">  -19</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.41</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.14</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.62</span> │ <span style="color: #008080; text-decoration-color: #008080">   7.8</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▁▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V13          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   8.2e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">     1</span> │ <span style="color: #008080; text-decoration-color: #008080"> -5.8</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.65</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.014</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.66</span> │ <span style="color: #008080; text-decoration-color: #008080">   7.1</span> │ <span style="color: #008000; text-decoration-color: #008000">  ▁▇▃ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V14          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.2e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.96</span> │ <span style="color: #008080; text-decoration-color: #008080">  -19</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.43</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.051</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.49</span> │ <span style="color: #008080; text-decoration-color: #008080">    11</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇▂ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V15          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   4.9e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.92</span> │ <span style="color: #008080; text-decoration-color: #008080"> -4.5</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.58</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.048</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.65</span> │ <span style="color: #008080; text-decoration-color: #008080">   8.9</span> │ <span style="color: #008000; text-decoration-color: #008000">  ▇▇  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V16          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.4e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.88</span> │ <span style="color: #008080; text-decoration-color: #008080">  -14</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.47</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.066</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.52</span> │ <span style="color: #008080; text-decoration-color: #008080">    17</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V17          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -3.8e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.85</span> │ <span style="color: #008080; text-decoration-color: #008080">  -25</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.48</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.066</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.4</span> │ <span style="color: #008080; text-decoration-color: #008080">   9.3</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V18          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   9.6e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.84</span> │ <span style="color: #008080; text-decoration-color: #008080"> -9.5</span> │ <span style="color: #008080; text-decoration-color: #008080">   -0.5</span> │ <span style="color: #008080; text-decoration-color: #008080"> -0.0036</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.5</span> │ <span style="color: #008080; text-decoration-color: #008080">     5</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇▅ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V19          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">     1e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.81</span> │ <span style="color: #008080; text-decoration-color: #008080"> -7.2</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.46</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.0037</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.46</span> │ <span style="color: #008080; text-decoration-color: #008080">   5.6</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▁▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V20          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   6.4e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.77</span> │ <span style="color: #008080; text-decoration-color: #008080">  -54</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.21</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.062</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.13</span> │ <span style="color: #008080; text-decoration-color: #008080">    39</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V21          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.7e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.73</span> │ <span style="color: #008080; text-decoration-color: #008080">  -35</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.23</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.029</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.19</span> │ <span style="color: #008080; text-decoration-color: #008080">    27</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V22          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -3.6e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.73</span> │ <span style="color: #008080; text-decoration-color: #008080">  -11</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.54</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.0068</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.53</span> │ <span style="color: #008080; text-decoration-color: #008080">    11</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▅▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V23          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   2.6e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.62</span> │ <span style="color: #008080; text-decoration-color: #008080">  -45</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.16</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.011</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.15</span> │ <span style="color: #008080; text-decoration-color: #008080">    23</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇▅ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V24          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   4.5e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.61</span> │ <span style="color: #008080; text-decoration-color: #008080"> -2.8</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.35</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.041</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.44</span> │ <span style="color: #008080; text-decoration-color: #008080">   4.6</span> │ <span style="color: #008000; text-decoration-color: #008000">  ▃▇▁ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V25          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   5.3e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.52</span> │ <span style="color: #008080; text-decoration-color: #008080">  -10</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.32</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.017</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.35</span> │ <span style="color: #008080; text-decoration-color: #008080">   7.5</span> │ <span style="color: #008000; text-decoration-color: #008000">    ▇ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V26          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">   1.7e-15</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.48</span> │ <span style="color: #008080; text-decoration-color: #008080"> -2.6</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.33</span> │ <span style="color: #008080; text-decoration-color: #008080">  -0.052</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.24</span> │ <span style="color: #008080; text-decoration-color: #008080">   3.5</span> │ <span style="color: #008000; text-decoration-color: #008000">  ▁▇▂ </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V27          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -3.7e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.4</span> │ <span style="color: #008080; text-decoration-color: #008080">  -23</span> │ <span style="color: #008080; text-decoration-color: #008080"> -0.071</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.0013</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.091</span> │ <span style="color: #008080; text-decoration-color: #008080">    32</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">V28          </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">  -1.2e-16</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.33</span> │ <span style="color: #008080; text-decoration-color: #008080">  -15</span> │ <span style="color: #008080; text-decoration-color: #008080"> -0.053</span> │ <span style="color: #008080; text-decoration-color: #008080">   0.011</span> │ <span style="color: #008080; text-decoration-color: #008080">  0.078</span> │ <span style="color: #008080; text-decoration-color: #008080">    34</span> │ <span style="color: #008000; text-decoration-color: #008000">   ▇  </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">Amount       </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">        88</span> │ <span style="color: #008080; text-decoration-color: #008080">   250</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">    5.6</span> │ <span style="color: #008080; text-decoration-color: #008080">      22</span> │ <span style="color: #008080; text-decoration-color: #008080">     77</span> │ <span style="color: #008080; text-decoration-color: #008080"> 26000</span> │ <span style="color: #008000; text-decoration-color: #008000">  ▇   </span> │  │
+│ │ <span style="color: #af87ff; text-decoration-color: #af87ff">Class        </span> │ <span style="color: #008080; text-decoration-color: #008080">  0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">    0.0017</span> │ <span style="color: #008080; text-decoration-color: #008080"> 0.042</span> │ <span style="color: #008080; text-decoration-color: #008080">    0</span> │ <span style="color: #008080; text-decoration-color: #008080">      0</span> │ <span style="color: #008080; text-decoration-color: #008080">       0</span> │ <span style="color: #008080; text-decoration-color: #008080">      0</span> │ <span style="color: #008080; text-decoration-color: #008080">     1</span> │ <span style="color: #008000; text-decoration-color: #008000">  ▇   </span> │  │
+│ └───────────────┴─────┴───────┴────────────┴────────┴───────┴─────────┴──────────┴─────────┴────────┴────────┘  │
+╰────────────────────────────────────────────────────── End ──────────────────────────────────────────────────────╯
+</pre>
+</div></div>
+</div>
+</section>
+</section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>
+<p>How expressive is Fraud in this dataset ? Calculate both the number and proportion of Fraud in the training and testing sets.</p>
+</section>
+<section id="knn-model-building-and-prediction">
+<h2>KNN Model Building and Prediction<a class="headerlink" href="#knn-model-building-and-prediction" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data Preprocessing</span>
+<span class="c1"># Standardize the &#39;Amount&#39; column, as other features are already standardized</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Split the data into features (X) and target (y)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Class&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Class&#39;</span><span class="p">]</span>
+
+<span class="c1"># Split the data into training and testing sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Train the K-NN model</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># You can adjust the value of k</span>
+<span class="n">KNN</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="n">KNN_param</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_neighbors&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="c1"># &lt; -- n_neighbors: the number of neighbours to use</span>
+             <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="c1"># &lt;-- p: euclidean distance (p=2), manhattan distance (p=1)</span>
+             <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span><span class="s1">&#39;distance&#39;</span><span class="p">]}</span> <span class="c1"># &lt; -- weights: whether to weight the neighbours uniformly or to the inverse of the distance</span>
+<span class="n">KNN_cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">KNN</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">KNN_param</span> <span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">KNN_cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">KNN_cv</span><span class="o">.</span><span class="n">best_params_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#cross-validation</span>
+<span class="n">KNN_best</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">)</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">KNN_best</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">cv_results</span><span class="p">[</span><span class="s1">&#39;test_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9986105816998263
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">KNN_cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="c1"># &lt;-- watch out for this: Knn assumes X is an numpy array in older versions of sklearn</span>
+
+<span class="c1"># Evaluate the model</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">confusion</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Confusion Matrix:</span><span class="se">\n</span><span class="si">{</span><span class="n">confusion</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Classification Report:</span><span class="se">\n</span><span class="si">{</span><span class="n">report</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but KNeighborsClassifier was fitted with feature names
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.9989466661985184
+Confusion Matrix:
+[[85297    10]
+ [   80    56]]
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     85307
+           1       0.85      0.41      0.55       136
+
+    accuracy                           1.00     85443
+   macro avg       0.92      0.71      0.78     85443
+weighted avg       1.00      1.00      1.00     85443
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Perform a grid-search by enlarging the number of neighbors and find the best configuration for your model. Recompute the classification report and comment on improvements gained.</p>
+</section>
+<section id="bayes-classifier">
+<h2>Bayes Classifier<a class="headerlink" href="#bayes-classifier" title="Permalink to this heading">#</a></h2>
+<p>The Bayes Classifier, often referred to as the Naive Bayes Classifier, is a simple but powerful probabilistic classification algorithm. It’s based on Bayes’ theorem and is widely used in machine learning and natural language processing for various classification tasks, including text classification, spam detection, and sentiment analysis.</p>
+<section id="naive-bayes-assumption">
+<h3>Naive Bayes Assumption<a class="headerlink" href="#naive-bayes-assumption" title="Permalink to this heading">#</a></h3>
+<p>The “naive” in Naive Bayes comes from the simplifying assumption that features (attributes) used for classification are conditionally independent given the class label. In other words, it assumes that the presence or absence of one feature does not affect the presence or absence of another feature. This simplification makes the math easier and is why it’s called “naive.”</p>
+</section>
+<section id="how-the-bayes-classifier-works">
+<h3>How the Bayes Classifier Works<a class="headerlink" href="#how-the-bayes-classifier-works" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Data Preparation</strong></p>
+<ul class="simple">
+<li><p>Collect a labeled dataset, where each instance is associated with a class label.</p></li>
+<li><p>Preprocess the data and extract features relevant to the classification task.</p></li>
+</ul>
+</li>
+<li><p><strong>Training</strong></p>
+<ul class="simple">
+<li><p>Setup a class priors: <span class="math notranslate nohighlight">\(P(y)\)</span> for each class y, which represents the probability of each class occurring in the dataset.</p></li>
+<li><p>For each feature, calculate conditional probabilities <span class="math notranslate nohighlight">\(P(X_i|y)\)</span> for each class y. This represents the probability of observing feature X_i given that the class is y.</p></li>
+</ul>
+</li>
+<li><p><strong>Prediction</strong></p>
+<ul class="simple">
+<li><p>Given a new data point with features X, calculate the probability of it belonging to each class y using Bayes’ theorem and the naive independence assumption:
+$<span class="math notranslate nohighlight">\(
+P(y|X) = P(y) P(X_1|y) P(X_2|y) ... P(X_N|y)
+\)</span>$</p></li>
+<li><p>The class with the highest posterior probability is the predicted class.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="types-of-naive-bayes-classifiers">
+<h3>Types of Naive Bayes Classifiers<a class="headerlink" href="#types-of-naive-bayes-classifiers" title="Permalink to this heading">#</a></h3>
+<p>There are several variants of the Naive Bayes Classifier, each of which makes different assumptions about the distribution of data. The most common ones include:</p>
+<ol class="arabic simple">
+<li><p><strong>Gaussian Naive Bayes</strong></p>
+<ul class="simple">
+<li><p>Assumes that the features follow a Gaussian (normal) distribution.</p></li>
+</ul>
+</li>
+<li><p><strong>Multinomial Naive Bayes</strong></p>
+<ul class="simple">
+<li><p>Used for discrete data like text, where features are counts of words or terms. It’s commonly used in text classification tasks.</p></li>
+</ul>
+</li>
+<li><p><strong>Bernoulli Naive Bayes</strong></p>
+<ul class="simple">
+<li><p>Appropriate for binary data, where features are either 0 or 1. It’s commonly used in spam detection.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="advantages-of-the-bayes-classifier">
+<h3>Advantages of the Bayes Classifier<a class="headerlink" href="#advantages-of-the-bayes-classifier" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Simple and computationally efficient.</p></li>
+<li><p>Works well with high-dimensional data.</p></li>
+<li><p>Performs surprisingly well in many real-world applications, especially text classification.</p></li>
+</ul>
+</section>
+<section id="limitations-of-the-bayes-classifier">
+<h3>Limitations of the Bayes Classifier<a class="headerlink" href="#limitations-of-the-bayes-classifier" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The “naive” assumption of feature independence may not hold in some real-world data.</p></li>
+<li><p>It can struggle with rare or unseen features.</p></li>
+<li><p>Performance can degrade if the feature space is highly imbalanced.</p></li>
+<li><p>Doesn’t handle numerical features with complex distributions well.</p></li>
+</ul>
+<p>In practice, the Bayes Classifier is a good choice for quick and effective classification tasks, especially when working with text data, and it often serves as a strong baseline model for many machine learning projects.</p>
+<p>One of the bottlenecks we came across while using KNN is computing time. This problem gets much worse with greater volumes of data. Let’s see how the Bayes classifier performs and compare.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="c1"># Choose the appropriate Naive Bayes variant (e.g., Gaussian Naive Bayes)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Model Prediction</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">classification_rep</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">confusion</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Accuracy: </span><span class="si">{</span><span class="n">accuracy</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Classification Report:</span><span class="se">\n</span><span class="si">{</span><span class="n">classification_rep</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Confusion Matrix:</span><span class="se">\n</span><span class="si">{</span><span class="n">confusion</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use a ROC curve</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.9928841449855459
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      0.99      1.00     85307
+           1       0.14      0.66      0.23       136
+
+    accuracy                           0.99     85443
+   macro avg       0.57      0.83      0.61     85443
+weighted avg       1.00      0.99      1.00     85443
+
+Confusion Matrix:
+[[84745   562]
+ [   46    90]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="receiver-operating-characteristic-roc-curve">
+<h2>Receiver Operating Characteristic (ROC) curve<a class="headerlink" href="#receiver-operating-characteristic-roc-curve" title="Permalink to this heading">#</a></h2>
+<p>The ROC curve is a graphical representation of the classifier’s ability to distinguish between positive and negative classes by varying the classification threshold. Let’s calculate it for our Naive Bayes Classifier of Credit Card Fraud</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">auc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Model Prediction</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># Probability of positive class (class 1)</span>
+
+<span class="c1"># ROC Curve</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+
+<span class="c1"># Plot ROC Curve</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ROC curve (AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ROC Curve&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Model Evaluation</span>
+<span class="c1"># You can also calculate the ROC AUC score as a numerical measure of classifier performance.</span>
+<span class="n">roc_auc_score</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ROC AUC Score: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/873433dd252b89e5c174e264bea73b35d60a9e199bb85bc79ddc5ee54fc6c640.png" src="../_images/873433dd252b89e5c174e264bea73b35d60a9e199bb85bc79ddc5ee54fc6c640.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC AUC Score: 0.97
+</pre></div>
+</div>
+</div>
+</div>
+<p>The AUC (i.e. area under the curve) is a measure of the classifiers performance. A higher AUC indicates better model performance.</p>
+</section>
+<section id="id2">
+<h2>Exercise<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Calculate the ROC and AUC for KNN and compare with the Bayes Classifier.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lab5"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Lab4/BLR.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bayesian Linear Regression</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-k-nn">K-Nearest Neighbors (K-NN)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credit-card-fraud-detection">Credit Card Fraud Detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-visualization">Data Preprocessing and Visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-model-building-and-prediction">KNN Model Building and Prediction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-classifier">Bayes Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-assumption">Naive Bayes Assumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-bayes-classifier-works">How the Bayes Classifier Works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-naive-bayes-classifiers">Types of Naive Bayes Classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-the-bayes-classifier">Advantages of the Bayes Classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-the-bayes-classifier">Limitations of the Bayes Classifier</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operating-characteristic-roc-curve">Receiver Operating Characteristic (ROC) curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Exercise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miguel C. Herculano
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

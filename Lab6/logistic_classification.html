@@ -671,55 +671,7 @@ P(NBER_{t,t+12}|X) = f(\alpha + \beta_1S_t^{GZ} + \beta_2 EBP_t + \gamma_1 TS_t 
         <span class="k">return</span> <span class="mi">0</span>
 
 <span class="c1"># Create a new column &#39;Recession_in_12_Months&#39; using the defined function</span>
-<span class="n">data_all</span><span class="p">[</span><span class="s1">&#39;NBER_Rec12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_all</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">recession_in_next_12_months</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">18</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="k">return</span> <span class="mi">0</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="c1"># Create a new column &#39;Recession_in_12_Months&#39; using the defined function</span>
-<span class="ne">---&gt; </span><span class="mi">18</span> <span class="n">data_all</span><span class="p">[</span><span class="s1">&#39;NBER_Rec12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_all</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">recession_in_next_12_months</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\core\frame.py:9423,</span> in <span class="ni">DataFrame.apply</span><span class="nt">(self, func, axis, raw, result_type, args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">9412</span> <span class="kn">from</span> <span class="nn">pandas.core.apply</span> <span class="kn">import</span> <span class="n">frame_apply</span>
-<span class="g g-Whitespace">   </span><span class="mi">9414</span> <span class="n">op</span> <span class="o">=</span> <span class="n">frame_apply</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">9415</span>     <span class="bp">self</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">9416</span>     <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">9421</span>     <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">9422</span> <span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">9423</span> <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;apply&quot;</span><span class="p">)</span>
-
-<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\core\apply.py:678,</span> in <span class="ni">FrameApply.apply</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">675</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">676</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_raw</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">678</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_standard</span><span class="p">()</span>
-
-<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\core\apply.py:798,</span> in <span class="ni">FrameApply.apply_standard</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">797</span> <span class="k">def</span> <span class="nf">apply_standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">798</span>     <span class="n">results</span><span class="p">,</span> <span class="n">res_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_generator</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">800</span>     <span class="c1"># wrap results</span>
-<span class="g g-Whitespace">    </span><span class="mi">801</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrap_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">res_index</span><span class="p">)</span>
-
-<span class="nn">File ~\anaconda3\Lib\site-packages\pandas\core\apply.py:814,</span> in <span class="ni">FrameApply.apply_series_generator</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">811</span> <span class="k">with</span> <span class="n">option_context</span><span class="p">(</span><span class="s2">&quot;mode.chained_assignment&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">812</span>     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series_gen</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">813</span>         <span class="c1"># ignore SettingWithCopy here in case the user mutates</span>
-<span class="ne">--&gt; </span><span class="mi">814</span>         <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">815</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ABCSeries</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">816</span>             <span class="c1"># If we have a view on v, we need to make a copy because</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span>             <span class="c1">#  series_generator will swap out the underlying data</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span>             <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="nn">Cell In[3], line 18,</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(row)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="k">return</span> <span class="mi">0</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="c1"># Create a new column &#39;Recession_in_12_Months&#39; using the defined function</span>
-<span class="ne">---&gt; </span><span class="mi">18</span> <span class="n">data_all</span><span class="p">[</span><span class="s1">&#39;NBER_Rec12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_all</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">recession_in_next_12_months</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;data&#39; is not defined
+<span class="n">data_all</span><span class="p">[</span><span class="s1">&#39;NBER_Rec12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_all</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">recession_in_next_12_months</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">data_all</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -997,75 +949,75 @@ weighted avg       0.85      0.88      0.86       165
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficients for each variable:
-3 Month Treasury Yield: 0.9847
-3 Month Treasury Yield (Bond Equivalent Basis): 1.0033
-Spread: -1.2965
-gz_spread: 0.7157
-ebp: 1.5594
-RPI: 0.1058
-DPCERA3M086SBEA: -0.2118
-IPDCONGD: -0.3113
-IPBUSEQ: 0.2765
-IPDMAT: -0.1923
+3 Month Treasury Yield: 0.6783
+3 Month Treasury Yield (Bond Equivalent Basis): 1.3072
+Spread: -1.2970
+gz_spread: 0.7130
+ebp: 1.5607
+RPI: 0.1060
+DPCERA3M086SBEA: -0.2119
+IPDCONGD: -0.3112
+IPBUSEQ: 0.2764
+IPDMAT: -0.1924
 IPNMAT: 0.0249
 IPB51222S: 0.1769
-IPFUELS: 0.1315
+IPFUELS: 0.1316
 HWI: 0.1817
-UNRATE: 0.1086
+UNRATE: 0.1089
 UEMPMEAN: -0.0520
-UEMPLT5: -0.2556
+UEMPLT5: -0.2557
 UEMP5TO14: -0.0146
-UEMP15T26: -0.1380
-UEMP27OV: 0.0117
+UEMP15T26: -0.1379
+UEMP27OV: 0.0118
 CES1021000001: 0.0641
-DMANEMP: 0.2928
+DMANEMP: 0.2931
 NDMANEMP: -0.1358
-SRVPRD: -0.2061
+SRVPRD: -0.2063
 USTRADE: 0.0266
-USFIRE: 1.1885
-AWOTMAN: -0.1337
-AWHMAN: 1.7076
-HOUSTMW: 0.5144
-HOUSTS: -1.6923
-HOUSTW: 0.4510
-PERMITNE: -1.0103
-PERMITMW: 0.5028
-AMDMNOx: -0.2554
-ANDENOx: 0.2159
-M2REAL: 0.3991
+USFIRE: 1.1892
+AWOTMAN: -0.1336
+AWHMAN: 1.7074
+HOUSTMW: 0.5145
+HOUSTS: -1.6925
+HOUSTW: 0.4511
+PERMITNE: -1.0099
+PERMITMW: 0.5023
+AMDMNOx: -0.2553
+ANDENOx: 0.2160
+M2REAL: 0.3989
 BOGMBASE: 0.0175
 TOTRESNS: 0.0990
 REALLN: 0.1642
-NONREVSL: -0.1434
-CONSPI: 0.4919
-S&amp;P 500: 0.2641
-S&amp;P PE ratio: -0.0274
-CP3Mx: -0.2418
-TB3MS: -0.0816
-TB6MS: -0.0110
-GS1: -0.2218
-BAA: 0.4517
-COMPAPFFx: 0.5345
-T1YFFM: 0.7432
-AAAFFM: 0.3055
-TWEXAFEGSMTHx: -0.1383
-EXUSUKx: 0.2892
-WPSFD49207: -0.1447
-WPSID61: -0.1029
-OILPRICEx: -0.2997
-CPIAUCSL: 0.2194
-CPITRNSL: -0.0018
+NONREVSL: -0.1436
+CONSPI: 0.4922
+S&amp;P 500: 0.2634
+S&amp;P PE ratio: -0.0266
+CP3Mx: -0.2422
+TB3MS: -0.0821
+TB6MS: -0.0093
+GS1: -0.2226
+BAA: 0.4518
+COMPAPFFx: 0.5344
+T1YFFM: 0.7425
+AAAFFM: 0.3068
+TWEXAFEGSMTHx: -0.1384
+EXUSUKx: 0.2891
+WPSFD49207: -0.1449
+WPSID61: -0.1030
+OILPRICEx: -0.2996
+CPIAUCSL: 0.2195
+CPITRNSL: -0.0019
 CPIMEDSL: -0.1677
-CPIULFSL: -0.1097
+CPIULFSL: -0.1096
 DSERRG3M086SBEA: 0.0656
-CES0600000008: 0.0759
-CES3000000008: 0.0379
+CES0600000008: 0.0760
+CES3000000008: 0.0377
 DTCTHFNM: 0.1676
-INVEST: 0.1600
-VIXCLSx: 0.1421
-mu_3: -1.2076
-fi_1: 0.1461
-fi_12: 0.6690
+INVEST: 0.1599
+VIXCLSx: 0.1416
+mu_3: -1.2073
+fi_1: 0.1456
+fi_12: 0.6695
 The model selects 69 variables out of a total of 140
 </pre></div>
 </div>

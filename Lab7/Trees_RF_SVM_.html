@@ -61,9 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab7/Trees_RF_SVM';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lab7/Trees_RF_SVM_';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Logistic Regression" href="../Lab6/logistic_classification.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -166,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">LAB MATERIALS</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../Lab1/regression_sol.html">Introduction to Regression</a></li>
 
 
@@ -178,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Lab4/BLR.html">Bayesian Linear Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lab5/classification.html">Introduction to Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lab6/logistic_classification.html">Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Trees_RF_SVM_.html">Decision Trees, Random Forests &amp; Support Vector Machines</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Decision Trees, Random Forests &amp; Support Vector Machines</a></li>
 </ul>
 
     </div>
@@ -233,7 +236,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Lab7/Trees_RF_SVM.ipynb" target="_blank"
+      <li><a href="../_sources/Lab7/Trees_RF_SVM_.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -866,7 +869,7 @@ memory usage: 1.0+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1aa19ed9790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x1be91fefcd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/eb31ea636558d1aeefb2a1d2fbcff842f3c40a3088f44854f60eed606bb4e429.png" src="../_images/eb31ea636558d1aeefb2a1d2fbcff842f3c40a3088f44854f60eed606bb4e429.png" />
@@ -879,10 +882,10 @@ memory usage: 1.0+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1aa1a2afd90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1be92709050&gt;
 </pre></div>
 </div>
-<img alt="../_images/f74f1f8c9299f8acd26e1f31b0d36cc1bdec43dcd07d5e2ad010dd9b8e6b13cf.png" src="../_images/f74f1f8c9299f8acd26e1f31b0d36cc1bdec43dcd07d5e2ad010dd9b8e6b13cf.png" />
+<img alt="../_images/64b9dc39726e9743898697a3de898a31955354d5bedac7931cd89940bb4abc1a.png" src="../_images/64b9dc39726e9743898697a3de898a31955354d5bedac7931cd89940bb4abc1a.png" />
 </div>
 </div>
 <p>Given a FICO score, there seems to be greater dispersion, in terms of interest rates charges, of borrowers that haven’t paid their loan back fully and therefore may default. This is a reminder that other variables should also be taken into account when considering delinquency likelihoods. Before we start processing the data and building our ML model, let’s look at the correlation amongst the variables.</p>
@@ -1280,15 +1283,15 @@ Here is a brief summary of the intuition behind Decision Trees:</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.85      0.84      0.84      2407
-           1       0.20      0.21      0.21       467
+           0       0.85      0.85      0.85      2413
+           1       0.22      0.22      0.22       461
 
-    accuracy                           0.74      2874
+    accuracy                           0.75      2874
    macro avg       0.53      0.53      0.53      2874
-weighted avg       0.74      0.74      0.74      2874
+weighted avg       0.75      0.75      0.75      2874
 
-[[2018  389]
- [ 367  100]]
+[[2041  372]
+ [ 358  103]]
 </pre></div>
 </div>
 </div>
@@ -1308,15 +1311,15 @@ weighted avg       0.74      0.74      0.74      2874
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.84      0.99      0.91      2407
-           1       0.42      0.03      0.06       467
+           0       0.84      0.99      0.91      2413
+           1       0.35      0.02      0.03       461
 
     accuracy                           0.84      2874
-   macro avg       0.63      0.51      0.48      2874
-weighted avg       0.77      0.84      0.77      2874
+   macro avg       0.60      0.50      0.47      2874
+weighted avg       0.76      0.84      0.77      2874
 
-[[2388   19]
- [ 453   14]]
+[[2400   13]
+ [ 454    7]]
 </pre></div>
 </div>
 </div>
@@ -1325,7 +1328,247 @@ weighted avg       0.77      0.84      0.77      2874
 </section>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>
-<p>Tune our random forest by using <code class="docutils literal notranslate"><span class="pre">RandomizedSearchCV()</span></code> function in sklearn and comment on prediction gains.</p>
+<p>Tune our random forest by using ‘RandomizedSearchCV()’ function in sklearn and comment on prediction gains.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_estimators</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)]</span>
+<span class="n">max_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="s1">&#39;sqrt&#39;</span><span class="p">]</span>
+<span class="n">max_depth</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)]</span>
+<span class="n">max_depth</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">min_samples_split</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">bootstrap</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+<span class="n">random_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="n">n_estimators</span><span class="p">,</span>
+               <span class="s1">&#39;max_features&#39;</span><span class="p">:</span> <span class="n">max_features</span><span class="p">,</span>
+               <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">max_depth</span><span class="p">,</span>
+               <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="n">min_samples_split</span><span class="p">,</span>
+               <span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:</span> <span class="n">min_samples_leaf</span><span class="p">,</span>
+               <span class="s1">&#39;bootstrap&#39;</span><span class="p">:</span> <span class="n">bootstrap</span><span class="p">}</span>
+
+<span class="n">rf1</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">rf2</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">rf1</span><span class="p">,</span> <span class="n">param_distributions</span> <span class="o">=</span> <span class="n">random_grid</span><span class="p">,</span> 
+                              <span class="n">cv</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">rf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 3 folds for each of 10 candidates, totalling 30 fits
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\ensemble\_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">18</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">rf1</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">rf2</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">rf1</span><span class="p">,</span> <span class="n">param_distributions</span> <span class="o">=</span> <span class="n">random_grid</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">17</span>                               <span class="n">cv</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">18</span> <span class="n">rf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\model_selection\_search.py:909,</span> in <span class="ni">BaseSearchCV.fit</span><span class="nt">(self, X, y, groups, **fit_params)</span>
+<span class="g g-Whitespace">    </span><span class="mi">907</span> <span class="n">refit_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">908</span> <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">909</span>     <span class="bp">self</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">911</span>     <span class="bp">self</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_params</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\ensemble\_forest.py:473,</span> in <span class="ni">BaseForest.fit</span><span class="nt">(self, X, y, sample_weight)</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span> <span class="n">trees</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">463</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_make_estimator</span><span class="p">(</span><span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+<span class="nn">    464     for i</span> in <span class="ni">range</span><span class="nt">(n_more_estimators)</span>
+<span class="g g-Whitespace">    </span><span class="mi">465</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">467</span> <span class="c1"># Parallel loop: we prefer the threading backend as the Cython code</span>
+<span class="g g-Whitespace">    </span><span class="mi">468</span> <span class="c1"># for fitting the trees is internally releasing the Python GIL</span>
+<span class="g g-Whitespace">    </span><span class="mi">469</span> <span class="c1"># making threading more efficient than multiprocessing in</span>
+<span class="g g-Whitespace">    </span><span class="mi">470</span> <span class="c1"># that case. However, for joblib 0.12+ we respect any</span>
+<span class="g g-Whitespace">    </span><span class="mi">471</span> <span class="c1"># parallel_backend contexts set at a higher level,</span>
+<span class="g g-Whitespace">    </span><span class="mi">472</span> <span class="c1"># since correctness does not rely on using threads.</span>
+<span class="ne">--&gt; </span><span class="mi">473</span> <span class="n">trees</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">474</span>     <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">475</span>     <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span>     <span class="n">prefer</span><span class="o">=</span><span class="s2">&quot;threads&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">_parallel_build_trees</span><span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">479</span>         <span class="n">t</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span>         <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>         <span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">482</span>         <span class="n">y</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span>         <span class="n">sample_weight</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">484</span>         <span class="n">i</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span>         <span class="nb">len</span><span class="p">(</span><span class="n">trees</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">486</span>         <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">487</span>         <span class="n">class_weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">class_weight</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">488</span>         <span class="n">n_samples_bootstrap</span><span class="o">=</span><span class="n">n_samples_bootstrap</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">489</span>     <span class="p">)</span>
+<span class="nn">    490     for i, t</span> in <span class="ni">enumerate</span><span class="nt">(trees)</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="c1"># Collect newly grown trees</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\utils\parallel.py:63,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="n">iterable_with_config</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="p">(</span><span class="n">_with_config</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">63</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\parallel.py:1051,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_one_batch</span><span class="p">(</span><span class="n">iterator</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_iterating</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_iterator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1051</span> <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_one_batch</span><span class="p">(</span><span class="n">iterator</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1052</span>     <span class="k">pass</span>
+<span class="g g-Whitespace">   </span><span class="mi">1054</span> <span class="k">if</span> <span class="n">pre_dispatch</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span> <span class="ow">or</span> <span class="n">n_jobs</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1055</span>     <span class="c1"># The iterable was consumed all at once by the above for loop.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1056</span>     <span class="c1"># No need to wait for async callbacks to trigger to</span>
+<span class="g g-Whitespace">   </span><span class="mi">1057</span>     <span class="c1"># consumption.</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\parallel.py:864,</span> in <span class="ni">Parallel.dispatch_one_batch</span><span class="nt">(self, iterator)</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>     <span class="k">return</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">863</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">864</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_dispatch</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">865</span>     <span class="k">return</span> <span class="kc">True</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\parallel.py:782,</span> in <span class="ni">Parallel._dispatch</span><span class="nt">(self, batch)</span>
+<span class="g g-Whitespace">    </span><span class="mi">780</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span>     <span class="n">job_idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jobs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">782</span>     <span class="n">job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">cb</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span>     <span class="c1"># A job can complete so quickly than its callback is</span>
+<span class="g g-Whitespace">    </span><span class="mi">784</span>     <span class="c1"># called before we get here, causing self._jobs to</span>
+<span class="g g-Whitespace">    </span><span class="mi">785</span>     <span class="c1"># grow. To ensure correct results ordering, .insert is</span>
+<span class="g g-Whitespace">    </span><span class="mi">786</span>     <span class="c1"># used (rather than .append) in the following line</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_jobs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">job_idx</span><span class="p">,</span> <span class="n">job</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\_parallel_backends.py:208,</span> in <span class="ni">SequentialBackend.apply_async</span><span class="nt">(self, func, callback)</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span> <span class="k">def</span> <span class="nf">apply_async</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Schedule a func to be run&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">208</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">ImmediateResult</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">209</span>     <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span>         <span class="n">callback</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\_parallel_backends.py:572,</span> in <span class="ni">ImmediateResult.__init__</span><span class="nt">(self, batch)</span>
+<span class="g g-Whitespace">    </span><span class="mi">569</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">570</span>     <span class="c1"># Don&#39;t delay the application, to avoid keeping the input</span>
+<span class="g g-Whitespace">    </span><span class="mi">571</span>     <span class="c1"># arguments in memory</span>
+<span class="ne">--&gt; </span><span class="mi">572</span>     <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">batch</span><span class="p">()</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\parallel.py:263,</span> in <span class="ni">BatchedCalls.__call__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">260</span>     <span class="c1"># Set the default nested backend to self._backend but do not set the</span>
+<span class="g g-Whitespace">    </span><span class="mi">261</span>     <span class="c1"># change the default number of processes to -1</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span>     <span class="k">with</span> <span class="n">parallel_backend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_jobs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">263</span>         <span class="k">return</span> <span class="p">[</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">264</span>                 <span class="k">for</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">]</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\parallel.py:263,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">260</span>     <span class="c1"># Set the default nested backend to self._backend but do not set the</span>
+<span class="g g-Whitespace">    </span><span class="mi">261</span>     <span class="c1"># change the default number of processes to -1</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span>     <span class="k">with</span> <span class="n">parallel_backend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_jobs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">263</span>         <span class="k">return</span> <span class="p">[</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">264</span>                 <span class="k">for</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">]</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\utils\parallel.py:123,</span> in <span class="ni">_FuncWrapper.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>     <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">123</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\ensemble\_forest.py:184,</span> in <span class="ni">_parallel_build_trees</span><span class="nt">(tree, bootstrap, X, y, sample_weight, tree_idx, n_trees, verbose, class_weight, n_samples_bootstrap)</span>
+<span class="g g-Whitespace">    </span><span class="mi">181</span>     <span class="k">elif</span> <span class="n">class_weight</span> <span class="o">==</span> <span class="s2">&quot;balanced_subsample&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span>         <span class="n">curr_sample_weight</span> <span class="o">*=</span> <span class="n">compute_sample_weight</span><span class="p">(</span><span class="s2">&quot;balanced&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="n">indices</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">184</span>     <span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">curr_sample_weight</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\tree\_classes.py:889,</span> in <span class="ni">DecisionTreeClassifier.fit</span><span class="nt">(self, X, y, sample_weight, check_input)</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span> <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">check_input</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Build a decision tree classifier from the training set (X, y).</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span><span class="sd">     Parameters</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">886</span><span class="sd">         Fitted estimator.</span>
+<span class="g g-Whitespace">    </span><span class="mi">887</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">889</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">890</span>         <span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">891</span>         <span class="n">y</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">892</span>         <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">893</span>         <span class="n">check_input</span><span class="o">=</span><span class="n">check_input</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">894</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">895</span>     <span class="k">return</span> <span class="bp">self</span>
+
+<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\tree\_classes.py:379,</span> in <span class="ni">BaseDecisionTree.fit</span><span class="nt">(self, X, y, sample_weight, check_input)</span>
+<span class="g g-Whitespace">    </span><span class="mi">368</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">369</span>     <span class="n">builder</span> <span class="o">=</span> <span class="n">BestFirstTreeBuilder</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">splitter</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="n">min_samples_split</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>         <span class="bp">self</span><span class="o">.</span><span class="n">min_impurity_decrease</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">379</span> <span class="n">builder</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree_</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_outputs_</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">is_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span>     <span class="bp">self</span><span class="o">.</span><span class="n">n_classes_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_classes_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf2</span><span class="o">.</span><span class="n">best_params_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;n_estimators&#39;: 800,
+ &#39;min_samples_split&#39;: 10,
+ &#39;min_samples_leaf&#39;: 4,
+ &#39;max_features&#39;: &#39;auto&#39;,
+ &#39;max_depth&#39;: 60,
+ &#39;bootstrap&#39;: True}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf3</span><span class="o">=</span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+ <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+ <span class="n">max_features</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+ <span class="n">max_depth</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+ <span class="n">bootstrap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rf3</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">preds3</span><span class="o">=</span><span class="n">rf3</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">preds3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">preds3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\ensemble\_forest.py:424: FutureWarning: `max_features=&#39;auto&#39;` has been deprecated in 1.1 and will be removed in 1.3. To keep the past behaviour, explicitly set `max_features=&#39;sqrt&#39;` or remove this parameter as it is also the default value for RandomForestClassifiers and ExtraTreesClassifiers.
+  warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           0       0.84      1.00      0.91      2400
+           1       0.38      0.01      0.01       474
+
+    accuracy                           0.83      2874
+   macro avg       0.61      0.50      0.46      2874
+weighted avg       0.76      0.83      0.76      2874
+
+[[2395    5]
+ [ 471    3]]
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="support-vector-machines-svms">
 <h2>Support Vector Machines (SVMs)<a class="headerlink" href="#support-vector-machines-svms" title="Permalink to this heading">#</a></h2>
@@ -1408,24 +1651,16 @@ weighted avg       0.77      0.84      0.77      2874
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Support Vector Machine - Classification Report:
                precision    recall  f1-score   support
 
-           0       0.84      1.00      0.91      2407
-           1       0.00      0.00      0.00       467
+           0       0.84      1.00      0.91      2400
+           1       0.15      0.00      0.01       474
 
-    accuracy                           0.84      2874
-   macro avg       0.42      0.50      0.46      2874
-weighted avg       0.70      0.84      0.76      2874
+    accuracy                           0.83      2874
+   macro avg       0.49      0.50      0.46      2874
+weighted avg       0.72      0.83      0.76      2874
 
 Support Vector Machine - Confusion Matrix:
- [[2407    0]
- [ 467    0]]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
-C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
-C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, msg_start, len(result))
+ [[2389   11]
+ [ 472    2]]
 </pre></div>
 </div>
 </div>
@@ -1435,6 +1670,88 @@ C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\metrics\_classification.py:1
 <section id="id1">
 <h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>Similarly to what you did with Random Forests, Tune the SVM for loan classification.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span><span class="p">,</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Assuming you have already loaded your data into X and y</span>
+
+<span class="c1"># Split the data into training and test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.30</span><span class="p">)</span>
+
+<span class="c1"># Create a StandardScaler object</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="c1"># Fit and transform training data</span>
+<span class="n">X_train_standardized</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+<span class="c1"># Transform test data using the same scaler</span>
+<span class="n">X_test_standardized</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Define a more compact parameter distribution for random search</span>
+<span class="n">param_dist</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># Uniform distribution between 0.1 and 1</span>
+    <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="s1">&#39;l2&#39;</span><span class="p">],</span>  <span class="c1"># Penalty term for LinearSVC</span>
+    <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">],</span>  <span class="c1"># Dual parameter for LinearSVC</span>
+<span class="p">}</span>
+
+<span class="c1"># Create a Linear Support Vector Machine classifier</span>
+<span class="n">linear_svm_classifier</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span>
+
+<span class="c1"># Use RandomizedSearchCV for a more efficient search</span>
+<span class="n">random_search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">linear_svm_classifier</span><span class="p">,</span> <span class="n">param_dist</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_standardized</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Get the best hyperparameters</span>
+<span class="n">best_params_random</span> <span class="o">=</span> <span class="n">random_search</span><span class="o">.</span><span class="n">best_params_</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Hyperparameters (Random Search):&quot;</span><span class="p">,</span> <span class="n">best_params_random</span><span class="p">)</span>
+
+<span class="c1"># Make predictions on the test data using the best model from random search</span>
+<span class="n">best_linear_svm_random</span> <span class="o">=</span> <span class="n">random_search</span><span class="o">.</span><span class="n">best_estimator_</span>
+<span class="n">linear_svm_pred_random</span> <span class="o">=</span> <span class="n">best_linear_svm_random</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_standardized</span><span class="p">)</span>
+
+<span class="c1"># Evaluate the performance of the tuned Linear SVM</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuned Linear Support Vector Machine (Random Search) - Classification Report:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linear_svm_pred_random</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuned Linear Support Vector Machine (Random Search) - Confusion Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linear_svm_pred_random</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 3 folds for each of 20 candidates, totalling 60 fits
+Best Hyperparameters (Random Search): {&#39;C&#39;: 1.0436886875130538, &#39;dual&#39;: False, &#39;penalty&#39;: &#39;l2&#39;}
+Tuned Linear Support Vector Machine (Random Search) - Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.83      1.00      0.91      2392
+           1       0.50      0.00      0.01       482
+
+    accuracy                           0.83      2874
+   macro avg       0.67      0.50      0.46      2874
+weighted avg       0.78      0.83      0.76      2874
+
+Tuned Linear Support Vector Machine (Random Search) - Confusion Matrix:
+ [[2390    2]
+ [ 480    2]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Some notes about the exercise:</p>
+<ul class="simple">
+<li><p>Performing grid-search with a SVM with a nonlinear Kernel is a computationally prohibitive task.</p></li>
+<li><p>Kernelized SVMs require the computation of a distance function between each point in the dataset, which is the dominating cost of <span class="math notranslate nohighlight">\(O(n_{features},n^2_{observations})\)</span>.</p></li>
+</ul>
+<p>To make this task feasible, it helps to think about it a bit before writing code:</p>
+<ul class="simple">
+<li><p>Standardizing the features helps a lot because the Kernel requires the storage of the distances putting a burden on memory</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">RandomizedSearchCV()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">GridSearchCV()</span></code> also helps.</p></li>
+<li><p>Another option is to use <code class="docutils literal notranslate"><span class="pre">LinearSVC()</span></code>.</p></li>
+</ul>
 </section>
 </section>
 
@@ -1469,6 +1786,15 @@ C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\metrics\_classification.py:1
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../Lab6/logistic_classification.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Logistic Regression</p>
+      </div>
+    </a>
 </div></div>
   
 </div>

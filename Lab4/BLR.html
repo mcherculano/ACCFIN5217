@@ -183,6 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Lab5/classification.html">Introduction to Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lab6/logistic_classification.html">Logistic Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lab7/Trees_RF_SVM_.html">Decision Trees, Random Forests &amp; Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lab8/ensemble_methods.html">Ensemble Learning</a></li>
 </ul>
 
     </div>
@@ -411,53 +412,52 @@ p(w|y,X) = N(w|\mu, \Sigma).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data_cali_hp</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">data_cali_hp</span><span class="o">.</span><span class="n">DESCR</span><span class="p">)</span> <span class="c1">#&lt;- uncomment to read a brief data description</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data_cali_hp</span> <span class="o">=</span> <span class="n">data_cali_hp</span><span class="o">.</span><span class="n">frame</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _california_housing_dataset:
 
-<span class="nn">File ~\anaconda3\Lib\site-packages\sklearn\datasets\_california_housing.py:153,</span> in <span class="ni">fetch_california_housing</span><span class="nt">(data_home, download_if_missing, return_X_y, as_frame)</span>
-<span class="g g-Whitespace">    </span><span class="mi">150</span>     <span class="n">remove</span><span class="p">(</span><span class="n">archive_path</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">152</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">153</span>     <span class="n">cal_housing</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span>
-<span class="g g-Whitespace">    </span><span class="mi">156</span>     <span class="s2">&quot;MedInc&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">157</span>     <span class="s2">&quot;HouseAge&quot;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">163</span>     <span class="s2">&quot;Longitude&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">164</span> <span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="n">target</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">cal_housing</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cal_housing</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+California Housing dataset
+--------------------------
 
-<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\numpy_pickle.py:587,</span> in <span class="ni">load</span><span class="nt">(filename, mmap_mode)</span>
-<span class="g g-Whitespace">    </span><span class="mi">581</span>             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fobj</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">582</span>                 <span class="c1"># if the returned file object is a string, this means we</span>
-<span class="g g-Whitespace">    </span><span class="mi">583</span>                 <span class="c1"># try to load a pickle file generated with an version of</span>
-<span class="g g-Whitespace">    </span><span class="mi">584</span>                 <span class="c1"># Joblib so we load it with joblib compatibility function.</span>
-<span class="g g-Whitespace">    </span><span class="mi">585</span>                 <span class="k">return</span> <span class="n">load_compatibility</span><span class="p">(</span><span class="n">fobj</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">587</span>             <span class="n">obj</span> <span class="o">=</span> <span class="n">_unpickle</span><span class="p">(</span><span class="n">fobj</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mmap_mode</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span> <span class="k">return</span> <span class="n">obj</span>
+**Data Set Characteristics:**
 
-<span class="nn">File ~\anaconda3\Lib\site-packages\joblib\numpy_pickle.py:506,</span> in <span class="ni">_unpickle</span><span class="nt">(fobj, filename, mmap_mode)</span>
-<span class="g g-Whitespace">    </span><span class="mi">504</span> <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">506</span>     <span class="n">obj</span> <span class="o">=</span> <span class="n">unpickler</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">507</span>     <span class="k">if</span> <span class="n">unpickler</span><span class="o">.</span><span class="n">compat_mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">508</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The file &#39;</span><span class="si">%s</span><span class="s2">&#39; has been generated with a &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">509</span>                       <span class="s2">&quot;joblib version less than 0.10. &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">510</span>                       <span class="s2">&quot;Please regenerate this pickle file.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span>                       <span class="o">%</span> <span class="n">filename</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">512</span>                       <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    :Number of Instances: 20640
 
-<span class="nn">File ~\anaconda3\Lib\pickle.py:1213,</span> in <span class="ni">_Unpickler.load</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1211</span>             <span class="k">raise</span> <span class="ne">EOFError</span>
-<span class="g g-Whitespace">   </span><span class="mi">1212</span>         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bytes_types</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1213</span>         <span class="n">dispatch</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]](</span><span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1214</span> <span class="k">except</span> <span class="n">_Stop</span> <span class="k">as</span> <span class="n">stopinst</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1215</span>     <span class="k">return</span> <span class="n">stopinst</span><span class="o">.</span><span class="n">value</span>
+    :Number of Attributes: 8 numeric, predictive attributes and the target
 
-<span class="ne">KeyError</span>: 194
+    :Attribute Information:
+        - MedInc        median income in block group
+        - HouseAge      median house age in block group
+        - AveRooms      average number of rooms per household
+        - AveBedrms     average number of bedrooms per household
+        - Population    block group population
+        - AveOccup      average number of household members
+        - Latitude      block group latitude
+        - Longitude     block group longitude
+
+    :Missing Attribute Values: None
+
+This dataset was obtained from the StatLib repository.
+https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html
+
+The target variable is the median house value for California districts,
+expressed in hundreds of thousands of dollars ($100,000).
+
+This dataset was derived from the 1990 U.S. census, using one row per census
+block group. A block group is the smallest geographical unit for which the U.S.
+Census Bureau publishes sample data (a block group typically has a population
+of 600 to 3,000 people).
+
+A household is a group of people residing within a home. Since the average
+number of rooms and bedrooms in this dataset are provided per household, these
+columns may take surprisingly large values for block groups with few households
+and many empty houses, such as vacation resorts.
+
+It can be downloaded/loaded using the
+:func:`sklearn.datasets.fetch_california_housing` function.
+
+.. topic:: References
+
+    - Pace, R. Kelley and Ronald Barry, Sparse Spatial Autoregressions,
+      Statistics and Probability Letters, 33 (1997) 291-297
 </pre></div>
 </div>
 </div>
@@ -472,7 +472,7 @@ p(w|y,X) = N(w|\mu, \Sigma).
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/89b6ad0497dd51209417deab6fcc79476b9420da3648d89befc0e5147ebe958c.png" src="../_images/89b6ad0497dd51209417deab6fcc79476b9420da3648d89befc0e5147ebe958c.png" />
+<img alt="../_images/111337d2421bbde7ddfea780fb475d9a4f2fcffd4d69d35122d875d653b05d60.png" src="../_images/111337d2421bbde7ddfea780fb475d9a4f2fcffd4d69d35122d875d653b05d60.png" />
 </div>
 </div>
 <p>We can first focus on features for which their distributions would be more or less expected.</p>
@@ -620,8 +620,18 @@ p(w|y,X) = N(w|\mu, \Sigma).
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/416ca70be9593670d39627cd2a8efc614e79186dfbdfd0b1e1e45f49bd9bc7db.png" src="../_images/416ca70be9593670d39627cd2a8efc614e79186dfbdfd0b1e1e45f49bd9bc7db.png" />
-<img alt="../_images/9aedb2b29b22eac8196d0c97241af5114120a9d5ad9b92be21ea25b251747806.png" src="../_images/9aedb2b29b22eac8196d0c97241af5114120a9d5ad9b92be21ea25b251747806.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\AppData\Local\Temp\ipykernel_38888\3254044107.py:12: UserWarning: Geometry is in a geographic CRS. Results from &#39;area&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+  cali = cali.assign(area=cali.geometry.area)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\AppData\Local\Temp\ipykernel_38888\3254044107.py:12: UserWarning: Geometry is in a geographic CRS. Results from &#39;area&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+  cali = cali.assign(area=cali.geometry.area)
+</pre></div>
+</div>
+<img alt="../_images/48edecbbd4907ea4988d3548283931b28bc01792d236247576083ec6b5e480e0.png" src="../_images/48edecbbd4907ea4988d3548283931b28bc01792d236247576083ec6b5e480e0.png" />
+<img alt="../_images/437c448dce136773b3ead4fe2abbc68122230ba1e9c0736edfba73786fdf532b.png" src="../_images/437c448dce136773b3ead4fe2abbc68122230ba1e9c0736edfba73786fdf532b.png" />
 </div>
 </div>
 <p>If you are not familiar with the state of California, it is interesting to notice that all datapoints show a graphical representation of this state. The high-valued houses will be located on the coast, where the big cities from California are located: San Diego, Los Angeles, San Jose, or San Francisco.</p>
@@ -655,7 +665,7 @@ p(w|y,X) = N(w|\mu, \Sigma).
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4ddd486751b60f56b6d8369e4bdaca59f4aef0b17645c9173c2c79ff2fe17c3e.png" src="../_images/4ddd486751b60f56b6d8369e4bdaca59f4aef0b17645c9173c2c79ff2fe17c3e.png" />
+<img alt="../_images/d02380fc7cbc7070e124f6630f8ef60a3c0791475aae7973a662b7fc65b5fc6a.png" src="../_images/d02380fc7cbc7070e124f6630f8ef60a3c0791475aae7973a662b7fc65b5fc6a.png" />
 </div>
 </div>
 <p>Looking at descriptive statistics helps build some intuition for the data and think about the predictive model we want to setup. We can for instance notice the presence of outliers, and see that the median income is helpful to distinguish high-valued from low-valued houses. It is reasonable to expect the longitude, latitude, and the median income to be useful features in predicting the median house values.</p>
@@ -715,6 +725,10 @@ p(w|y,X) = N(w|\mu, \Sigma).
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Miguel\anaconda3\Lib\site-packages\sklearn\base.py:439: UserWarning: X does not have valid feature names, but BayesianRidge was fitted with feature names
+  warnings.warn(
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([18.68512913])
 </pre></div>
 </div>
@@ -968,7 +982,7 @@ p(w|\lambda) = N(w|0,A^{-1}),
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/fbac31af139350f813da9911d65d94753a715f15a0d06197a6877f4274385f20.png" src="../_images/fbac31af139350f813da9911d65d94753a715f15a0d06197a6877f4274385f20.png" />
+<img alt="../_images/2236d875fed6e899fde121c4d710b64131dce118bc302bfad460c59c59546d01.png" src="../_images/2236d875fed6e899fde121c4d710b64131dce118bc302bfad460c59c59546d01.png" />
 </div>
 </div>
 </section>

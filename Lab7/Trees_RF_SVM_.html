@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Lab7/Trees_RF_SVM_';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ensemble Learning" href="../Lab8/ensemble_methods.html" />
     <link rel="prev" title="Logistic Regression" href="../Lab6/logistic_classification.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -182,6 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Lab5/classification.html">Introduction to Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lab6/logistic_classification.html">Logistic Regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Decision Trees, Random Forests &amp; Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lab8/ensemble_methods.html">Ensemble Learning</a></li>
 </ul>
 
     </div>
@@ -858,7 +860,7 @@ memory usage: 1.0+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2b3d3735c0e81ea5b8cfa76fb8480a9548c2a348b7d18b5405f7ad19e4c0b1da.png" src="../_images/2b3d3735c0e81ea5b8cfa76fb8480a9548c2a348b7d18b5405f7ad19e4c0b1da.png" />
+<img alt="../_images/91ee8cc5344a7ac32bba3b274516a454f9abf0515f7ac4689112e4ce87b3e267.png" src="../_images/91ee8cc5344a7ac32bba3b274516a454f9abf0515f7ac4689112e4ce87b3e267.png" />
 </div>
 </div>
 <p>Now, let’s also have a look at the distribution of FICO scores, interest rates charged and how they relate to each other.</p>
@@ -869,10 +871,10 @@ memory usage: 1.0+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x24007cce550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x229b7bfdcd0&gt;
 </pre></div>
 </div>
-<img alt="../_images/eb31ea636558d1aeefb2a1d2fbcff842f3c40a3088f44854f60eed606bb4e429.png" src="../_images/eb31ea636558d1aeefb2a1d2fbcff842f3c40a3088f44854f60eed606bb4e429.png" />
+<img alt="../_images/61d0cb2c92d66e4d5a75e362f3933de14f2cdc06919744b7db25bc847281e901.png" src="../_images/61d0cb2c92d66e4d5a75e362f3933de14f2cdc06919744b7db25bc847281e901.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -882,10 +884,10 @@ memory usage: 1.0+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x24007ccfa90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x229b7de1c90&gt;
 </pre></div>
 </div>
-<img alt="../_images/3e3bb44f9ec6101c415b0446574a88d3616624a98f869ae85ffc70e7e516a335.png" src="../_images/3e3bb44f9ec6101c415b0446574a88d3616624a98f869ae85ffc70e7e516a335.png" />
+<img alt="../_images/7497a0bb9f912a82efa51cf4f285d304b52f5a8c7c0dfa488b7144c739e2240a.png" src="../_images/7497a0bb9f912a82efa51cf4f285d304b52f5a8c7c0dfa488b7144c739e2240a.png" />
 </div>
 </div>
 <p>Given a FICO score, there seems to be greater dispersion, in terms of interest rates charges, of borrowers that haven’t paid their loan back fully and therefore may default. This is a reminder that other variables should also be taken into account when considering delinquency likelihoods. Before we start processing the data and building our ML model, let’s look at the correlation amongst the variables.</p>
@@ -902,7 +904,7 @@ memory usage: 1.0+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/699d8dcf34741fadecd88a4996303c6b2f4c85d9b048bfa53f8eafbca4f03560.png" src="../_images/699d8dcf34741fadecd88a4996303c6b2f4c85d9b048bfa53f8eafbca4f03560.png" />
+<img alt="../_images/542f21de486d749de5eb98c0f2d8ae4e95fdf352f3e1b5dfe4db9b276121d627.png" src="../_images/542f21de486d749de5eb98c0f2d8ae4e95fdf352f3e1b5dfe4db9b276121d627.png" />
 </div>
 </div>
 <p>Now convert some categorical variables into dummy variables so that they can be added to the feature set of our ML model.</p>
@@ -969,12 +971,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -991,12 +993,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1013,12 +1015,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1035,12 +1037,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1057,12 +1059,12 @@ memory usage: 1.0+ MB
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1101,12 +1103,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9574</th>
@@ -1123,12 +1125,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9575</th>
@@ -1145,12 +1147,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9576</th>
@@ -1167,12 +1169,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>9577</th>
@@ -1189,12 +1191,12 @@ memory usage: 1.0+ MB
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>False</td>
-      <td>True</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
-      <td>False</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -1283,15 +1285,15 @@ Here is a brief summary of the intuition behind Decision Trees:</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.85      0.82      0.84      2408
-           1       0.21      0.25      0.23       466
+           0       0.84      0.83      0.83      2387
+           1       0.20      0.21      0.20       487
 
-    accuracy                           0.73      2874
-   macro avg       0.53      0.54      0.53      2874
-weighted avg       0.75      0.73      0.74      2874
+    accuracy                           0.72      2874
+   macro avg       0.52      0.52      0.52      2874
+weighted avg       0.73      0.72      0.73      2874
 
-[[1981  427]
- [ 350  116]]
+[[1972  415]
+ [ 384  103]]
 </pre></div>
 </div>
 </div>
@@ -1311,15 +1313,15 @@ weighted avg       0.75      0.73      0.74      2874
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.84      1.00      0.91      2408
-           1       0.40      0.01      0.02       466
+           0       0.83      1.00      0.91      2387
+           1       0.62      0.02      0.04       487
 
-    accuracy                           0.84      2874
-   macro avg       0.62      0.50      0.47      2874
-weighted avg       0.77      0.84      0.77      2874
+    accuracy                           0.83      2874
+   macro avg       0.73      0.51      0.47      2874
+weighted avg       0.80      0.83      0.76      2874
 
-[[2399    9]
- [ 460    6]]
+[[2381    6]
+ [ 477   10]]
 </pre></div>
 </div>
 </div>
@@ -1636,6 +1638,15 @@ Tuned Linear Support Vector Machine (Random Search) - Confusion Matrix:
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Logistic Regression</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Lab8/ensemble_methods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ensemble Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

@@ -183,6 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../Lab5/classification.html">Introduction to Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lab6/logistic_classification.html">Logistic Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lab7/Trees_RF_SVM_.html">Decision Trees, Random Forests &amp; Support Vector Machines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lab8/ensemble_methods.html">Ensemble Learning</a></li>
 </ul>
 
     </div>
@@ -456,7 +457,7 @@ f(y) = \frac{\mu^{y}}{y!} e^{-\mu},
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b662384d4d500cef50b51ff24b18213b4ced3777b6149bb51707d9dbc1815236.png" src="../_images/b662384d4d500cef50b51ff24b18213b4ced3777b6149bb51707d9dbc1815236.png" />
+<img alt="../_images/54279920f25ae2638497aec98a93e99a429d914cf497f72e4f0d8631e8c60fb6.png" src="../_images/54279920f25ae2638497aec98a93e99a429d914cf497f72e4f0d8631e8c60fb6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -597,7 +598,7 @@ dropped for plotting purposes)</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3ddbc0315a54011378ec5cd7be20093b3e1d043cdd880de61dd4b5839190adf1.png" src="../_images/3ddbc0315a54011378ec5cd7be20093b3e1d043cdd880de61dd4b5839190adf1.png" />
+<img alt="../_images/d232f2367569b60311f0c0ea965df8d30e7ed29bc1afa3a503c530bb830c71af.png" src="../_images/d232f2367569b60311f0c0ea965df8d30e7ed29bc1afa3a503c530bb830c71af.png" />
 </div>
 </div>
 <p>From the histogram, it appears that the Poisson assumption is not unreasonable (albeit with a very low <span class="math notranslate nohighlight">\( \mu \)</span> and some outliers).</p>
@@ -661,7 +662,7 @@ f(y_i \mid \mathbf{x}_i) = \frac{\mu_i^{y_i}}{y_i!} e^{-\mu_i}; \qquad y_i = 0, 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/730d2d9bdb25987e6160c9575720a4041a29b92c33f0a0ad8f5aae1838e144e8.png" src="../_images/730d2d9bdb25987e6160c9575720a4041a29b92c33f0a0ad8f5aae1838e144e8.png" />
+<img alt="../_images/9872e781eb01090926e58d3ffca4ac2045d1d8eb39246493090ce1b97d2daf2f.png" src="../_images/9872e781eb01090926e58d3ffca4ac2045d1d8eb39246493090ce1b97d2daf2f.png" />
 </div>
 </div>
 <p>We can see that the distribution of <span class="math notranslate nohighlight">\( y_i \)</span> is conditional on
@@ -715,7 +716,7 @@ we can visualize the joint pdf like so</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d4afcfc614e9fb2ba2ca568430805f2d2b400cfc3342b74a6dc3afc9414c3777.png" src="../_images/d4afcfc614e9fb2ba2ca568430805f2d2b400cfc3342b74a6dc3afc9414c3777.png" />
+<img alt="../_images/4752297a6870470c2464bae7ea453c3e25f6cc3844f8c177d4bf9c920ba359d4.png" src="../_images/4752297a6870470c2464bae7ea453c3e25f6cc3844f8c177d4bf9c920ba359d4.png" />
 </div>
 </div>
 <p>Similarly, the joint pdf of our data (which is distributed as a
@@ -819,7 +820,7 @@ function will be equal to 0.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1e7620d2dd1ef384c15301425dd45e90fe9e8d3159e43a98956cb38f68cd2cb2.png" src="../_images/1e7620d2dd1ef384c15301425dd45e90fe9e8d3159e43a98956cb38f68cd2cb2.png" />
+<img alt="../_images/0629935ba3a5932deaf7b746b7f82d9917c94aaf19313a62e385501f2a68e0a7.png" src="../_images/0629935ba3a5932deaf7b746b7f82d9917c94aaf19313a62e385501f2a68e0a7.png" />
 </div>
 </div>
 <p>The plot shows that the maximum likelihood value (the top plot) occurs
@@ -1050,7 +1051,7 @@ the maximum is found at <span class="math notranslate nohighlight">\( \beta = 10
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ac3a5c85462fadf9ebb7b0504f0ab662b09668b9468b10dff88c9f990950da8a.png" src="../_images/ac3a5c85462fadf9ebb7b0504f0ab662b09668b9468b10dff88c9f990950da8a.png" />
+<img alt="../_images/36bf193ece575490f36f3abe0263a8771e4001dd5571b5254daf9421d5d2831a.png" src="../_images/36bf193ece575490f36f3abe0263a8771e4001dd5571b5254daf9421d5d2831a.png" />
 </div>
 </div>
 <p>Note that our implementation of the Newton-Raphson algorithm is rather
@@ -1090,8 +1091,8 @@ to confirm we obtain the same coefficients and log-likelihood value.</p>
 Dep. Variable:                      y   No. Observations:                    5
 Model:                        Poisson   Df Residuals:                        2
 Method:                           MLE   Df Model:                            2
-Date:                Thu, 16 Nov 2023   Pseudo R-squ.:                  0.2546
-Time:                        15:55:43   Log-Likelihood:                -3.3784
+Date:                Sat, 18 Nov 2023   Pseudo R-squ.:                  0.2546
+Time:                        16:07:41   Log-Likelihood:                -3.3784
 converged:                       True   LL-Null:                       -4.5325
 Covariance Type:            nonrobust   LLR p-value:                    0.3153
 ==============================================================================
@@ -1157,8 +1158,8 @@ model.</p>
 Dep. Variable:                numbil0   No. Observations:                  197
 Model:                        Poisson   Df Residuals:                      193
 Method:                           MLE   Df Model:                            3
-Date:                Thu, 16 Nov 2023   Pseudo R-squ.:                  0.8574
-Time:                        15:55:43   Log-Likelihood:                -438.54
+Date:                Sat, 18 Nov 2023   Pseudo R-squ.:                  0.8574
+Time:                        16:07:41   Log-Likelihood:                -438.54
 converged:                       True   LL-Null:                       -3074.7
 Covariance Type:                  HC0   LLR p-value:                     0.000
 ==============================================================================
@@ -1279,7 +1280,7 @@ plot the first 15</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b35e82d806413c6c79137ce3fa93d1952f692840de88436b9a15fa0bd377dc09.png" src="../_images/b35e82d806413c6c79137ce3fa93d1952f692840de88436b9a15fa0bd377dc09.png" />
+<img alt="../_images/0207c1ce1e2d978576518dc79cc221377860dfae6faa77cee78a61473b4ee0cf.png" src="../_images/0207c1ce1e2d978576518dc79cc221377860dfae6faa77cee78a61473b4ee0cf.png" />
 </div>
 </div>
 <p>As we can see, Russia has by far the highest number of billionaires in
@@ -1503,8 +1504,8 @@ Number of iterations: 4
 Dep. Variable:                      y   No. Observations:                    5
 Model:                         Probit   Df Residuals:                        2
 Method:                           MLE   Df Model:                            2
-Date:                Thu, 16 Nov 2023   Pseudo R-squ.:                  0.2961
-Time:                        15:55:44   Log-Likelihood:                -2.3687
+Date:                Sat, 18 Nov 2023   Pseudo R-squ.:                  0.2961
+Time:                        16:07:42   Log-Likelihood:                -2.3687
 converged:                       True   LL-Null:                       -3.3651
 Covariance Type:            nonrobust   LLR p-value:                    0.3692
 ==============================================================================

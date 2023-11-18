@@ -39,7 +39,9 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-# Create an ensemble model using bagging with the best-performing model
-bagged_model = ensemble_model(best_model, method='Bagging')
+# Setup PyCaret
+clf_setup = setup(data, target='not.fully.paid', train_size=0.8, session_id=42)
+# Compare models
+best_model = compare_models()
 -------------------
 

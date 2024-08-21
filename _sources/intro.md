@@ -1,21 +1,16 @@
 <!--![](images/Media_459455_smxx.jpg)-->
 
 
-## Course Overview
+## ACCFIN5217: Financial Econometrics 
 
-**Course Description:**
+**Tutorials:**
 
-<p align="justify"> Machine learning is a field devoted to developing algorithms that adapt their behaviour to data, providing useful representations of the data and/or predictions. This course covers some fundamental theoretical concepts in machine learning, and common patterns for implementing methods in practice. The intended audience are those wanting the background required to begin research and development of machine learning methods. <p>
+<p align="justify"> The three last tutorials are designed to allow students to practice their Python skills while learning Financial Econometrics and applying concepts learned in class.  <p>
 
-**Lectures:** [Prof. Dimitris Korobilis](https://www.gla.ac.uk/schools/business/staff/dimitriskorobilis/)
+**Lectures:** [Miguel C. Herculano](https://www.gla.ac.uk/schools/business/staff/miguelcolburnherculano/)
 
-**Labs:** [Miguel C. Herculano](https://www.gla.ac.uk/schools/business/staff/miguelcolburnherculano/)
+**Labs:** Manish Arora and Napasorn Thavichaigarn
 
-
-**Class Schedule:** 
-
-`Lectures (James Watt STH 811):` Every Thursday between 10:00-12:00, from the 28th of September and <br>
-`Labs (Adam Smith Building 1113 Lab L):` Every Thursday between 14:00-16:00 from the 21th of September.
 
 
 
